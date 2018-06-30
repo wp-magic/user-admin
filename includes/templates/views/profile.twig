@@ -1,0 +1,52 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  <h3>{{ post.title }}</h3>
+
+  {% if post.above_text %}
+    <div class="above">{{ post.above_text }}</div>
+  {% endif %}
+
+  <form class="profile" action="{{ form.url }}" method="post">
+    <input type="hidden" name="nonce" value="{{ form.nonce }}" />
+    <input type="hidden" name="action" value="{{ form.action }}" />
+    <input type="hidden" name="ID" value="{{ user.ID }}" />
+
+    {% if form.error %}
+      <div class="error">{{ form.error }}</div>
+    {% endif %}
+
+    <ul>
+      <li>
+        <div class="label">{{ post.login_text }}</div>
+        <div>{{ user.user_login }}</div>
+      </li>
+      <li>
+        <div class="label">{{ post.display_name_text }}</div>
+        <input type="text" value="{{ user.display_name }}" name="display_name" />
+      </li>
+      <li>
+        <div class="label">{{ post.nicename_text }}</div>
+        <input type="text" value="{{ user.user_nicename }}" name="user_nicename" />
+      </li>
+      <li>
+        <div class="label">{{ post.email_text }}</div>
+        <div>{{ user.user_email }}</div>
+      </li>
+      <li>
+        <div class="label">{{ post.url_text }}</div>
+        <input type="text" value="{{ user.user_url }}" name="user_url" />
+      </li>
+      <li>
+        <div class="label">{{ post.registered_text }}</div>
+        <div>{{ user.user_registered }}</div>
+      </li>
+      <li>
+        <input type="submit" value="{{ post.submit_text }}" />
+      </li>
+    </ul>
+  </form>
+  {% if post.below_text %}
+    <div class="below">{{ post.below_text }}</div>
+  {% endif %}
+{% endblock %}

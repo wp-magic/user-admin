@@ -1,0 +1,24 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  {{ post }}
+  <form action="{{ form.url }}" method="post">
+    <input type="hidden" name="nonce" value="{{ form.nonce }}" />
+    <input type="hidden" name="action" value="{{ form.action }}" />
+
+    {% if form.error %}
+      <div class="error">{{ form.error }}</div>
+    {% endif %}
+
+    <ul>
+      <li>
+        <input type="email" name="email" placeholder="{{ post.email_placeholder }}" value="{{ _REQUEST.email }}" />
+      </li>
+      <li>
+        <input type="password" name="password" placeholder="{{ post.password_placeholder }}" />
+      </li>
+      <li>
+        <input type="submit" value="{{ post.submit_text }}" />
+    </ul>
+  </form>
+{% endblock %}
