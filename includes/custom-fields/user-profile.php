@@ -112,7 +112,7 @@ if ( function_exists("register_field_group" ) ) {
 				array (
 					'param' => 'page_template',
 					'operator' => '==',
-					'value' => 'templates/profile.php',
+					'value' => 'magic_user_admin_profile.php',
 					'order_no' => 0,
 					'group_no' => 0,
 				),

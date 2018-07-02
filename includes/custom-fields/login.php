@@ -1,62 +1,34 @@
 <?php
-if(function_exists("register_field_group")) {
-	register_field_group(array (
+if(function_exists("magic_register_field_group")) {
+	magic_register_field_group(array (
 		'id' => 'acf_magic_user_admin_login_page',
 		'title' => 'Magic Login Page',
+		'slug' => 'magic_user_admin',
 		'fields' => array (
-			array (
-				'key' => 'field_5b3649feb6591',
+			'above_form' => array (
 				'label' => 'Content above Form',
-				'name' => 'above_form',
 				'type' => 'wysiwyg',
-				'default_value' => '',
-				'toolbar' => 'full',
-				'media_upload' => 'yes',
 			),
-			array (
-				'key' => 'field_5b3524cbb55bd',
+			'email_placeholder' => array (
 				'label' => 'Login Form Email Placeholder',
-				'name' => 'email_placeholder',
 				'type' => 'text',
 				'default_value' => 'Email',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'html',
-				'maxlength' => '',
 			),
-			array (
+			'password_placeholder' => array (
 				'key' => 'field_5b3525dbbda43',
 				'label' => 'Login Form Password Placeholder',
 				'name' => 'password_placeholder',
 				'type' => 'text',
 				'default_value' => 'Password',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'html',
-				'maxlength' => '',
 			),
-			array (
-				'key' => 'field_5b3525f372dd7',
-				'label' => 'Login Form Submit Button Text',
+			'submit_text' => array (
 				'name' => 'submit_text',
 				'type' => 'text',
 				'default_value' => 'Send',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'html',
-				'maxlength' => '',
 			),
-			array (
-				'key' => 'field_5b364a0fb6592',
+			'below_form' => array (
 				'label' => 'Content below Form',
-				'name' => 'below_form',
 				'type' => 'wysiwyg',
-				'default_value' => '',
-				'toolbar' => 'full',
-				'media_upload' => 'yes',
 			),
 		),
 		'location' => array (
@@ -64,7 +36,7 @@ if(function_exists("register_field_group")) {
 				array (
 					'param' => 'page_template',
 					'operator' => '==',
-					'value' => 'templates/login.php',
+					'value' => 'magic_user_admin_login.php',
 					'order_no' => 0,
 					'group_no' => 0,
 				),
@@ -85,6 +57,5 @@ if(function_exists("register_field_group")) {
 				8 => 'send-trackbacks',
 			),
 		),
-		'menu_order' => 0,
-	));
+	) );
 }

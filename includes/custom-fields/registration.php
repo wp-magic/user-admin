@@ -76,7 +76,7 @@ if(function_exists("register_field_group")) {
 				array (
 					'param' => 'page_template',
 					'operator' => '==',
-					'value' => 'templates/registration.php',
+					'value' => 'magic_user_admin_registration.php',
 					'order_no' => 0,
 					'group_no' => 0,
 				),
