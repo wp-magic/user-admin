@@ -13,6 +13,14 @@ if ( function_exists("register_field_group" ) ) {
 				'toolbar' => 'full',
 				'media_upload' => 'yes',
 			),
+			array(
+				'key' => 'magic_user_admin_profile_page_use_gravatar',
+				'label' => 'Use Gravatar images',
+				'name' => 'use_gravatar',
+				'type' => 'true_false',
+				'message' => 'Load user images using gravatar',
+				'default_value' => 0,
+			),
 			array (
 				'key' => 'field_5b376fe0d3edf',
 				'label' => 'Login text',

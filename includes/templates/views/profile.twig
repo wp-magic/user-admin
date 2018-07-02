@@ -21,7 +21,7 @@
         <div class="label">{{ post.login_text }}</div>
         <div>{{ user.user_login }}</div>
       </li>
-      {% if user.avatar %}
+      {% if user.avatar and post.use_gravatar %}
       <li>
         <img src="{{ user.avatar }}" role="presentation" />
       </li>
