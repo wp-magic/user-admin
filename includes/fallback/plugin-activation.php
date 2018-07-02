@@ -2,38 +2,12 @@
 /**
  * Plugin installation and activation for WordPress themes.
  *
- * Please note that this is a drop-in library for a theme or plugin.
- * The authors of this library (Thomas, Gary and Juliette) are NOT responsible
- * for the support of your plugin or theme. Please contact the plugin
- * or theme author for support.
- *
- * @package   TGM-Plugin-Activation
- * @version   2.6.1
- * @link      http://tgmpluginactivation.com/
- * @author    Thomas Griffin, Gary Jones, Juliette Reinders Folmer
- * @copyright Copyright (c) 2011, Thomas Griffin
- * @license   GPL-2.0+
+ * @package   Magic-Plugin-Activation
+ * @version   0.0.1
+ * @author    Jascha Ehrenreich, Thomas Griffin, Gary Jones, Juliette Reinders Folmer
  */
 
-/*
-	Copyright 2011 Thomas Griffin (thomasgriffinmedia.com)
-
-	This program is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License, version 2, as
-	published by the Free Software Foundation.
-
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*/
-
 if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
-
 	/**
 	 * Automatic plugin installation and activation library.
 	 *
@@ -41,9 +15,9 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 	 * The plugins can be either bundled, downloaded from the WordPress
 	 * Plugin Repository or downloaded from another external source.
 	 *
-	 * @since 1.0.0
+	 * @since 0.0.1
 	 *
-	 * @package TGM-Plugin-Activation
+	 * @package Magic-Plugin-Activation
 	 * @author  Thomas Griffin
 	 * @author  Gary Jones
 	 */
@@ -51,7 +25,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * TGMPA version number.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @const string Version number.
 		 */
@@ -62,7 +36,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 *
 		 * @const string Regex.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 */
 		const WP_REPO_REGEX = '|^http[s]?://wordpress\.org/(?:extend/)?plugins/|';
 
@@ -71,24 +45,24 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 *
 		 * @const string Regex.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 */
 		const IS_URL_REGEX = '|^http[s]?://|';
 
 		/**
 		 * Holds a copy of itself, so it can be referenced by the class name.
 		 *
-		 * @since 1.0.0
+		 * @since 0.0.1
 		 *
-		 * @var Magic_Appointments_Plugin_Activation
+		 * @var Magic_Plugin_Activation
 		 */
 		public static $instance;
 
 		/**
 		 * Holds arrays of plugin details.
 		 *
-		 * @since 1.0.0
-		 * @since 2.5.0 the array has the plugin slug as an associative key.
+		 * @since 0.0.1
+		 * @since 0.0.1 the array has the plugin slug as an associative key.
 		 *
 		 * @var array
 		 */
@@ -97,7 +71,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Holds arrays of plugin names to use to sort the plugins array.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @var array
 		 */
@@ -106,7 +80,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Whether any plugins have the 'force_activation' setting set to true.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @var bool
 		 */
@@ -115,7 +89,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Whether any plugins have the 'force_deactivation' setting set to true.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @var bool
 		 */
@@ -124,25 +98,25 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Name of the unique ID to hash notices.
 		 *
-		 * @since 2.4.0
+		 * @since 0.0.1
 		 *
 		 * @var string
 		 */
-		public $id = 'tgmpa';
+		public $id = 'magic_pa';
 
 		/**
 		 * Name of the query-string argument for the admin page.
 		 *
-		 * @since 1.0.0
+		 * @since 0.0.1
 		 *
 		 * @var string
 		 */
-		protected $menu = 'tgmpa-install-plugins';
+		protected $menu = 'magic_pa-install-plugins';
 
 		/**
 		 * Parent menu file slug.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @var string
 		 */
@@ -151,7 +125,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Capability needed to view the plugin installation menu item.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @var string
 		 */
@@ -160,7 +134,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Default absolute path to folder containing bundled plugin zip files.
 		 *
-		 * @since 2.0.0
+		 * @since 0.0.1
 		 *
 		 * @var string Absolute path prefix to zip file location for bundled plugins. Default is empty string.
 		 */
@@ -169,7 +143,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Flag to show admin notices or not.
 		 *
-		 * @since 2.1.0
+		 * @since 0.0.1
 		 *
 		 * @var boolean
 		 */
@@ -178,7 +152,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Flag to determine if the user can dismiss the notice nag.
 		 *
-		 * @since 2.4.0
+		 * @since 0.0.1
 		 *
 		 * @var boolean
 		 */
@@ -187,7 +161,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Message to be output above nag notice if dismissable is false.
 		 *
-		 * @since 2.4.0
+		 * @since 0.0.1
 		 *
 		 * @var string
 		 */
@@ -196,7 +170,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Flag to set automatic activation of plugins. Off by default.
 		 *
-		 * @since 2.2.0
+		 * @since 0.0.1
 		 *
 		 * @var boolean
 		 */
@@ -205,7 +179,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Optional message to display before the plugins table.
 		 *
-		 * @since 2.2.0
+		 * @since 0.0.1
 		 *
 		 * @var string Message filtered by wp_kses_post(). Default is empty string.
 		 */
@@ -216,7 +190,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 *
 		 * Default values are added in the constructor.
 		 *
-		 * @since 2.0.0
+		 * @since 0.0.1
 		 *
 		 * @var array
 		 */
@@ -225,7 +199,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Holds the version of WordPress.
 		 *
-		 * @since 2.4.0
+		 * @since 0.0.1
 		 *
 		 * @var int
 		 */
@@ -234,7 +208,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Holds the hook name for the admin page.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @var string
 		 */
@@ -242,22 +216,22 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 
 		/**
 		 * Adds a reference of this object to $instance, populates default strings,
-		 * does the tgmpa_init action hook, and hooks in the interactions to init.
+		 * does the magic_pa_init action hook, and hooks in the interactions to init.
 		 *
 		 * {@internal This method should be `protected`, but as too many TGMPA implementations
 		 * haven't upgraded beyond v2.3.6 yet, this gives backward compatibility issues.
 		 * Reverted back to public for the time being.}}
 		 *
-		 * @since 1.0.0
+		 * @since 0.0.1
 		 *
-		 * @see Magic_Appointments_Plugin_Activation::init()
+		 * @see Magic_Plugin_Activation::init()
 		 */
 		public function __construct() {
 			// Set the current WordPress version.
 			$this->wp_version = $GLOBALS['wp_version'];
 
 			// Announce that the class is ready, and pass the object (for advanced use).
-			do_action_ref_array( 'tgmpa_init', array( $this ) );
+			do_action_ref_array( 'magic_pa_init', array( $this ) );
 
 			/*
 			 * Load our text domain and allow for overloading the fall-back file.
@@ -281,7 +255,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 *
 		 * @see https://github.com/TGMPA/TGM-Plugin-Activation/blob/2.3.6/tgm-plugin-activation/class-tgm-plugin-activation.php#L1593
 		 *
-		 * @since 2.5.2
+		 * @since 0.0.1
 		 *
 		 * @param string $name  Name of an inaccessible property.
 		 * @param mixed  $value Value to assign to the property.
@@ -295,7 +269,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Magic method to get the value of a protected property outside of this class context.
 		 *
-		 * @since 2.5.2
+		 * @since 0.0.1
 		 *
 		 * @param string $name Name of an inaccessible property.
 		 * @return mixed The property value.
@@ -309,102 +283,102 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 *
 		 * Hooks in three new methods for the class: admin_menu, notices and styles.
 		 *
-		 * @since 2.0.0
+		 * @since 0.0.1
 		 *
-		 * @see Magic_Appointments_Plugin_Activation::admin_menu()
-		 * @see Magic_Appointments_Plugin_Activation::notices()
-		 * @see Magic_Appointments_Plugin_Activation::styles()
+		 * @see Magic_Plugin_Activation::admin_menu()
+		 * @see Magic_Plugin_Activation::notices()
+		 * @see Magic_Plugin_Activation::styles()
 		 */
 		public function init() {
 			/**
 			 * By default TGMPA only loads on the WP back-end and not in an Ajax call. Using this filter
 			 * you can overrule that behaviour.
 			 *
-			 * @since 2.5.0
+			 * @since 0.0.1
 			 *
 			 * @param bool $load Whether or not TGMPA should load.
 			 *                   Defaults to the return of `is_admin() && ! defined( 'DOING_AJAX' )`.
 			 */
-			if ( true !== apply_filters( 'tgmpa_load', ( is_admin() && ! defined( 'DOING_AJAX' ) ) ) ) {
+			if ( true !== apply_filters( 'magic_pa_load', ( is_admin() && ! defined( 'DOING_AJAX' ) ) ) ) {
 				return;
 			}
 
 			// Load class strings.
 			$this->strings = array(
-				'page_title'                      => __( 'Install Required Plugins', 'tgmpa' ),
-				'menu_title'                      => __( 'Install Plugins', 'tgmpa' ),
+				'page_title'                      => __( 'Install Required Plugins', 'magic_pa' ),
+				'menu_title'                      => __( 'Install Plugins', 'magic_pa' ),
 				/* translators: %s: plugin name. */
-				'installing'                      => __( 'Installing Plugin: %s', 'tgmpa' ),
+				'installing'                      => __( 'Installing Plugin: %s', 'magic_pa' ),
 				/* translators: %s: plugin name. */
-				'updating'                        => __( 'Updating Plugin: %s', 'tgmpa' ),
-				'oops'                            => __( 'Something went wrong with the plugin API.', 'tgmpa' ),
+				'updating'                        => __( 'Updating Plugin: %s', 'magic_pa' ),
+				'oops'                            => __( 'Something went wrong with the plugin API.', 'magic_pa' ),
 				'notice_can_install_required'     => _n_noop(
 					/* translators: 1: plugin name(s). */
 					'This theme requires the following plugin: %1$s.',
 					'This theme requires the following plugins: %1$s.',
-					'tgmpa'
+					'magic_pa'
 				),
 				'notice_can_install_recommended'  => _n_noop(
 					/* translators: 1: plugin name(s). */
 					'This theme recommends the following plugin: %1$s.',
 					'This theme recommends the following plugins: %1$s.',
-					'tgmpa'
+					'magic_pa'
 				),
 				'notice_ask_to_update'            => _n_noop(
 					/* translators: 1: plugin name(s). */
 					'The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.',
 					'The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s.',
-					'tgmpa'
+					'magic_pa'
 				),
 				'notice_ask_to_update_maybe'      => _n_noop(
 					/* translators: 1: plugin name(s). */
 					'There is an update available for: %1$s.',
 					'There are updates available for the following plugins: %1$s.',
-					'tgmpa'
+					'magic_pa'
 				),
 				'notice_can_activate_required'    => _n_noop(
 					/* translators: 1: plugin name(s). */
 					'The following required plugin is currently inactive: %1$s.',
 					'The following required plugins are currently inactive: %1$s.',
-					'tgmpa'
+					'magic_pa'
 				),
 				'notice_can_activate_recommended' => _n_noop(
 					/* translators: 1: plugin name(s). */
 					'The following recommended plugin is currently inactive: %1$s.',
 					'The following recommended plugins are currently inactive: %1$s.',
-					'tgmpa'
+					'magic_pa'
 				),
 				'install_link'                    => _n_noop(
 					'Begin installing plugin',
 					'Begin installing plugins',
-					'tgmpa'
+					'magic_pa'
 				),
 				'update_link'                     => _n_noop(
 					'Begin updating plugin',
 					'Begin updating plugins',
-					'tgmpa'
+					'magic_pa'
 				),
 				'activate_link'                   => _n_noop(
 					'Begin activating plugin',
 					'Begin activating plugins',
-					'tgmpa'
+					'magic_pa'
 				),
-				'return'                          => __( 'Return to Required Plugins Installer', 'tgmpa' ),
-				'dashboard'                       => __( 'Return to the Dashboard', 'tgmpa' ),
-				'plugin_activated'                => __( 'Plugin activated successfully.', 'tgmpa' ),
-				'activated_successfully'          => __( 'The following plugin was activated successfully:', 'tgmpa' ),
+				'return'                          => __( 'Return to Required Plugins Installer', 'magic_pa' ),
+				'dashboard'                       => __( 'Return to the Dashboard', 'magic_pa' ),
+				'plugin_activated'                => __( 'Plugin activated successfully.', 'magic_pa' ),
+				'activated_successfully'          => __( 'The following plugin was activated successfully:', 'magic_pa' ),
 				/* translators: 1: plugin name. */
-				'plugin_already_active'           => __( 'No action taken. Plugin %1$s was already active.', 'tgmpa' ),
+				'plugin_already_active'           => __( 'No action taken. Plugin %1$s was already active.', 'magic_pa' ),
 				/* translators: 1: plugin name. */
-				'plugin_needs_higher_version'     => __( 'Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin.', 'tgmpa' ),
+				'plugin_needs_higher_version'     => __( 'Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin.', 'magic_pa' ),
 				/* translators: 1: dashboard link. */
-				'complete'                        => __( 'All plugins installed and activated successfully. %1$s', 'tgmpa' ),
-				'dismiss'                         => __( 'Dismiss this notice', 'tgmpa' ),
-				'notice_cannot_install_activate'  => __( 'There are one or more required or recommended plugins to install, update or activate.', 'tgmpa' ),
-				'contact_admin'                   => __( 'Please contact the administrator of this site for help.', 'tgmpa' ),
+				'complete'                        => __( 'All plugins installed and activated successfully. %1$s', 'magic_pa' ),
+				'dismiss'                         => __( 'Dismiss this notice', 'magic_pa' ),
+				'notice_cannot_install_activate'  => __( 'There are one or more required or recommended plugins to install, update or activate.', 'magic_pa' ),
+				'contact_admin'                   => __( 'Please contact the administrator of this site for help.', 'magic_pa' ),
 			);
 
-			do_action( 'tgmpa_register' );
+			do_action( 'magic_pa_register' );
 
 			/* After this point, the plugins should be registered and the configuration set. */
 
@@ -414,7 +388,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 			}
 
 			// Set up the menu and notices if we still have outstanding actions.
-			if ( true !== $this->is_tgmpa_complete() ) {
+			if ( true !== $this->is_magic_pa_complete() ) {
 				// Sort the plugins.
 				array_multisort( $this->sort_order, SORT_ASC, $this->plugins );
 
@@ -456,7 +430,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Load translations.
 		 *
-		 * @since 2.6.0
+		 * @since 0.0.1
 		 *
 		 * (@internal Uses `load_theme_textdomain()` rather than `load_plugin_textdomain()` to
 		 * get round the different ways of handling the path and deprecated notices being thrown
@@ -466,17 +440,17 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * generator on the website.}}
 		 */
 		public function load_textdomain() {
-			if ( is_textdomain_loaded( 'tgmpa' ) ) {
+			if ( is_textdomain_loaded( 'magic_pa' ) ) {
 				return;
 			}
 
 			if ( false !== strpos( __FILE__, WP_PLUGIN_DIR ) || false !== strpos( __FILE__, WPMU_PLUGIN_DIR ) ) {
 				// Plugin, we'll need to adjust the file name.
 				add_action( 'load_textdomain_mofile', array( $this, 'correct_plugin_mofile' ), 10, 2 );
-				load_theme_textdomain( 'tgmpa', dirname( __FILE__ ) . '/languages' );
+				load_theme_textdomain( 'magic_pa', dirname( __FILE__ ) . '/languages' );
 				remove_action( 'load_textdomain_mofile', array( $this, 'correct_plugin_mofile' ), 10 );
 			} else {
-				load_theme_textdomain( 'tgmpa', dirname( __FILE__ ) . '/languages' );
+				load_theme_textdomain( 'magic_pa', dirname( __FILE__ ) . '/languages' );
 			}
 		}
 
@@ -488,7 +462,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * {@internal IMPORTANT! If this function changes, review the regex in the custom TGMPA
 		 * generator on the website.}}
 		 *
-		 * @since 2.6.0
+		 * @since 0.0.1
 		 *
 		 * @param string $mofile Full path to the target mofile.
 		 * @param string $domain The domain for which a language file is being loaded.
@@ -496,10 +470,10 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 */
 		public function correct_plugin_mofile( $mofile, $domain ) {
 			// Exit early if not our domain (just in case).
-			if ( 'tgmpa' !== $domain ) {
+			if ( 'magic_pa' !== $domain ) {
 				return $mofile;
 			}
-			return preg_replace( '`/([a-z]{2}_[A-Z]{2}.mo)$`', '/tgmpa-$1', $mofile );
+			return preg_replace( '`/([a-z]{2}_[A-Z]{2}.mo)$`', '/magic_pa-$1', $mofile );
 		}
 
 		/**
@@ -515,7 +489,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * {@internal IMPORTANT! If this function changes, review the regex in the custom TGMPA
 		 * generator on the website.}}
 		 *
-		 * @since 2.6.0
+		 * @since 0.0.1
 		 *
 		 * @param string $mofile Full path to the target mofile.
 		 * @param string $domain The domain for which a language file is being loaded.
@@ -523,7 +497,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 */
 		public function overload_textdomain_mofile( $mofile, $domain ) {
 			// Exit early if not our domain, not a WP_LANG_DIR load or if the file exists and is readable.
-			if ( 'tgmpa' !== $domain || false === strpos( $mofile, WP_LANG_DIR ) || @is_readable( $mofile ) ) {
+			if ( 'magic_pa' !== $domain || false === strpos( $mofile, WP_LANG_DIR ) || @is_readable( $mofile ) ) {
 				return $mofile;
 			}
 
@@ -544,7 +518,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * - Prevent deactivation of force-activated plugins.
 		 * - Add update notice if update available.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 */
 		public function add_plugin_action_link_filters() {
 			foreach ( $this->plugins as $slug => $plugin ) {
@@ -566,7 +540,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * Remove the 'Activate' link on the WP native plugins page if the plugin does not meet the
 		 * minimum version requirements.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param array $actions Action links.
 		 * @return array
@@ -580,7 +554,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Remove the 'Deactivate' link on the WP native plugins page if the plugin has been set to force activate.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param array $actions Action links.
 		 * @return array
@@ -595,7 +569,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * Add a 'Requires update' link on the WP native plugins page if the plugin does not meet the
 		 * minimum version requirements.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param array $actions Action links.
 		 * @return array
@@ -603,9 +577,9 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		public function filter_plugin_action_links_update( $actions ) {
 			$actions['update'] = sprintf(
 				'<a href="%1$s" title="%2$s" class="edit">%3$s</a>',
-				esc_url( $this->get_tgmpa_status_url( 'update' ) ),
-				esc_attr__( 'This plugin needs to be updated to be compatible with your theme.', 'tgmpa' ),
-				esc_html__( 'Update Required', 'tgmpa' )
+				esc_url( $this->get_magic_pa_status_url( 'update' ) ),
+				esc_attr__( 'This plugin needs to be updated to be compatible with your theme.', 'magic_pa' ),
+				esc_html__( 'Update Required', 'magic_pa' )
 			);
 
 			return $actions;
@@ -627,7 +601,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 *
 		 * Returns early if not the TGMPA page.
 		 *
-		 * @since 2.1.0
+		 * @since 0.0.1
 		 *
 		 * @global string $tab Used as iframe div class names, helps with styling
 		 * @global string $body_id Used as the iframe body ID, helps with styling
@@ -635,7 +609,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * @return null Returns early if not the TGMPA page.
 		 */
 		public function admin_init() {
-			if ( ! $this->is_tgmpa_page() ) {
+			if ( ! $this->is_magic_pa_page() ) {
 				return;
 			}
 
@@ -666,10 +640,10 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * Thickbox is only loaded if the user has not dismissed the admin
 		 * notice or if there are any plugins left to install and activate.
 		 *
-		 * @since 2.1.0
+		 * @since 0.0.1
 		 */
 		public function thickbox() {
-			if ( ! get_user_meta( get_current_user_id(), 'tgmpa_dismissed_notice_' . $this->id, true ) ) {
+			if ( ! get_user_meta( get_current_user_id(), 'magic_pa_dismissed_notice_' . $this->id, true ) ) {
 				add_thickbox();
 			}
 		}
@@ -682,10 +656,10 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 *
 		 * This page disappears once the plugin has been installed and activated.
 		 *
-		 * @since 1.0.0
+		 * @since 0.0.1
 		 *
-		 * @see Magic_Appointments_Plugin_Activation::init()
-		 * @see Magic_Appointments_Plugin_Activation::install_plugins_page()
+		 * @see Magic_Plugin_Activation::init()
+		 * @see Magic_Plugin_Activation::install_plugins_page()
 		 *
 		 * @return null Return early if user lacks capability to install a plugin.
 		 */
@@ -696,7 +670,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 			}
 
 			$args = apply_filters(
-				'tgmpa_admin_menu_args',
+				'magic_pa_admin_menu_args',
 				array(
 					'parent_slug' => $this->parent_slug,                     // Parent Menu slug.
 					'page_title'  => $this->strings['page_title'],           // Page title.
@@ -716,13 +690,13 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * {@internal IMPORTANT! If this function changes, review the regex in the custom TGMPA
 		 * generator on the website.}}
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param array $args Menu item configuration.
 		 */
 		protected function add_admin_menu( array $args ) {
-			if ( has_filter( 'tgmpa_admin_menu_use_add_theme_page' ) ) {
-				_deprecated_function( 'The "tgmpa_admin_menu_use_add_theme_page" filter', '2.5.0', esc_html__( 'Set the parent_slug config variable instead.', 'tgmpa' ) );
+			if ( has_filter( 'magic_pa_admin_menu_use_add_theme_page' ) ) {
+				_deprecated_function( 'The "magic_pa_admin_menu_use_add_theme_page" filter', '2.5.0', esc_html__( 'Set the parent_slug config variable instead.', 'magic_pa' ) );
 			}
 
 			if ( 'themes.php' === $this->parent_slug ) {
@@ -739,16 +713,16 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * This displays the admin page and form area where the user can select to install and activate the plugin.
 		 * Aborts early if we're processing a plugin installation action.
 		 *
-		 * @since 1.0.0
+		 * @since 0.0.1
 		 *
 		 * @return null Aborts early if we're processing a plugin installation action.
 		 */
 		public function install_plugins_page() {
 			// Store new instance of plugin table in object.
-			$plugin_table = new Magic_Appointments_List_Table;
+			$plugin_table = new Magic_Plugin_Activation_List_Table;
 
 			// Return early if processing a plugin installation action.
-			if ( ( ( 'tgmpa-bulk-install' === $plugin_table->current_action() || 'tgmpa-bulk-update' === $plugin_table->current_action() ) && $plugin_table->process_bulk_actions() ) || $this->do_plugin_install() ) {
+			if ( ( ( 'magic_pa-bulk-install' === $plugin_table->current_action() || 'magic_pa-bulk-update' === $plugin_table->current_action() ) && $plugin_table->process_bulk_actions() ) || $this->do_plugin_install() ) {
 				return;
 			}
 
@@ -756,7 +730,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 			wp_clean_plugins_cache( false );
 
 			?>
-			<div class="tgmpa wrap">
+			<div class="magic_pa wrap">
 				<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 				<?php $plugin_table->prepare_items(); ?>
 
@@ -767,8 +741,8 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 				?>
 				<?php $plugin_table->views(); ?>
 
-				<form id="tgmpa-plugins" action="" method="post">
-					<input type="hidden" name="tgmpa-page" value="<?php echo esc_attr( $this->menu ); ?>" />
+				<form id="magic_pa-plugins" action="" method="post">
+					<input type="hidden" name="magic_pa-page" value="<?php echo esc_attr( $this->menu ); ?>" />
 					<input type="hidden" name="plugin_status" value="<?php echo esc_attr( $plugin_table->view_context ); ?>" />
 					<?php $plugin_table->display(); ?>
 				</form>
@@ -785,7 +759,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * Uses WP_Filesystem to process and handle the plugin installation
 		 * method.
 		 *
-		 * @since 1.0.0
+		 * @since 0.0.1
 		 *
 		 * @uses WP_Filesystem
 		 * @uses WP_Error
@@ -809,26 +783,26 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 			}
 
 			// Was an install or upgrade action link clicked?
-			if ( ( isset( $_GET['tgmpa-install'] ) && 'install-plugin' === $_GET['tgmpa-install'] ) || ( isset( $_GET['tgmpa-update'] ) && 'update-plugin' === $_GET['tgmpa-update'] ) ) {
+			if ( ( isset( $_GET['magic_pa-install'] ) && 'install-plugin' === $_GET['magic_pa-install'] ) || ( isset( $_GET['magic_pa-update'] ) && 'update-plugin' === $_GET['magic_pa-update'] ) ) {
 
 				$install_type = 'install';
-				if ( isset( $_GET['tgmpa-update'] ) && 'update-plugin' === $_GET['tgmpa-update'] ) {
+				if ( isset( $_GET['magic_pa-update'] ) && 'update-plugin' === $_GET['magic_pa-update'] ) {
 					$install_type = 'update';
 				}
 
-				check_admin_referer( 'tgmpa-' . $install_type, 'tgmpa-nonce' );
+				check_admin_referer( 'magic_pa-' . $install_type, 'magic_pa-nonce' );
 
 				// Pass necessary information via URL if WP_Filesystem is needed.
 				$url = wp_nonce_url(
 					add_query_arg(
 						array(
 							'plugin'                 => urlencode( $slug ),
-							'tgmpa-' . $install_type => $install_type . '-plugin',
+							'magic_pa-' . $install_type => $install_type . '-plugin',
 						),
-						$this->get_tgmpa_url()
+						$this->get_magic_pa_url()
 					),
-					'tgmpa-' . $install_type,
-					'tgmpa-nonce'
+					'magic_pa-' . $install_type,
+					'magic_pa-nonce'
 				);
 
 				$method = ''; // Leave blank so WP_Filesystem can populate it as necessary.
@@ -913,20 +887,20 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 					}
 				}
 
-				$this->show_tgmpa_version();
+				$this->show_magic_pa_version();
 
 				// Display message based on if all plugins are now active or not.
-				if ( $this->is_tgmpa_complete() ) {
-					echo '<p>', sprintf( esc_html( $this->strings['complete'] ), '<a href="' . esc_url( self_admin_url() ) . '">' . esc_html__( 'Return to the Dashboard', 'tgmpa' ) . '</a>' ), '</p>';
+				if ( $this->is_magic_pa_complete() ) {
+					echo '<p>', sprintf( esc_html( $this->strings['complete'] ), '<a href="' . esc_url( self_admin_url() ) . '">' . esc_html__( 'Return to the Dashboard', 'magic_pa' ) . '</a>' ), '</p>';
 					echo '<style type="text/css">#adminmenu .wp-submenu li.current { display: none !important; }</style>';
 				} else {
-					echo '<p><a href="', esc_url( $this->get_tgmpa_url() ), '" target="_parent">', esc_html( $this->strings['return'] ), '</a></p>';
+					echo '<p><a href="', esc_url( $this->get_magic_pa_url() ), '" target="_parent">', esc_html( $this->strings['return'] ), '</a></p>';
 				}
 
 				return true;
-			} elseif ( isset( $this->plugins[ $slug ]['file_path'], $_GET['tgmpa-activate'] ) && 'activate-plugin' === $_GET['tgmpa-activate'] ) {
+			} elseif ( isset( $this->plugins[ $slug ]['file_path'], $_GET['magic_pa-activate'] ) && 'activate-plugin' === $_GET['magic_pa-activate'] ) {
 				// Activate action link was clicked.
-				check_admin_referer( 'tgmpa-activate', 'tgmpa-nonce' );
+				check_admin_referer( 'magic_pa-activate', 'magic_pa-nonce' );
 
 				if ( false === $this->activate_single_plugin( $this->plugins[ $slug ]['file_path'], $slug ) ) {
 					return true; // Finish execution of the function early as we encountered an error.
@@ -939,7 +913,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Inject information into the 'update_plugins' site transient as WP checks that before running an update.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param array $plugins The plugin information for the plugins which are to be updated.
 		 */
@@ -979,7 +953,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * as installed. This is fixed by adjusting the temporary unzipped source subdirectory name to
 		 * the expected plugin slug.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string       $source        Path to upgrade/zip-file-name.tmp/subdirectory/.
 		 * @param string       $remote_source Path to upgrade/zip-file-name.tmp.
@@ -987,7 +961,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * @return string $source
 		 */
 		public function maybe_adjust_source_dir( $source, $remote_source, $upgrader ) {
-			if ( ! $this->is_tgmpa_page() || ! is_object( $GLOBALS['wp_filesystem'] ) ) {
+			if ( ! $this->is_magic_pa_page() || ! is_object( $GLOBALS['wp_filesystem'] ) ) {
 				return $source;
 			}
 
@@ -1024,10 +998,10 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 					if ( true === $GLOBALS['wp_filesystem']->move( $from_path, $to_path ) ) {
 						return trailingslashit( $to_path );
 					} else {
-						return new WP_Error( 'rename_failed', esc_html__( 'The remote plugin package does not contain a folder with the desired slug and renaming did not work.', 'tgmpa' ) . ' ' . esc_html__( 'Please contact the plugin provider and ask them to package their plugin according to the WordPress guidelines.', 'tgmpa' ), array( 'found' => $subdir_name, 'expected' => $desired_slug ) );
+						return new WP_Error( 'rename_failed', esc_html__( 'The remote plugin package does not contain a folder with the desired slug and renaming did not work.', 'magic_pa' ) . ' ' . esc_html__( 'Please contact the plugin provider and ask them to package their plugin according to the WordPress guidelines.', 'magic_pa' ), array( 'found' => $subdir_name, 'expected' => $desired_slug ) );
 					}
 				} elseif ( empty( $subdir_name ) ) {
-					return new WP_Error( 'packaged_wrong', esc_html__( 'The remote plugin package consists of more than one file, but the files are not packaged in a folder.', 'tgmpa' ) . ' ' . esc_html__( 'Please contact the plugin provider and ask them to package their plugin according to the WordPress guidelines.', 'tgmpa' ), array( 'found' => $subdir_name, 'expected' => $desired_slug ) );
+					return new WP_Error( 'packaged_wrong', esc_html__( 'The remote plugin package consists of more than one file, but the files are not packaged in a folder.', 'magic_pa' ) . ' ' . esc_html__( 'Please contact the plugin provider and ask them to package their plugin according to the WordPress guidelines.', 'magic_pa' ), array( 'found' => $subdir_name, 'expected' => $desired_slug ) );
 				}
 			}
 
@@ -1037,7 +1011,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Activate a single plugin and send feedback about the result to the screen.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $file_path Path within wp-plugins/ to main plugin file.
 		 * @param string $slug      Plugin slug.
@@ -1051,7 +1025,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 
 				if ( is_wp_error( $activate ) ) {
 					echo '<div id="message" class="error"><p>', wp_kses_post( $activate->get_error_message() ), '</p></div>',
-						'<p><a href="', esc_url( $this->get_tgmpa_url() ), '" target="_parent">', esc_html( $this->strings['return'] ), '</a></p>';
+						'<p><a href="', esc_url( $this->get_magic_pa_url() ), '" target="_parent">', esc_html( $this->strings['return'] ), '</a></p>';
 
 					return false; // End it here if there is an error with activation.
 				} else {
@@ -1105,7 +1079,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 *
 		 * Returns early if we're on the Install page.
 		 *
-		 * @since 1.0.0
+		 * @since 0.0.1
 		 *
 		 * @global object $current_screen
 		 *
@@ -1113,7 +1087,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 */
 		public function notices() {
 			// Remove nag on the install page / Return early if the nag message has been dismissed or user < author.
-			if ( ( $this->is_tgmpa_page() || $this->is_core_update_page() ) || get_user_meta( get_current_user_id(), 'tgmpa_dismissed_notice_' . $this->id, true ) || ! current_user_can( apply_filters( 'tgmpa_show_admin_notice_capability', 'publish_posts' ) ) ) {
+			if ( ( $this->is_magic_pa_page() || $this->is_core_update_page() ) || get_user_meta( get_current_user_id(), 'magic_pa_dismissed_notice_' . $this->id, true ) || ! current_user_can( apply_filters( 'magic_pa_show_admin_notice_capability', 'publish_posts' ) ) ) {
 				return;
 			}
 
@@ -1209,14 +1183,14 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 						unset( $plugin_slug );
 
 						$count          = count( $plugin_group );
-						$linked_plugins = array_map( array( 'Magic_Appointments_Utils', 'wrap_in_em' ), $linked_plugins );
+						$linked_plugins = array_map( array( 'Magic_Plugin_Activation_Utils', 'wrap_in_em' ), $linked_plugins );
 						$last_plugin    = array_pop( $linked_plugins ); // Pop off last name to prep for readability.
-						$imploded       = empty( $linked_plugins ) ? $last_plugin : ( implode( ', ', $linked_plugins ) . ' ' . esc_html_x( 'and', 'plugin A *and* plugin B', 'tgmpa' ) . ' ' . $last_plugin );
+						$imploded       = empty( $linked_plugins ) ? $last_plugin : ( implode( ', ', $linked_plugins ) . ' ' . esc_html_x( 'and', 'plugin A *and* plugin B', 'magic_pa' ) . ' ' . $last_plugin );
 
 						$rendered .= sprintf(
 							$line_template,
 							sprintf(
-								translate_nooped_plural( $this->strings[ $type ], $count, 'tgmpa' ),
+								translate_nooped_plural( $this->strings[ $type ], $count, 'magic_pa' ),
 								$imploded,
 								$count
 							)
@@ -1229,7 +1203,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 				}
 
 				// Register the nag messages and prepare them to be processed.
-				add_settings_error( 'tgmpa', 'tgmpa', $rendered, $this->get_admin_notice_class() );
+				add_settings_error( 'magic_pa', 'magic_pa', $rendered, $this->get_admin_notice_class() );
 			}
 
 			// Admin options pages already output settings_errors, so this is to avoid duplication.
@@ -1241,7 +1215,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Generate the user action links for the admin notice.
 		 *
-		 * @since 2.6.0
+		 * @since 0.0.1
 		 *
 		 * @param int $install_count  Number of plugins to install.
 		 * @param int $update_count   Number of plugins to update.
@@ -1255,7 +1229,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 				'install'  => '',
 				'update'   => '',
 				'activate' => '',
-				'dismiss'  => $this->dismissable ? '<a href="' . esc_url( wp_nonce_url( add_query_arg( 'tgmpa-dismiss', 'dismiss_admin_notices' ), 'tgmpa-dismiss-' . get_current_user_id() ) ) . '" class="dismiss-notice" target="_parent">' . esc_html( $this->strings['dismiss'] ) . '</a>' : '',
+				'dismiss'  => $this->dismissable ? '<a href="' . esc_url( wp_nonce_url( add_query_arg( 'magic_pa-dismiss', 'dismiss_admin_notices' ), 'magic_pa-dismiss-' . get_current_user_id() ) ) . '" class="dismiss-notice" target="_parent">' . esc_html( $this->strings['dismiss'] ) . '</a>' : '',
 			);
 
 			$link_template = '<a href="%2$s">%1$s</a>';
@@ -1264,15 +1238,15 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 				if ( $install_count > 0 ) {
 					$action_links['install'] = sprintf(
 						$link_template,
-						translate_nooped_plural( $this->strings['install_link'], $install_count, 'tgmpa' ),
-						esc_url( $this->get_tgmpa_status_url( 'install' ) )
+						translate_nooped_plural( $this->strings['install_link'], $install_count, 'magic_pa' ),
+						esc_url( $this->get_magic_pa_status_url( 'install' ) )
 					);
 				}
 				if ( $update_count > 0 ) {
 					$action_links['update'] = sprintf(
 						$link_template,
-						translate_nooped_plural( $this->strings['update_link'], $update_count, 'tgmpa' ),
-						esc_url( $this->get_tgmpa_status_url( 'update' ) )
+						translate_nooped_plural( $this->strings['update_link'], $update_count, 'magic_pa' ),
+						esc_url( $this->get_magic_pa_status_url( 'update' ) )
 					);
 				}
 			}
@@ -1280,18 +1254,18 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 			if ( current_user_can( 'activate_plugins' ) && $activate_count > 0 ) {
 				$action_links['activate'] = sprintf(
 					$link_template,
-					translate_nooped_plural( $this->strings['activate_link'], $activate_count, 'tgmpa' ),
-					esc_url( $this->get_tgmpa_status_url( 'activate' ) )
+					translate_nooped_plural( $this->strings['activate_link'], $activate_count, 'magic_pa' ),
+					esc_url( $this->get_magic_pa_status_url( 'activate' ) )
 				);
 			}
 
-			$action_links = apply_filters( 'tgmpa_notice_action_links', $action_links );
+			$action_links = apply_filters( 'magic_pa_notice_action_links', $action_links );
 
 			$action_links = array_filter( (array) $action_links ); // Remove any empty array items.
 
 			if ( ! empty( $action_links ) ) {
 				$action_links = sprintf( $line_template, implode( ' | ', $action_links ) );
-				return apply_filters( 'tgmpa_notice_rendered_action_links', $action_links );
+				return apply_filters( 'magic_pa_notice_rendered_action_links', $action_links );
 			} else {
 				return '';
 			}
@@ -1303,7 +1277,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * Work around all the changes to the various admin notice classes between WP 4.4 and 3.7
 		 * (lowest supported version by TGMPA).
 		 *
-		 * @since 2.6.0
+		 * @since 0.0.1
 		 *
 		 * @return string
 		 */
@@ -1324,15 +1298,15 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Display settings errors and remove those which have been displayed to avoid duplicate messages showing
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 */
 		protected function display_settings_errors() {
 			global $wp_settings_errors;
 
-			settings_errors( 'tgmpa' );
+			settings_errors( 'magic_pa' );
 
 			foreach ( (array) $wp_settings_errors as $key => $details ) {
-				if ( 'tgmpa' === $details['setting'] ) {
+				if ( 'magic_pa' === $details['setting'] ) {
 					unset( $wp_settings_errors[ $key ] );
 					break;
 				}
@@ -1345,11 +1319,11 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * Acts on the dismiss link in the admin nag messages.
 		 * If clicked, the admin notice disappears and will no longer be visible to this user.
 		 *
-		 * @since 2.1.0
+		 * @since 0.0.1
 		 */
 		public function dismiss() {
-			if ( isset( $_GET['tgmpa-dismiss'] ) && check_admin_referer( 'tgmpa-dismiss-' . get_current_user_id() ) ) {
-				update_user_meta( get_current_user_id(), 'tgmpa_dismissed_notice_' . $this->id, 1 );
+			if ( isset( $_GET['magic_pa-dismiss'] ) && check_admin_referer( 'magic_pa-dismiss-' . get_current_user_id() ) ) {
+				update_user_meta( get_current_user_id(), 'magic_pa_dismissed_notice_' . $this->id, 1 );
 			}
 		}
 
@@ -1359,7 +1333,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * If the required keys are not set or the plugin has already
 		 * been registered, the plugin is not added.
 		 *
-		 * @since 2.0.0
+		 * @since 0.0.1
 		 *
 		 * @param array|null $plugin Array of plugin arguments or null if invalid argument.
 		 * @return null Return early if incorrect argument.
@@ -1394,9 +1368,9 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 			// Forgive users for using string versions of booleans or floats for version number.
 			$plugin['version']            = (string) $plugin['version'];
 			$plugin['source']             = empty( $plugin['source'] ) ? 'repo' : $plugin['source'];
-			$plugin['required']           = Magic_Appointments_Utils::validate_bool( $plugin['required'] );
-			$plugin['force_activation']   = Magic_Appointments_Utils::validate_bool( $plugin['force_activation'] );
-			$plugin['force_deactivation'] = Magic_Appointments_Utils::validate_bool( $plugin['force_deactivation'] );
+			$plugin['required']           = Magic_Plugin_Activation_Utils::validate_bool( $plugin['required'] );
+			$plugin['force_activation']   = Magic_Plugin_Activation_Utils::validate_bool( $plugin['force_activation'] );
+			$plugin['force_deactivation'] = Magic_Plugin_Activation_Utils::validate_bool( $plugin['force_deactivation'] );
 
 			// Enrich the received data.
 			$plugin['file_path']   = $this->_get_plugin_basename_from_slug( $plugin['slug'] );
@@ -1420,7 +1394,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Determine what type of source the plugin comes from.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $source The source of the plugin as provided, either empty (= WP repo), a file path
 		 *                       (= bundled) or an external URL.
@@ -1445,7 +1419,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 *
 		 * @see https://developer.wordpress.org/reference/hooks/sanitize_key/
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $key String key.
 		 * @return string Sanitized key
@@ -1457,18 +1431,18 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 			/**
 			 * Filter a sanitized key string.
 			 *
-			 * @since 2.5.0
+			 * @since 0.0.1
 			 *
 			 * @param string $key     Sanitized key.
 			 * @param string $raw_key The key prior to sanitization.
 			 */
-			return apply_filters( 'tgmpa_sanitize_key', $key, $raw_key );
+			return apply_filters( 'magic_pa_sanitize_key', $key, $raw_key );
 		}
 
 		/**
 		 * Amend default configuration settings.
 		 *
-		 * @since 2.0.0
+		 * @since 0.0.1
 		 *
 		 * @param array $config Array of config options to pass as class properties.
 		 */
@@ -1501,14 +1475,14 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Amend action link after plugin installation.
 		 *
-		 * @since 2.0.0
+		 * @since 0.0.1
 		 *
 		 * @param array $install_actions Existing array of actions.
 		 * @return false|array Amended array of actions.
 		 */
 		public function actions( $install_actions ) {
 			// Remove action links on the TGMPA install page.
-			if ( $this->is_tgmpa_page() ) {
+			if ( $this->is_magic_pa_page() ) {
 				return false;
 			}
 
@@ -1519,7 +1493,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * Flushes the plugins cache on theme switch to prevent stale entries
 		 * from remaining in the plugin table.
 		 *
-		 * @since 2.4.0
+		 * @since 0.0.1
 		 *
 		 * @param bool $clear_update_cache Optional. Whether to clear the Plugin updates cache.
 		 *                                 Parameter added in v2.5.0.
@@ -1531,7 +1505,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Set file_path key for each installed plugin.
 		 *
-		 * @since 2.1.0
+		 * @since 0.0.1
 		 *
 		 * @param string $plugin_slug Optional. If set, only (re-)populates the file path for that specific plugin.
 		 *                            Parameter added in v2.5.0.
@@ -1551,7 +1525,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * Helper function to extract the file path of the plugin file from the
 		 * plugin slug, if the plugin is installed.
 		 *
-		 * @since 2.0.0
+		 * @since 0.0.1
 		 *
 		 * @param string $slug Plugin slug (typically folder name) as provided by the developer.
 		 * @return string Either file path for plugin if installed, or just the plugin slug.
@@ -1574,7 +1548,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * Loops through the registered plugins looking for $name. If it finds it,
 		 * it returns the $data from that plugin. Otherwise, returns false.
 		 *
-		 * @since 2.1.0
+		 * @since 0.0.1
 		 *
 		 * @param string $name Name of the plugin, as it was registered.
 		 * @param string $data Optional. Array key of plugin data to return. Default is slug.
@@ -1593,7 +1567,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Retrieve the download URL for a package.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $slug Plugin slug.
 		 * @return string Plugin download URL or path to local file or empty string if undetermined.
@@ -1616,7 +1590,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Retrieve the download URL for a WP repo package.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $slug Plugin slug.
 		 * @return string Plugin download URL.
@@ -1635,7 +1609,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Try to grab information from WordPress API.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $slug Plugin slug.
 		 * @return object Plugins_api response object on success, WP_Error on failure.
@@ -1665,7 +1639,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Retrieve a link to a plugin information page.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $slug Plugin slug.
 		 * @return string Fully formed html link to a plugin information page if available
@@ -1705,18 +1679,18 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Determine if we're on the TGMPA Install page.
 		 *
-		 * @since 2.1.0
+		 * @since 0.0.1
 		 *
 		 * @return boolean True when on the TGMPA page, false otherwise.
 		 */
-		protected function is_tgmpa_page() {
+		protected function is_magic_pa_page() {
 			return isset( $_GET['page'] ) && $this->menu === $_GET['page'];
 		}
 
 		/**
 		 * Determine if we're on a WP Core installation/upgrade page.
 		 *
-		 * @since 2.6.0
+		 * @since 0.0.1
 		 *
 		 * @return boolean True when on a WP Core installation/upgrade page, false otherwise.
 		 */
@@ -1746,13 +1720,13 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * Retrieve the URL to the TGMPA Install page.
 		 *
 		 * I.e. depending on the config settings passed something along the lines of:
-		 * http://example.com/wp-admin/themes.php?page=tgmpa-install-plugins
+		 * http://example.com/wp-admin/themes.php?page=magic_pa-install-plugins
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @return string Properly encoded URL (not escaped).
 		 */
-		public function get_tgmpa_url() {
+		public function get_magic_pa_url() {
 			static $url;
 
 			if ( ! isset( $url ) ) {
@@ -1775,30 +1749,30 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * Retrieve the URL to the TGMPA Install page for a specific plugin status (view).
 		 *
 		 * I.e. depending on the config settings passed something along the lines of:
-		 * http://example.com/wp-admin/themes.php?page=tgmpa-install-plugins&plugin_status=install
+		 * http://example.com/wp-admin/themes.php?page=magic_pa-install-plugins&plugin_status=install
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $status Plugin status - either 'install', 'update' or 'activate'.
 		 * @return string Properly encoded URL (not escaped).
 		 */
-		public function get_tgmpa_status_url( $status ) {
+		public function get_magic_pa_status_url( $status ) {
 			return add_query_arg(
 				array(
 					'plugin_status' => urlencode( $status ),
 				),
-				$this->get_tgmpa_url()
+				$this->get_magic_pa_url()
 			);
 		}
 
 		/**
 		 * Determine whether there are open actions for plugins registered with TGMPA.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @return bool True if complete, i.e. no outstanding actions. False otherwise.
 		 */
-		public function is_tgmpa_complete() {
+		public function is_magic_pa_complete() {
 			$complete = true;
 			foreach ( $this->plugins as $slug => $plugin ) {
 				if ( ! $this->is_plugin_active( $slug ) || false !== $this->does_plugin_have_update( $slug ) ) {
@@ -1813,7 +1787,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Check if a plugin is installed. Does not take must-use plugins into account.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $slug Plugin slug.
 		 * @return bool True if installed, false otherwise.
@@ -1827,7 +1801,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Check if a plugin is active.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $slug Plugin slug.
 		 * @return bool True if active, false otherwise.
@@ -1840,7 +1814,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * Check if a plugin can be updated, i.e. if we have information on the minimum WP version required
 		 * available, check whether the current install meets them.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $slug Plugin slug.
 		 * @return bool True if OK to update, false otherwise.
@@ -1865,7 +1839,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * Check to see if the plugin is 'updatetable', i.e. installed, with an update available
 		 * and no WP version requirements blocking it.
 		 *
-		 * @since 2.6.0
+		 * @since 0.0.1
 		 *
 		 * @param string $slug Plugin slug.
 		 * @return bool True if OK to proceed with update, false otherwise.
@@ -1882,7 +1856,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * Check if a plugin can be activated, i.e. is not currently active and meets the minimum
 		 * plugin version requirements set in TGMPA (if any).
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $slug Plugin slug.
 		 * @return bool True if OK to activate, false otherwise.
@@ -1894,7 +1868,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Retrieve the version number of an installed plugin.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $slug Plugin slug.
 		 * @return string Version number as string or an empty string if the plugin is not installed
@@ -1913,7 +1887,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Check whether a plugin complies with the minimum version requirements.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $slug Plugin slug.
 		 * @return bool True when a plugin needs to be updated, otherwise false.
@@ -1928,7 +1902,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Check whether there is an update available for a plugin.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $slug Plugin slug.
 		 * @return false|string Version number string of the available update or false if no update available.
@@ -1955,7 +1929,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Retrieve potential upgrade notice for a plugin.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $slug Plugin slug.
 		 * @return string The upgrade notice or an empty string if no message was available or provided.
@@ -1978,7 +1952,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Wrapper around the core WP get_plugins function, making sure it's actually available.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $plugin_folder Optional. Relative path to single plugin folder.
 		 * @return array Array of installed plugins with plugin information.
@@ -1997,10 +1971,10 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * This ensures that the user(s) is/are again reminded via nag of required
 		 * and/or recommended plugins if they re-activate the theme.
 		 *
-		 * @since 2.1.1
+		 * @since 0.0.1
 		 */
 		public function update_dismiss() {
-			delete_metadata( 'user', null, 'tgmpa_dismissed_notice_' . $this->id, null, true );
+			delete_metadata( 'user', null, 'magic_pa_dismissed_notice_' . $this->id, null, true );
 		}
 
 		/**
@@ -2015,7 +1989,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * to true will not allow the specified plugin to be deactivated unless
 		 * the user switches themes.
 		 *
-		 * @since 2.2.0
+		 * @since 0.0.1
 		 */
 		public function force_activation() {
 			foreach ( $this->plugins as $slug => $plugin ) {
@@ -2041,7 +2015,7 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		 * Please take special care when using this parameter as it has the
 		 * potential to be harmful if not used correctly.
 		 *
-		 * @since 2.2.0
+		 * @since 0.0.1
 		 */
 		public function force_deactivation() {
 			$deactivated = array();
@@ -2065,14 +2039,14 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Echo the current TGMPA version number to the page.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 */
-		public function show_tgmpa_version() {
+		public function show_magic_pa_version() {
 			echo '<p style="float: right; padding: 0em 1.5em 0.5em 0;"><strong><small>',
 				esc_html(
 					sprintf(
 						/* translators: %s: version number */
-						__( 'TGMPA v%s', 'tgmpa' ),
+						__( 'TGMPA v%s', 'magic_pa' ),
 						self::MAGIC_PLUGIN_ACTIVATION_VERSION
 					)
 				),
@@ -2082,9 +2056,9 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Returns the singleton instance of the class.
 		 *
-		 * @since 2.4.0
+		 * @since 0.0.1
 		 *
-		 * @return \Magic_Appointments_Plugin_Activation The Magic_Appointments_Plugin_Activation object.
+		 * @return \Magic_Plugin_Activation The Magic_Plugin_Activation object.
 		 */
 		public static function get_instance() {
 			if ( ! isset( self::$instance ) && ! ( self::$instance instanceof self ) ) {
@@ -2099,10 +2073,10 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 		/**
 		 * Ensure only one instance of the class is ever invoked.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 */
 		function load_tgm_plugin_activation() {
-			$GLOBALS['tgmpa'] = Magic_Appointments_Plugin_Activation::get_instance();
+			$GLOBALS['magic_pa'] = Magic_Plugin_Activation::get_instance();
 		}
 	}
 
@@ -2113,18 +2087,18 @@ if ( ! class_exists( 'Magic_Plugin_Activation' ) ) {
 	}
 }
 
-if ( ! function_exists( 'tgmpa' ) ) {
+if ( ! function_exists( 'magic_pa' ) ) {
 	/**
 	 * Helper function to register a collection of required plugins.
 	 *
-	 * @since 2.0.0
+	 * @since 0.0.1
 	 * @api
 	 *
 	 * @param array $plugins An array of plugin arrays.
 	 * @param array $config  Optional. An array of configuration values.
 	 */
-	function tgmpa( $plugins, $config = array() ) {
-		$instance = call_user_func( array( get_class( $GLOBALS['tgmpa'] ), 'get_instance' ) );
+	function magic_pa( $plugins, $config = array() ) {
+		$instance = call_user_func( array( get_class( $GLOBALS['magic_pa'] ), 'get_instance' ) );
 
 		foreach ( $plugins as $plugin ) {
 			call_user_func( array( $instance, 'register' ), $plugin );
@@ -2155,13 +2129,13 @@ if ( ! function_exists( 'tgmpa' ) ) {
  * WP_List_Table isn't always available. If it isn't available,
  * we load it here.
  *
- * @since 2.2.0
+ * @since 0.0.1
  */
 if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
 
-if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
+if ( ! class_exists( 'Magic_Plugin_Activation_List_Table' ) ) {
 
 	/**
 	 * List table class for handling plugins.
@@ -2174,26 +2148,26 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 	 *
 	 * This class also allows for the bulk install of plugins.
 	 *
-	 * @since 2.2.0
+	 * @since 0.0.1
 	 *
-	 * @package TGM-Plugin-Activation
+	 * @package Magic-Plugin-Activation
 	 * @author  Thomas Griffin
 	 * @author  Gary Jones
 	 */
-	class Magic_Appointments_List_Table extends WP_List_Table {
+	class Magic_Plugin_Activation_List_Table extends WP_List_Table {
 		/**
 		 * TGMPA instance.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @var object
 		 */
-		protected $tgmpa;
+		protected $magic_pa;
 
 		/**
 		 * The currently chosen view.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @var string One of: 'all', 'install', 'update', 'activate'
 		 */
@@ -2202,7 +2176,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		/**
 		 * The plugin counts for the various views.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @var array
 		 */
@@ -2216,10 +2190,10 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		/**
 		 * References parent constructor and sets defaults for class.
 		 *
-		 * @since 2.2.0
+		 * @since 0.0.1
 		 */
 		public function __construct() {
-			$this->tgmpa = call_user_func( array( get_class( $GLOBALS['tgmpa'] ), 'get_instance' ) );
+			$this->magic_pa = call_user_func( array( get_class( $GLOBALS['magic_pa'] ), 'get_instance' ) );
 
 			parent::__construct(
 				array(
@@ -2233,7 +2207,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 				$this->view_context = sanitize_key( $_REQUEST['plugin_status'] );
 			}
 
-			add_filter( 'tgmpa_table_data_items', array( $this, 'sort_table_items' ) );
+			add_filter( 'magic_pa_table_data_items', array( $this, 'sort_table_items' ) );
 		}
 
 		/**
@@ -2241,7 +2215,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		 *
 		 * Overruled to prevent the 'plural' argument from being added.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @return array CSS classnames.
 		 */
@@ -2252,14 +2226,14 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		/**
 		 * Gathers and renames all of our plugin information to be used by WP_List_Table to create our table.
 		 *
-		 * @since 2.2.0
+		 * @since 0.0.1
 		 *
 		 * @return array $table_data Information for use in table.
 		 */
 		protected function _gather_plugin_data() {
 			// Load thickbox for plugin links.
-			$this->tgmpa->admin_init();
-			$this->tgmpa->thickbox();
+			$this->magic_pa->admin_init();
+			$this->magic_pa->thickbox();
 
 			// Categorize the plugins which have open actions.
 			$plugins = $this->categorize_plugins_to_views();
@@ -2279,23 +2253,23 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 			foreach ( $plugins[ $this->view_context ] as $slug => $plugin ) {
 				$table_data[ $i ]['sanitized_plugin']  = $plugin['name'];
 				$table_data[ $i ]['slug']              = $slug;
-				$table_data[ $i ]['plugin']            = '<strong>' . $this->tgmpa->get_info_link( $slug ) . '</strong>';
+				$table_data[ $i ]['plugin']            = '<strong>' . $this->magic_pa->get_info_link( $slug ) . '</strong>';
 				$table_data[ $i ]['source']            = $this->get_plugin_source_type_text( $plugin['source_type'] );
 				$table_data[ $i ]['type']              = $this->get_plugin_advise_type_text( $plugin['required'] );
 				$table_data[ $i ]['status']            = $this->get_plugin_status_text( $slug );
-				$table_data[ $i ]['installed_version'] = $this->tgmpa->get_installed_version( $slug );
+				$table_data[ $i ]['installed_version'] = $this->magic_pa->get_installed_version( $slug );
 				$table_data[ $i ]['minimum_version']   = $plugin['version'];
-				$table_data[ $i ]['available_version'] = $this->tgmpa->does_plugin_have_update( $slug );
+				$table_data[ $i ]['available_version'] = $this->magic_pa->does_plugin_have_update( $slug );
 
 				// Prep the upgrade notice info.
-				$upgrade_notice = $this->tgmpa->get_upgrade_notice( $slug );
+				$upgrade_notice = $this->magic_pa->get_upgrade_notice( $slug );
 				if ( ! empty( $upgrade_notice ) ) {
 					$table_data[ $i ]['upgrade_notice'] = $upgrade_notice;
 
-					add_action( "tgmpa_after_plugin_row_{$slug}", array( $this, 'wp_plugin_update_row' ), 10, 2 );
+					add_action( "magic_pa_after_plugin_row_{$slug}", array( $this, 'wp_plugin_update_row' ), 10, 2 );
 				}
 
-				$table_data[ $i ] = apply_filters( 'tgmpa_table_data_item', $table_data[ $i ], $plugin );
+				$table_data[ $i ] = apply_filters( 'magic_pa_table_data_item', $table_data[ $i ], $plugin );
 
 				$i++;
 			}
@@ -2306,7 +2280,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		/**
 		 * Categorize the plugins which have open actions into views for the TGMPA page.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 */
 		protected function categorize_plugins_to_views() {
 			$plugins = array(
@@ -2316,21 +2290,21 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 				'activate' => array(),
 			);
 
-			foreach ( $this->tgmpa->plugins as $slug => $plugin ) {
-				if ( $this->tgmpa->is_plugin_active( $slug ) && false === $this->tgmpa->does_plugin_have_update( $slug ) ) {
+			foreach ( $this->magic_pa->plugins as $slug => $plugin ) {
+				if ( $this->magic_pa->is_plugin_active( $slug ) && false === $this->magic_pa->does_plugin_have_update( $slug ) ) {
 					// No need to display plugins if they are installed, up-to-date and active.
 					continue;
 				} else {
 					$plugins['all'][ $slug ] = $plugin;
 
-					if ( ! $this->tgmpa->is_plugin_installed( $slug ) ) {
+					if ( ! $this->magic_pa->is_plugin_installed( $slug ) ) {
 						$plugins['install'][ $slug ] = $plugin;
 					} else {
-						if ( false !== $this->tgmpa->does_plugin_have_update( $slug ) ) {
+						if ( false !== $this->magic_pa->does_plugin_have_update( $slug ) ) {
 							$plugins['update'][ $slug ] = $plugin;
 						}
 
-						if ( $this->tgmpa->can_plugin_activate( $slug ) ) {
+						if ( $this->magic_pa->can_plugin_activate( $slug ) ) {
 							$plugins['activate'][ $slug ] = $plugin;
 						}
 					}
@@ -2343,7 +2317,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		/**
 		 * Set the counts for the view links.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param array $plugins Plugins order by view.
 		 */
@@ -2356,23 +2330,23 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		/**
 		 * Get the plugin required/recommended text string.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $required Plugin required setting.
 		 * @return string
 		 */
 		protected function get_plugin_advise_type_text( $required ) {
 			if ( true === $required ) {
-				return __( 'Required', 'tgmpa' );
+				return __( 'Required', 'magic_pa' );
 			}
 
-			return __( 'Recommended', 'tgmpa' );
+			return __( 'Recommended', 'magic_pa' );
 		}
 
 		/**
 		 * Get the plugin source type text string.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $type Plugin type.
 		 * @return string
@@ -2382,13 +2356,13 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 
 			switch ( $type ) {
 				case 'repo':
-					$string = __( 'WordPress Repository', 'tgmpa' );
+					$string = __( 'WordPress Repository', 'magic_pa' );
 					break;
 				case 'external':
-					$string = __( 'External Source', 'tgmpa' );
+					$string = __( 'External Source', 'magic_pa' );
 					break;
 				case 'bundled':
-					$string = __( 'Pre-Packaged', 'tgmpa' );
+					$string = __( 'Pre-Packaged', 'magic_pa' );
 					break;
 			}
 
@@ -2398,32 +2372,32 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		/**
 		 * Determine the plugin status message.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $slug Plugin slug.
 		 * @return string
 		 */
 		protected function get_plugin_status_text( $slug ) {
-			if ( ! $this->tgmpa->is_plugin_installed( $slug ) ) {
-				return __( 'Not Installed', 'tgmpa' );
+			if ( ! $this->magic_pa->is_plugin_installed( $slug ) ) {
+				return __( 'Not Installed', 'magic_pa' );
 			}
 
-			if ( ! $this->tgmpa->is_plugin_active( $slug ) ) {
-				$install_status = __( 'Installed But Not Activated', 'tgmpa' );
+			if ( ! $this->magic_pa->is_plugin_active( $slug ) ) {
+				$install_status = __( 'Installed But Not Activated', 'magic_pa' );
 			} else {
-				$install_status = __( 'Active', 'tgmpa' );
+				$install_status = __( 'Active', 'magic_pa' );
 			}
 
 			$update_status = '';
 
-			if ( $this->tgmpa->does_plugin_require_update( $slug ) && false === $this->tgmpa->does_plugin_have_update( $slug ) ) {
-				$update_status = __( 'Required Update not Available', 'tgmpa' );
+			if ( $this->magic_pa->does_plugin_require_update( $slug ) && false === $this->magic_pa->does_plugin_have_update( $slug ) ) {
+				$update_status = __( 'Required Update not Available', 'magic_pa' );
 
-			} elseif ( $this->tgmpa->does_plugin_require_update( $slug ) ) {
-				$update_status = __( 'Requires Update', 'tgmpa' );
+			} elseif ( $this->magic_pa->does_plugin_require_update( $slug ) ) {
+				$update_status = __( 'Requires Update', 'magic_pa' );
 
-			} elseif ( false !== $this->tgmpa->does_plugin_have_update( $slug ) ) {
-				$update_status = __( 'Update recommended', 'tgmpa' );
+			} elseif ( false !== $this->magic_pa->does_plugin_have_update( $slug ) ) {
+				$update_status = __( 'Update recommended', 'magic_pa' );
 			}
 
 			if ( '' === $update_status ) {
@@ -2432,7 +2406,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 
 			return sprintf(
 				/* translators: 1: install status, 2: update status */
-				_x( '%1$s, %2$s', 'Install/Update Status', 'tgmpa' ),
+				_x( '%1$s, %2$s', 'Install/Update Status', 'magic_pa' ),
 				$install_status,
 				$update_status
 			);
@@ -2441,7 +2415,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		/**
 		 * Sort plugins by Required/Recommended type and by alphabetical plugin name within each type.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param array $items Prepared table items.
 		 * @return array Sorted table items.
@@ -2463,7 +2437,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		/**
 		 * Get an associative array ( id => link ) of the views available on this table.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @return array
 		 */
@@ -2478,19 +2452,19 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 				switch ( $type ) {
 					case 'all':
 						/* translators: 1: number of plugins. */
-						$text = _nx( 'All <span class="count">(%s)</span>', 'All <span class="count">(%s)</span>', $count, 'plugins', 'tgmpa' );
+						$text = _nx( 'All <span class="count">(%s)</span>', 'All <span class="count">(%s)</span>', $count, 'plugins', 'magic_pa' );
 						break;
 					case 'install':
 						/* translators: 1: number of plugins. */
-						$text = _n( 'To Install <span class="count">(%s)</span>', 'To Install <span class="count">(%s)</span>', $count, 'tgmpa' );
+						$text = _n( 'To Install <span class="count">(%s)</span>', 'To Install <span class="count">(%s)</span>', $count, 'magic_pa' );
 						break;
 					case 'update':
 						/* translators: 1: number of plugins. */
-						$text = _n( 'Update Available <span class="count">(%s)</span>', 'Update Available <span class="count">(%s)</span>', $count, 'tgmpa' );
+						$text = _n( 'Update Available <span class="count">(%s)</span>', 'Update Available <span class="count">(%s)</span>', $count, 'magic_pa' );
 						break;
 					case 'activate':
 						/* translators: 1: number of plugins. */
-						$text = _n( 'To Activate <span class="count">(%s)</span>', 'To Activate <span class="count">(%s)</span>', $count, 'tgmpa' );
+						$text = _n( 'To Activate <span class="count">(%s)</span>', 'To Activate <span class="count">(%s)</span>', $count, 'magic_pa' );
 						break;
 					default:
 						$text = '';
@@ -2501,7 +2475,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 
 					$status_links[ $type ] = sprintf(
 						'<a href="%s"%s>%s</a>',
-						esc_url( $this->tgmpa->get_tgmpa_status_url( $type ) ),
+						esc_url( $this->magic_pa->get_magic_pa_status_url( $type ) ),
 						( $type === $this->view_context ) ? ' class="current"' : '',
 						sprintf( $text, number_format_i18n( $count ) )
 					);
@@ -2515,7 +2489,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		 * Create default columns to display important plugin information
 		 * like type, action and status.
 		 *
-		 * @since 2.2.0
+		 * @since 0.0.1
 		 *
 		 * @param array  $item        Array of item data.
 		 * @param string $column_name The name of the column.
@@ -2530,7 +2504,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		 *
 		 * Adds a checkbox for each plugin.
 		 *
-		 * @since 2.2.0
+		 * @since 0.0.1
 		 *
 		 * @param array $item Array of item data.
 		 * @return string The input checkbox with all necessary info.
@@ -2547,7 +2521,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		/**
 		 * Create default title column along with the action links.
 		 *
-		 * @since 2.2.0
+		 * @since 0.0.1
 		 *
 		 * @param array $item Array of item data.
 		 * @return string The plugin name and action links.
@@ -2563,7 +2537,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		/**
 		 * Create version information column.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param array $item Array of item data.
 		 * @return string HTML-formatted version information.
@@ -2571,16 +2545,16 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		public function column_version( $item ) {
 			$output = array();
 
-			if ( $this->tgmpa->is_plugin_installed( $item['slug'] ) ) {
-				$installed = ! empty( $item['installed_version'] ) ? $item['installed_version'] : _x( 'unknown', 'as in: "version nr unknown"', 'tgmpa' );
+			if ( $this->magic_pa->is_plugin_installed( $item['slug'] ) ) {
+				$installed = ! empty( $item['installed_version'] ) ? $item['installed_version'] : _x( 'unknown', 'as in: "version nr unknown"', 'magic_pa' );
 
 				$color = '';
-				if ( ! empty( $item['minimum_version'] ) && $this->tgmpa->does_plugin_require_update( $item['slug'] ) ) {
+				if ( ! empty( $item['minimum_version'] ) && $this->magic_pa->does_plugin_require_update( $item['slug'] ) ) {
 					$color = ' color: #ff0000; font-weight: bold;';
 				}
 
 				$output[] = sprintf(
-					'<p><span style="min-width: 32px; text-align: right; float: right;%1$s">%2$s</span>' . __( 'Installed version:', 'tgmpa' ) . '</p>',
+					'<p><span style="min-width: 32px; text-align: right; float: right;%1$s">%2$s</span>' . __( 'Installed version:', 'magic_pa' ) . '</p>',
 					$color,
 					$installed
 				);
@@ -2588,7 +2562,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 
 			if ( ! empty( $item['minimum_version'] ) ) {
 				$output[] = sprintf(
-					'<p><span style="min-width: 32px; text-align: right; float: right;">%1$s</span>' . __( 'Minimum required version:', 'tgmpa' ) . '</p>',
+					'<p><span style="min-width: 32px; text-align: right; float: right;">%1$s</span>' . __( 'Minimum required version:', 'magic_pa' ) . '</p>',
 					$item['minimum_version']
 				);
 			}
@@ -2600,7 +2574,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 				}
 
 				$output[] = sprintf(
-					'<p><span style="min-width: 32px; text-align: right; float: right;%1$s">%2$s</span>' . __( 'Available version:', 'tgmpa' ) . '</p>',
+					'<p><span style="min-width: 32px; text-align: right; float: right;%1$s">%2$s</span>' . __( 'Available version:', 'magic_pa' ) . '</p>',
 					$color,
 					$item['available_version']
 				);
@@ -2620,40 +2594,40 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		 * Hides the menu item to prevent the user from clicking and
 		 * getting a permissions error.
 		 *
-		 * @since 2.2.0
+		 * @since 0.0.1
 		 */
 		public function no_items() {
-			echo esc_html__( 'No plugins to install, update or activate.', 'tgmpa' ) . ' <a href="' . esc_url( self_admin_url() ) . '"> ' . esc_html__( 'Return to the Dashboard', 'tgmpa' ) . '</a>';
+			echo esc_html__( 'No plugins to install, update or activate.', 'magic_pa' ) . ' <a href="' . esc_url( self_admin_url() ) . '"> ' . esc_html__( 'Return to the Dashboard', 'magic_pa' ) . '</a>';
 			echo '<style type="text/css">#adminmenu .wp-submenu li.current { display: none !important; }</style>';
 		}
 
 		/**
 		 * Output all the column information within the table.
 		 *
-		 * @since 2.2.0
+		 * @since 0.0.1
 		 *
 		 * @return array $columns The column names.
 		 */
 		public function get_columns() {
 			$columns = array(
 				'cb'     => '<input type="checkbox" />',
-				'plugin' => __( 'Plugin', 'tgmpa' ),
-				'source' => __( 'Source', 'tgmpa' ),
-				'type'   => __( 'Type', 'tgmpa' ),
+				'plugin' => __( 'Plugin', 'magic_pa' ),
+				'source' => __( 'Source', 'magic_pa' ),
+				'type'   => __( 'Type', 'magic_pa' ),
 			);
 
 			if ( 'all' === $this->view_context || 'update' === $this->view_context ) {
-				$columns['version'] = __( 'Version', 'tgmpa' );
-				$columns['status']  = __( 'Status', 'tgmpa' );
+				$columns['version'] = __( 'Version', 'magic_pa' );
+				$columns['status']  = __( 'Status', 'magic_pa' );
 			}
 
-			return apply_filters( 'tgmpa_table_columns', $columns );
+			return apply_filters( 'magic_pa_table_columns', $columns );
 		}
 
 		/**
 		 * Get name of default primary column
 		 *
-		 * @since 2.5.0 / WP 4.3+ compatibility
+		 * @since 0.0.1 / WP 4.3+ compatibility
 		 * @access protected
 		 *
 		 * @return string
@@ -2665,7 +2639,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		/**
 		 * Get the name of the primary column.
 		 *
-		 * @since 2.5.0 / WP 4.3+ compatibility
+		 * @since 0.0.1 / WP 4.3+ compatibility
 		 * @access protected
 		 *
 		 * @return string The name of the primary column.
@@ -2681,7 +2655,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		/**
 		 * Get the actions which are relevant for a specific plugin row.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param array $item Array of item data.
 		 * @return array Array with relevant action links.
@@ -2691,20 +2665,20 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 			$action_links = array();
 
 			// Display the 'Install' action link if the plugin is not yet available.
-			if ( ! $this->tgmpa->is_plugin_installed( $item['slug'] ) ) {
+			if ( ! $this->magic_pa->is_plugin_installed( $item['slug'] ) ) {
 				/* translators: %2$s: plugin name in screen reader markup */
-				$actions['install'] = __( 'Install %2$s', 'tgmpa' );
+				$actions['install'] = __( 'Install %2$s', 'magic_pa' );
 			} else {
 				// Display the 'Update' action link if an update is available and WP complies with plugin minimum.
-				if ( false !== $this->tgmpa->does_plugin_have_update( $item['slug'] ) && $this->tgmpa->can_plugin_update( $item['slug'] ) ) {
+				if ( false !== $this->magic_pa->does_plugin_have_update( $item['slug'] ) && $this->magic_pa->can_plugin_update( $item['slug'] ) ) {
 					/* translators: %2$s: plugin name in screen reader markup */
-					$actions['update'] = __( 'Update %2$s', 'tgmpa' );
+					$actions['update'] = __( 'Update %2$s', 'magic_pa' );
 				}
 
 				// Display the 'Activate' action link, but only if the plugin meets the minimum version.
-				if ( $this->tgmpa->can_plugin_activate( $item['slug'] ) ) {
+				if ( $this->magic_pa->can_plugin_activate( $item['slug'] ) ) {
 					/* translators: %2$s: plugin name in screen reader markup */
-					$actions['activate'] = __( 'Activate %2$s', 'tgmpa' );
+					$actions['activate'] = __( 'Activate %2$s', 'magic_pa' );
 				}
 			}
 
@@ -2714,12 +2688,12 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 					add_query_arg(
 						array(
 							'plugin'           => urlencode( $item['slug'] ),
-							'tgmpa-' . $action => $action . '-plugin',
+							'magic_pa-' . $action => $action . '-plugin',
 						),
-						$this->tgmpa->get_tgmpa_url()
+						$this->magic_pa->get_magic_pa_url()
 					),
-					'tgmpa-' . $action,
-					'tgmpa-nonce'
+					'magic_pa-' . $action,
+					'magic_pa-nonce'
 				);
 
 				$action_links[ $action ] = sprintf(
@@ -2730,13 +2704,13 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 			}
 
 			$prefix = ( defined( 'WP_NETWORK_ADMIN' ) && WP_NETWORK_ADMIN ) ? 'network_admin_' : '';
-			return apply_filters( "tgmpa_{$prefix}plugin_action_links", array_filter( $action_links ), $item['slug'], $item, $this->view_context );
+			return apply_filters( "magic_pa_{$prefix}plugin_action_links", array_filter( $action_links ), $item['slug'], $item, $this->view_context );
 		}
 
 		/**
 		 * Generates content for a single row of the table.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param object $item The current item.
 		 */
@@ -2749,15 +2723,15 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 			 * The dynamic portion of the hook name, `$item['slug']`, refers to the slug
 			 * for the plugin.
 			 *
-			 * @since 2.5.0
+			 * @since 0.0.1
 			 */
-			do_action( "tgmpa_after_plugin_row_{$item['slug']}", $item['slug'], $item, $this->view_context );
+			do_action( "magic_pa_after_plugin_row_{$item['slug']}", $item['slug'], $item, $this->view_context );
 		}
 
 		/**
 		 * Show the upgrade notice below a plugin row if there is one.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @see /wp-admin/includes/update.php
 		 *
@@ -2774,7 +2748,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 				<tr class="plugin-update-tr">
 					<td colspan="', absint( $this->get_column_count() ), '" class="plugin-update colspanchange">
 						<div class="update-message">',
-							esc_html__( 'Upgrade message from the plugin author:', 'tgmpa' ),
+							esc_html__( 'Upgrade message from the plugin author:', 'magic_pa' ),
 							' <strong>', wp_kses_data( $item['upgrade_notice'] ), '</strong>
 						</div>
 					</td>
@@ -2784,20 +2758,20 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		/**
 		 * Extra controls to be displayed between bulk actions and pagination.
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @param string $which 'top' or 'bottom' table navigation.
 		 */
 		public function extra_tablenav( $which ) {
 			if ( 'bottom' === $which ) {
-				$this->tgmpa->show_tgmpa_version();
+				$this->magic_pa->show_magic_pa_version();
 			}
 		}
 
 		/**
 		 * Defines the bulk actions for handling registered plugins.
 		 *
-		 * @since 2.2.0
+		 * @since 0.0.1
 		 *
 		 * @return array $actions The bulk actions for the plugin install table.
 		 */
@@ -2807,16 +2781,16 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 
 			if ( 'update' !== $this->view_context && 'activate' !== $this->view_context ) {
 				if ( current_user_can( 'install_plugins' ) ) {
-					$actions['tgmpa-bulk-install'] = __( 'Install', 'tgmpa' );
+					$actions['magic_pa-bulk-install'] = __( 'Install', 'magic_pa' );
 				}
 			}
 
 			if ( 'install' !== $this->view_context ) {
 				if ( current_user_can( 'update_plugins' ) ) {
-					$actions['tgmpa-bulk-update'] = __( 'Update', 'tgmpa' );
+					$actions['magic_pa-bulk-update'] = __( 'Update', 'magic_pa' );
 				}
 				if ( current_user_can( 'activate_plugins' ) ) {
-					$actions['tgmpa-bulk-activate'] = __( 'Activate', 'tgmpa' );
+					$actions['magic_pa-bulk-activate'] = __( 'Activate', 'magic_pa' );
 				}
 			}
 
@@ -2829,16 +2803,16 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		 * The bulk installation process looks for the $_POST information and passes that
 		 * through if a user has to use WP_Filesystem to enter their credentials.
 		 *
-		 * @since 2.2.0
+		 * @since 0.0.1
 		 */
 		public function process_bulk_actions() {
 			// Bulk installation process.
-			if ( 'tgmpa-bulk-install' === $this->current_action() || 'tgmpa-bulk-update' === $this->current_action() ) {
+			if ( 'magic_pa-bulk-install' === $this->current_action() || 'magic_pa-bulk-update' === $this->current_action() ) {
 
 				check_admin_referer( 'bulk-' . $this->_args['plural'] );
 
 				$install_type = 'install';
-				if ( 'tgmpa-bulk-update' === $this->current_action() ) {
+				if ( 'magic_pa-bulk-update' === $this->current_action() ) {
 					$install_type = 'update';
 				}
 
@@ -2847,9 +2821,9 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 				// Did user actually select any plugins to install/update ?
 				if ( empty( $_POST['plugin'] ) ) {
 					if ( 'install' === $install_type ) {
-						$message = __( 'No plugins were selected to be installed. No action taken.', 'tgmpa' );
+						$message = __( 'No plugins were selected to be installed. No action taken.', 'magic_pa' );
 					} else {
-						$message = __( 'No plugins were selected to be updated. No action taken.', 'tgmpa' );
+						$message = __( 'No plugins were selected to be updated. No action taken.', 'magic_pa' );
 					}
 
 					echo '<div id="message" class="error"><p>', esc_html( $message ), '</p></div>';
@@ -2866,23 +2840,23 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 
 				// Sanitize the received input.
 				$plugins_to_install = array_map( 'urldecode', $plugins_to_install );
-				$plugins_to_install = array_map( array( $this->tgmpa, 'sanitize_key' ), $plugins_to_install );
+				$plugins_to_install = array_map( array( $this->magic_pa, 'sanitize_key' ), $plugins_to_install );
 
 				// Validate the received input.
 				foreach ( $plugins_to_install as $key => $slug ) {
 					// Check if the plugin was registered with TGMPA and remove if not.
-					if ( ! isset( $this->tgmpa->plugins[ $slug ] ) ) {
+					if ( ! isset( $this->magic_pa->plugins[ $slug ] ) ) {
 						unset( $plugins_to_install[ $key ] );
 						continue;
 					}
 
 					// For install: make sure this is a plugin we *can* install and not one already installed.
-					if ( 'install' === $install_type && true === $this->tgmpa->is_plugin_installed( $slug ) ) {
+					if ( 'install' === $install_type && true === $this->magic_pa->is_plugin_installed( $slug ) ) {
 						unset( $plugins_to_install[ $key ] );
 					}
 
 					// For updates: make sure this is a plugin we *can* update (update available and WP version ok).
-					if ( 'update' === $install_type && false === $this->tgmpa->is_plugin_updatetable( $slug ) ) {
+					if ( 'update' === $install_type && false === $this->magic_pa->is_plugin_updatetable( $slug ) ) {
 						unset( $plugins_to_install[ $key ] );
 					}
 				}
@@ -2890,9 +2864,9 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 				// No need to proceed further if we have no plugins to handle.
 				if ( empty( $plugins_to_install ) ) {
 					if ( 'install' === $install_type ) {
-						$message = __( 'No plugins are available to be installed at this time.', 'tgmpa' );
+						$message = __( 'No plugins are available to be installed at this time.', 'magic_pa' );
 					} else {
-						$message = __( 'No plugins are available to be updated at this time.', 'tgmpa' );
+						$message = __( 'No plugins are available to be updated at this time.', 'magic_pa' );
 					}
 
 					echo '<div id="message" class="error"><p>', esc_html( $message ), '</p></div>';
@@ -2902,7 +2876,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 
 				// Pass all necessary information if WP_Filesystem is needed.
 				$url = wp_nonce_url(
-					$this->tgmpa->get_tgmpa_url(),
+					$this->magic_pa->get_magic_pa_url(),
 					'bulk-' . $this->_args['plural']
 				);
 
@@ -2934,8 +2908,8 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 
 				// Prepare the data for validated plugins for the install/upgrade.
 				foreach ( $plugins_to_install as $slug ) {
-					$name   = $this->tgmpa->plugins[ $slug ]['name'];
-					$source = $this->tgmpa->get_download_url( $slug );
+					$name   = $this->magic_pa->plugins[ $slug ]['name'];
+					$source = $this->magic_pa->get_download_url( $slug );
 
 					if ( ! empty( $name ) && ! empty( $source ) ) {
 						$names[] = $name;
@@ -2947,8 +2921,8 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 								break;
 
 							case 'update':
-								$file_paths[]                 = $this->tgmpa->plugins[ $slug ]['file_path'];
-								$to_inject[ $slug ]           = $this->tgmpa->plugins[ $slug ];
+								$file_paths[]                 = $this->magic_pa->plugins[ $slug ]['file_path'];
+								$to_inject[ $slug ]           = $this->magic_pa->plugins[ $slug ];
 								$to_inject[ $slug ]['source'] = $source;
 								break;
 						}
@@ -2956,11 +2930,11 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 				}
 				unset( $slug, $name, $source );
 
-				// Create a new instance of Magic_Appointments_Bulk_Installer.
-				$installer = new Magic_Appointments_Bulk_Installer(
-					new Magic_Appointments_Bulk_Installer_Skin(
+				// Create a new instance of Magic_Plugin_Activation_Bulk_Installer.
+				$installer = new Magic_Plugin_Activation_Bulk_Installer(
+					new Magic_Plugin_Activation_Bulk_Installer_Skin(
 						array(
-							'url'          => esc_url_raw( $this->tgmpa->get_tgmpa_url() ),
+							'url'          => esc_url_raw( $this->magic_pa->get_magic_pa_url() ),
 							'nonce'        => 'bulk-' . $this->_args['plural'],
 							'names'        => $names,
 							'install_type' => $install_type,
@@ -2969,23 +2943,23 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 				);
 
 				// Wrap the install process with the appropriate HTML.
-				echo '<div class="tgmpa">',
+				echo '<div class="magic_pa">',
 					'<h2 style="font-size: 23px; font-weight: 400; line-height: 29px; margin: 0; padding: 9px 15px 4px 0;">', esc_html( get_admin_page_title() ), '</h2>
 					<div class="update-php" style="width: 100%; height: 98%; min-height: 850px; padding-top: 1px;">';
 
 				// Process the bulk installation submissions.
-				add_filter( 'upgrader_source_selection', array( $this->tgmpa, 'maybe_adjust_source_dir' ), 1, 3 );
+				add_filter( 'upgrader_source_selection', array( $this->magic_pa, 'maybe_adjust_source_dir' ), 1, 3 );
 
-				if ( 'tgmpa-bulk-update' === $this->current_action() ) {
+				if ( 'magic_pa-bulk-update' === $this->current_action() ) {
 					// Inject our info into the update transient.
-					$this->tgmpa->inject_update_info( $to_inject );
+					$this->magic_pa->inject_update_info( $to_inject );
 
 					$installer->bulk_upgrade( $file_paths );
 				} else {
 					$installer->bulk_install( $sources );
 				}
 
-				remove_filter( 'upgrader_source_selection', array( $this->tgmpa, 'maybe_adjust_source_dir' ), 1 );
+				remove_filter( 'upgrader_source_selection', array( $this->magic_pa, 'maybe_adjust_source_dir' ), 1 );
 
 				echo '</div></div>';
 
@@ -2993,12 +2967,12 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 			}
 
 			// Bulk activation process.
-			if ( 'tgmpa-bulk-activate' === $this->current_action() ) {
+			if ( 'magic_pa-bulk-activate' === $this->current_action() ) {
 				check_admin_referer( 'bulk-' . $this->_args['plural'] );
 
 				// Did user actually select any plugins to activate ?
 				if ( empty( $_POST['plugin'] ) ) {
-					echo '<div id="message" class="error"><p>', esc_html__( 'No plugins were selected to be activated. No action taken.', 'tgmpa' ), '</p></div>';
+					echo '<div id="message" class="error"><p>', esc_html__( 'No plugins were selected to be activated. No action taken.', 'magic_pa' ), '</p></div>';
 
 					return false;
 				}
@@ -3007,7 +2981,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 				$plugins = array();
 				if ( isset( $_POST['plugin'] ) ) {
 					$plugins = array_map( 'urldecode', (array) $_POST['plugin'] );
-					$plugins = array_map( array( $this->tgmpa, 'sanitize_key' ), $plugins );
+					$plugins = array_map( array( $this->magic_pa, 'sanitize_key' ), $plugins );
 				}
 
 				$plugins_to_activate = array();
@@ -3015,16 +2989,16 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 
 				// Grab the file paths for the selected & inactive plugins from the registration array.
 				foreach ( $plugins as $slug ) {
-					if ( $this->tgmpa->can_plugin_activate( $slug ) ) {
-						$plugins_to_activate[] = $this->tgmpa->plugins[ $slug ]['file_path'];
-						$plugin_names[]        = $this->tgmpa->plugins[ $slug ]['name'];
+					if ( $this->magic_pa->can_plugin_activate( $slug ) ) {
+						$plugins_to_activate[] = $this->magic_pa->plugins[ $slug ]['file_path'];
+						$plugin_names[]        = $this->magic_pa->plugins[ $slug ]['name'];
 					}
 				}
 				unset( $slug );
 
 				// Return early if there are no plugins to activate.
 				if ( empty( $plugins_to_activate ) ) {
-					echo '<div id="message" class="error"><p>', esc_html__( 'No plugins are available to be activated at this time.', 'tgmpa' ), '</p></div>';
+					echo '<div id="message" class="error"><p>', esc_html__( 'No plugins are available to be activated at this time.', 'magic_pa' ), '</p></div>';
 
 					return false;
 				}
@@ -3036,13 +3010,13 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 					echo '<div id="message" class="error"><p>', wp_kses_post( $activate->get_error_message() ), '</p></div>';
 				} else {
 					$count        = count( $plugin_names ); // Count so we can use _n function.
-					$plugin_names = array_map( array( 'Magic_Appointments_Utils', 'wrap_in_strong' ), $plugin_names );
+					$plugin_names = array_map( array( 'Magic_Plugin_Activation_Utils', 'wrap_in_strong' ), $plugin_names );
 					$last_plugin  = array_pop( $plugin_names ); // Pop off last name to prep for readability.
-					$imploded     = empty( $plugin_names ) ? $last_plugin : ( implode( ', ', $plugin_names ) . ' ' . esc_html_x( 'and', 'plugin A *and* plugin B', 'tgmpa' ) . ' ' . $last_plugin );
+					$imploded     = empty( $plugin_names ) ? $last_plugin : ( implode( ', ', $plugin_names ) . ' ' . esc_html_x( 'and', 'plugin A *and* plugin B', 'magic_pa' ) . ' ' . $last_plugin );
 
 					printf( // WPCS: xss ok.
 						'<div id="message" class="updated"><p>%1$s %2$s.</p></div>',
-						esc_html( _n( 'The following plugin was activated successfully:', 'The following plugins were activated successfully:', $count, 'tgmpa' ) ),
+						esc_html( _n( 'The following plugin was activated successfully:', 'The following plugins were activated successfully:', $count, 'magic_pa' ) ),
 						$imploded
 					);
 
@@ -3067,7 +3041,7 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 		/**
 		 * Prepares all of our information to be outputted into a usable table.
 		 *
-		 * @since 2.2.0
+		 * @since 0.0.1
 		 */
 		public function prepare_items() {
 			$columns               = $this->get_columns(); // Get all necessary column information.
@@ -3077,60 +3051,41 @@ if ( ! class_exists( 'Magic_Appointments_List_Table' ) ) {
 			$this->_column_headers = array( $columns, $hidden, $sortable, $primary ); // Get all necessary column headers.
 
 			// Process our bulk activations here.
-			if ( 'tgmpa-bulk-activate' === $this->current_action() ) {
+			if ( 'magic_pa-bulk-activate' === $this->current_action() ) {
 				$this->process_bulk_actions();
 			}
 
 			// Store all of our plugin data into $items array so WP_List_Table can use it.
-			$this->items = apply_filters( 'tgmpa_table_data_items', $this->_gather_plugin_data() );
-		}
-
-		/* *********** DEPRECATED METHODS *********** */
-
-		/**
-		 * Retrieve plugin data, given the plugin name.
-		 *
-		 * @since      2.2.0
-		 * @deprecated 2.5.0 use {@see Magic_Appointments_Plugin_Activation::_get_plugin_data_from_name()} instead.
-		 * @see        Magic_Appointments_Plugin_Activation::_get_plugin_data_from_name()
-		 *
-		 * @param string $name Name of the plugin, as it was registered.
-		 * @param string $data Optional. Array key of plugin data to return. Default is slug.
-		 * @return string|boolean Plugin slug if found, false otherwise.
-		 */
-		protected function _get_plugin_data_from_name( $name, $data = 'slug' ) {
-			_deprecated_function( __FUNCTION__, 'TGMPA 2.5.0', 'Magic_Appointments_Plugin_Activation::_get_plugin_data_from_name()' );
-
-			return $this->tgmpa->_get_plugin_data_from_name( $name, $data );
+			$this->items = apply_filters( 'magic_pa_table_data_items', $this->_gather_plugin_data() );
 		}
 	}
 }
 
 
-if ( ! class_exists( 'Magic_Appointments_Bulk_Installer' ) ) {
+if ( ! class_exists( 'Magic_Plugin_Activation_Bulk_Installer' ) ) {
 
 	/**
 	 * Hack: Prevent TGMPA v2.4.1- bulk installer class from being loaded if 2.4.1- is loaded after 2.5+.
 	 *
-	 * @since 2.5.2
+	 * @since 0.0.1
 	 *
-	 * {@internal The Magic_Appointments_Bulk_Installer class was originally called Magic_Appointments_Bulk_Installer.
+	 * {@internal The Magic_Plugin_Activation_Bulk_Installer class was originally called Magic_Plugin_Activation_Bulk_Installer.
 	 *            For more information, see that class.}}
 	 */
-	class Magic_Appointments_Bulk_Installer {
+	class Magic_Plugin_Activation_Bulk_Installer {
 	}
 }
-if ( ! class_exists( 'Magic_Appointments_Bulk_Installer_Skin' ) ) {
+if ( ! class_exists( 'Magic_Plugin_Activation_Bulk_Installer_Skin' ) ) {
 
 	/**
 	 * Hack: Prevent TGMPA v2.4.1- bulk installer skin class from being loaded if 2.4.1- is loaded after 2.5+.
 	 *
-	 * @since 2.5.2
+	 * @since 0.0.1
 	 *
-	 * {@internal The Magic_Appointments_Bulk_Installer_Skin class was originally called Magic_Appointments_Bulk_Installer_Skin.
+	 * {@internal The Magic_Plugin_Activation_Bulk_Installer_Skin class was originally called Magic_Plugin_Activation_Bulk_Installer_Skin.
 	 *            For more information, see that class.}}
 	 */
-	class Magic_Appointments_Bulk_Installer_Skin {
+	class Magic_Plugin_Activation_Bulk_Installer_Skin {
 	}
 }
 
@@ -3142,28 +3097,28 @@ if ( ! class_exists( 'Magic_Appointments_Bulk_Installer_Skin' ) ) {
  * does not try to re-include the class when processing upgrades or installs outside
  * of the class.
  *
- * @since 2.2.0
+ * @since 0.0.1
  */
-add_action( 'admin_init', 'tgmpa_load_bulk_installer' );
-if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
+add_action( 'admin_init', 'magic_pa_load_bulk_installer' );
+if ( ! function_exists( 'magic_pa_load_bulk_installer' ) ) {
 	/**
 	 * Load bulk installer
 	 */
-	function tgmpa_load_bulk_installer() {
+	function magic_pa_load_bulk_installer() {
 		// Silently fail if 2.5+ is loaded *after* an older version.
-		if ( ! isset( $GLOBALS['tgmpa'] ) ) {
+		if ( ! isset( $GLOBALS['magic_pa'] ) ) {
 			return;
 		}
 
 		// Get TGMPA class instance.
-		$tgmpa_instance = call_user_func( array( get_class( $GLOBALS['tgmpa'] ), 'get_instance' ) );
+		$magic_pa_instance = call_user_func( array( get_class( $GLOBALS['magic_pa'] ), 'get_instance' ) );
 
-		if ( isset( $_GET['page'] ) && $tgmpa_instance->menu === $_GET['page'] ) {
+		if ( isset( $_GET['page'] ) && $magic_pa_instance->menu === $_GET['page'] ) {
 			if ( ! class_exists( 'Plugin_Upgrader', false ) ) {
 				require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 			}
 
-			if ( ! class_exists( 'Magic_Appointments_Bulk_Installer' ) ) {
+			if ( ! class_exists( 'Magic_Plugin_Activation_Bulk_Installer' ) ) {
 
 				/**
 				 * Installer class to handle bulk plugin installations.
@@ -3171,21 +3126,21 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 				 * Extends WP_Upgrader and customizes to suit the installation of multiple
 				 * plugins.
 				 *
-				 * @since 2.2.0
+				 * @since 0.0.1
 				 *
 				 * {@internal Since 2.5.0 the class is an extension of Plugin_Upgrader rather than WP_Upgrader.}}
-				 * {@internal Since 2.5.2 the class has been renamed from Magic_Appointments_Bulk_Installer to Magic_Appointments_Bulk_Installer.
+				 * {@internal Since 2.5.2 the class has been renamed from Magic_Plugin_Activation_Bulk_Installer to Magic_Plugin_Activation_Bulk_Installer.
 				 *            This was done to prevent backward compatibility issues with v2.3.6.}}
 				 *
-				 * @package TGM-Plugin-Activation
+				 * @package Magic-Plugin-Activation
 				 * @author  Thomas Griffin
 				 * @author  Gary Jones
 				 */
-				class Magic_Appointments_Bulk_Installer extends Plugin_Upgrader {
+				class Magic_Plugin_Activation_Bulk_Installer extends Plugin_Upgrader {
 					/**
 					 * Holds result of bulk plugin installation.
 					 *
-					 * @since 2.2.0
+					 * @since 0.0.1
 					 *
 					 * @var string
 					 */
@@ -3194,7 +3149,7 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 					/**
 					 * Flag to check if bulk installation is occurring or not.
 					 *
-					 * @since 2.2.0
+					 * @since 0.0.1
 					 *
 					 * @var boolean
 					 */
@@ -3203,16 +3158,16 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 					/**
 					 * TGMPA instance
 					 *
-					 * @since 2.5.0
+					 * @since 0.0.1
 					 *
 					 * @var object
 					 */
-					protected $tgmpa;
+					protected $magic_pa;
 
 					/**
 					 * Whether or not the destination directory needs to be cleared ( = on update).
 					 *
-					 * @since 2.5.0
+					 * @since 0.0.1
 					 *
 					 * @var bool
 					 */
@@ -3221,13 +3176,13 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 					/**
 					 * References parent constructor and sets defaults for class.
 					 *
-					 * @since 2.2.0
+					 * @since 0.0.1
 					 *
 					 * @param \Bulk_Upgrader_Skin|null $skin Installer skin.
 					 */
 					public function __construct( $skin = null ) {
 						// Get TGMPA class instance.
-						$this->tgmpa = call_user_func( array( get_class( $GLOBALS['tgmpa'] ), 'get_instance' ) );
+						$this->magic_pa = call_user_func( array( get_class( $GLOBALS['magic_pa'] ), 'get_instance' ) );
 
 						parent::__construct( $skin );
 
@@ -3235,27 +3190,27 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 							$this->clear_destination = true;
 						}
 
-						if ( $this->tgmpa->is_automatic ) {
+						if ( $this->magic_pa->is_automatic ) {
 							$this->activate_strings();
 						}
 
-						add_action( 'upgrader_process_complete', array( $this->tgmpa, 'populate_file_path' ) );
+						add_action( 'upgrader_process_complete', array( $this->magic_pa, 'populate_file_path' ) );
 					}
 
 					/**
 					 * Sets the correct activation strings for the installer skin to use.
 					 *
-					 * @since 2.2.0
+					 * @since 0.0.1
 					 */
 					public function activate_strings() {
-						$this->strings['activation_failed']  = __( 'Plugin activation failed.', 'tgmpa' );
-						$this->strings['activation_success'] = __( 'Plugin activated successfully.', 'tgmpa' );
+						$this->strings['activation_failed']  = __( 'Plugin activation failed.', 'magic_pa' );
+						$this->strings['activation_success'] = __( 'Plugin activated successfully.', 'magic_pa' );
 					}
 
 					/**
 					 * Performs the actual installation of each plugin.
 					 *
-					 * @since 2.2.0
+					 * @since 0.0.1
 					 *
 					 * @see WP_Upgrader::run()
 					 *
@@ -3266,7 +3221,7 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 						$result = parent::run( $options );
 
 						// Reset the strings in case we changed one during automatic activation.
-						if ( $this->tgmpa->is_automatic ) {
+						if ( $this->magic_pa->is_automatic ) {
 							if ( 'update' === $this->skin->options['install_type'] ) {
 								$this->upgrade_strings();
 							} else {
@@ -3280,7 +3235,7 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 					/**
 					 * Processes the bulk installation of plugins.
 					 *
-					 * @since 2.2.0
+					 * @since 0.0.1
 					 *
 					 * {@internal This is basically a near identical copy of the WP Core
 					 * Plugin_Upgrader::bulk_upgrade() method, with minor adjustments to deal with
@@ -3433,7 +3388,7 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 					/**
 					 * Handle a bulk upgrade request.
 					 *
-					 * @since 2.5.0
+					 * @since 0.0.1
 					 *
 					 * @see Plugin_Upgrader::bulk_upgrade()
 					 *
@@ -3457,14 +3412,14 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 					 *
 					 * Hooked into the 'upgrader_post_install' filter hook.
 					 *
-					 * @since 2.5.0
+					 * @since 0.0.1
 					 *
 					 * @param bool $bool The value we need to give back (true).
 					 * @return bool
 					 */
 					public function auto_activate( $bool ) {
 						// Only process the activation of installed plugins if the automatic flag is set to true.
-						if ( $this->tgmpa->is_automatic ) {
+						if ( $this->magic_pa->is_automatic ) {
 							// Flush plugins cache so the headers of the newly installed plugins will be read correctly.
 							wp_clean_plugins_cache();
 
@@ -3492,7 +3447,7 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 				}
 			}
 
-			if ( ! class_exists( 'Magic_Appointments_Bulk_Installer_Skin' ) ) {
+			if ( ! class_exists( 'Magic_Plugin_Activation_Bulk_Installer_Skin' ) ) {
 
 				/**
 				 * Installer skin to set strings for the bulk plugin installations..
@@ -3500,23 +3455,16 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 				 * Extends Bulk_Upgrader_Skin and customizes to suit the installation of multiple
 				 * plugins.
 				 *
-				 * @since 2.2.0
-				 *
-				 * {@internal Since 2.5.2 the class has been renamed from Magic_Appointments_Bulk_Installer_Skin to
-				 *            Magic_Appointments_Bulk_Installer_Skin.
-				 *            This was done to prevent backward compatibility issues with v2.3.6.}}
-				 *
-				 * @see https://core.trac.wordpress.org/browser/trunk/src/wp-admin/includes/class-wp-upgrader-skins.php
-				 *
-				 * @package TGM-Plugin-Activation
+				 * @since 0.0.1
+				 * @package Magic-Plugin-Activation
 				 * @author  Thomas Griffin
 				 * @author  Gary Jones
 				 */
-				class Magic_Appointments_Bulk_Installer_Skin extends Bulk_Upgrader_Skin {
+				class Magic_Plugin_Activation_Bulk_Installer_Skin extends Bulk_Upgrader_Skin {
 					/**
 					 * Holds plugin info for each individual plugin installation.
 					 *
-					 * @since 2.2.0
+					 * @since 0.0.1
 					 *
 					 * @var array
 					 */
@@ -3525,7 +3473,7 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 					/**
 					 * Holds names of plugins that are undergoing bulk installations.
 					 *
-					 * @since 2.2.0
+					 * @since 0.0.1
 					 *
 					 * @var array
 					 */
@@ -3534,7 +3482,7 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 					/**
 					 * Integer to use for iteration through each plugin installation.
 					 *
-					 * @since 2.2.0
+					 * @since 0.0.1
 					 *
 					 * @var integer
 					 */
@@ -3543,22 +3491,22 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 					/**
 					 * TGMPA instance
 					 *
-					 * @since 2.5.0
+					 * @since 0.0.1
 					 *
 					 * @var object
 					 */
-					protected $tgmpa;
+					protected $magic_pa;
 
 					/**
 					 * Constructor. Parses default args with new ones and extracts them for use.
 					 *
-					 * @since 2.2.0
+					 * @since 0.0.1
 					 *
 					 * @param array $args Arguments to pass for use within the class.
 					 */
 					public function __construct( $args = array() ) {
 						// Get TGMPA class instance.
-						$this->tgmpa = call_user_func( array( get_class( $GLOBALS['tgmpa'] ), 'get_instance' ) );
+						$this->magic_pa = call_user_func( array( get_class( $GLOBALS['magic_pa'] ), 'get_instance' ) );
 
 						// Parse default and new args.
 						$defaults = array(
@@ -3582,35 +3530,35 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 					 * Checks to see if the automatic activation flag is set and uses the
 					 * the proper strings accordingly.
 					 *
-					 * @since 2.2.0
+					 * @since 0.0.1
 					 */
 					public function add_strings() {
 						if ( 'update' === $this->options['install_type'] ) {
 							parent::add_strings();
 							/* translators: 1: plugin name, 2: action number 3: total number of actions. */
-							$this->upgrader->strings['skin_before_update_header'] = __( 'Updating Plugin %1$s (%2$d/%3$d)', 'tgmpa' );
+							$this->upgrader->strings['skin_before_update_header'] = __( 'Updating Plugin %1$s (%2$d/%3$d)', 'magic_pa' );
 						} else {
 							/* translators: 1: plugin name, 2: error message. */
-							$this->upgrader->strings['skin_update_failed_error'] = __( 'An error occurred while installing %1$s: <strong>%2$s</strong>.', 'tgmpa' );
+							$this->upgrader->strings['skin_update_failed_error'] = __( 'An error occurred while installing %1$s: <strong>%2$s</strong>.', 'magic_pa' );
 							/* translators: 1: plugin name. */
-							$this->upgrader->strings['skin_update_failed'] = __( 'The installation of %1$s failed.', 'tgmpa' );
+							$this->upgrader->strings['skin_update_failed'] = __( 'The installation of %1$s failed.', 'magic_pa' );
 
-							if ( $this->tgmpa->is_automatic ) {
+							if ( $this->magic_pa->is_automatic ) {
 								// Automatic activation strings.
-								$this->upgrader->strings['skin_upgrade_start'] = __( 'The installation and activation process is starting. This process may take a while on some hosts, so please be patient.', 'tgmpa' );
+								$this->upgrader->strings['skin_upgrade_start'] = __( 'The installation and activation process is starting. This process may take a while on some hosts, so please be patient.', 'magic_pa' );
 								/* translators: 1: plugin name. */
-								$this->upgrader->strings['skin_update_successful'] = __( '%1$s installed and activated successfully.', 'tgmpa' ) . ' <a href="#" class="hide-if-no-js" onclick="%2$s"><span>' . esc_html__( 'Show Details', 'tgmpa' ) . '</span><span class="hidden">' . esc_html__( 'Hide Details', 'tgmpa' ) . '</span>.</a>';
-								$this->upgrader->strings['skin_upgrade_end']       = __( 'All installations and activations have been completed.', 'tgmpa' );
+								$this->upgrader->strings['skin_update_successful'] = __( '%1$s installed and activated successfully.', 'magic_pa' ) . ' <a href="#" class="hide-if-no-js" onclick="%2$s"><span>' . esc_html__( 'Show Details', 'magic_pa' ) . '</span><span class="hidden">' . esc_html__( 'Hide Details', 'magic_pa' ) . '</span>.</a>';
+								$this->upgrader->strings['skin_upgrade_end']       = __( 'All installations and activations have been completed.', 'magic_pa' );
 								/* translators: 1: plugin name, 2: action number 3: total number of actions. */
-								$this->upgrader->strings['skin_before_update_header'] = __( 'Installing and Activating Plugin %1$s (%2$d/%3$d)', 'tgmpa' );
+								$this->upgrader->strings['skin_before_update_header'] = __( 'Installing and Activating Plugin %1$s (%2$d/%3$d)', 'magic_pa' );
 							} else {
 								// Default installation strings.
-								$this->upgrader->strings['skin_upgrade_start'] = __( 'The installation process is starting. This process may take a while on some hosts, so please be patient.', 'tgmpa' );
+								$this->upgrader->strings['skin_upgrade_start'] = __( 'The installation process is starting. This process may take a while on some hosts, so please be patient.', 'magic_pa' );
 								/* translators: 1: plugin name. */
-								$this->upgrader->strings['skin_update_successful'] = esc_html__( '%1$s installed successfully.', 'tgmpa' ) . ' <a href="#" class="hide-if-no-js" onclick="%2$s"><span>' . esc_html__( 'Show Details', 'tgmpa' ) . '</span><span class="hidden">' . esc_html__( 'Hide Details', 'tgmpa' ) . '</span>.</a>';
-								$this->upgrader->strings['skin_upgrade_end']       = __( 'All installations have been completed.', 'tgmpa' );
+								$this->upgrader->strings['skin_update_successful'] = esc_html__( '%1$s installed successfully.', 'magic_pa' ) . ' <a href="#" class="hide-if-no-js" onclick="%2$s"><span>' . esc_html__( 'Show Details', 'magic_pa' ) . '</span><span class="hidden">' . esc_html__( 'Hide Details', 'magic_pa' ) . '</span>.</a>';
+								$this->upgrader->strings['skin_upgrade_end']       = __( 'All installations have been completed.', 'magic_pa' );
 								/* translators: 1: plugin name, 2: action number 3: total number of actions. */
-								$this->upgrader->strings['skin_before_update_header'] = __( 'Installing Plugin %1$s (%2$d/%3$d)', 'tgmpa' );
+								$this->upgrader->strings['skin_before_update_header'] = __( 'Installing Plugin %1$s (%2$d/%3$d)', 'magic_pa' );
 							}
 						}
 					}
@@ -3618,7 +3566,7 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 					/**
 					 * Outputs the header strings and necessary JS before each plugin installation.
 					 *
-					 * @since 2.2.0
+					 * @since 0.0.1
 					 *
 					 * @param string $title Unused in this implementation.
 					 */
@@ -3635,7 +3583,7 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 					 * Checks for any errors and outputs them if they exist, else output
 					 * success strings.
 					 *
-					 * @since 2.2.0
+					 * @since 0.0.1
 					 *
 					 * @param string $title Unused in this implementation.
 					 */
@@ -3651,7 +3599,7 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 					/**
 					 * Outputs links after bulk plugin installation is complete.
 					 *
-					 * @since 2.2.0
+					 * @since 0.0.1
 					 */
 					public function bulk_footer() {
 						// Serve up the string to say installations (and possibly activations) are complete.
@@ -3660,63 +3608,35 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 						// Flush plugins cache so we can make sure that the installed plugins list is always up to date.
 						wp_clean_plugins_cache();
 
-						$this->tgmpa->show_tgmpa_version();
+						$this->magic_pa->show_magic_pa_version();
 
 						// Display message based on if all plugins are now active or not.
 						$update_actions = array();
 
-						if ( $this->tgmpa->is_tgmpa_complete() ) {
+						if ( $this->magic_pa->is_magic_pa_complete() ) {
 							// All plugins are active, so we display the complete string and hide the menu to protect users.
 							echo '<style type="text/css">#adminmenu .wp-submenu li.current { display: none !important; }</style>';
 							$update_actions['dashboard'] = sprintf(
-								esc_html( $this->tgmpa->strings['complete'] ),
-								'<a href="' . esc_url( self_admin_url() ) . '">' . esc_html__( 'Return to the Dashboard', 'tgmpa' ) . '</a>'
+								esc_html( $this->magic_pa->strings['complete'] ),
+								'<a href="' . esc_url( self_admin_url() ) . '">' . esc_html__( 'Return to the Dashboard', 'magic_pa' ) . '</a>'
 							);
 						} else {
-							$update_actions['tgmpa_page'] = '<a href="' . esc_url( $this->tgmpa->get_tgmpa_url() ) . '" target="_parent">' . esc_html( $this->tgmpa->strings['return'] ) . '</a>';
+							$update_actions['magic_pa_page'] = '<a href="' . esc_url( $this->magic_pa->get_magic_pa_url() ) . '" target="_parent">' . esc_html( $this->magic_pa->strings['return'] ) . '</a>';
 						}
 
 						/**
 						 * Filter the list of action links available following bulk plugin installs/updates.
 						 *
-						 * @since 2.5.0
+						 * @since 0.0.1
 						 *
 						 * @param array $update_actions Array of plugin action links.
 						 * @param array $plugin_info    Array of information for the last-handled plugin.
 						 */
-						$update_actions = apply_filters( 'tgmpa_update_bulk_plugins_complete_actions', $update_actions, $this->plugin_info );
+						$update_actions = apply_filters( 'magic_pa_update_bulk_plugins_complete_actions', $update_actions, $this->plugin_info );
 
 						if ( ! empty( $update_actions ) ) {
 							$this->feedback( implode( ' | ', (array) $update_actions ) );
 						}
-					}
-
-					/* *********** DEPRECATED METHODS *********** */
-
-					/**
-					 * Flush header output buffer.
-					 *
-					 * @since      2.2.0
-					 * @deprecated 2.5.0 use {@see Bulk_Upgrader_Skin::flush_output()} instead
-					 * @see        Bulk_Upgrader_Skin::flush_output()
-					 */
-					public function before_flush_output() {
-						_deprecated_function( __FUNCTION__, 'TGMPA 2.5.0', 'Bulk_Upgrader_Skin::flush_output()' );
-						$this->flush_output();
-					}
-
-					/**
-					 * Flush footer output buffer and iterate $this->i to make sure the
-					 * installation strings reference the correct plugin.
-					 *
-					 * @since      2.2.0
-					 * @deprecated 2.5.0 use {@see Bulk_Upgrader_Skin::flush_output()} instead
-					 * @see        Bulk_Upgrader_Skin::flush_output()
-					 */
-					public function after_flush_output() {
-						_deprecated_function( __FUNCTION__, 'TGMPA 2.5.0', 'Bulk_Upgrader_Skin::flush_output()' );
-						$this->flush_output();
-						$this->i++;
 					}
 				}
 			}
@@ -3724,27 +3644,27 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
 	}
 }
 
-if ( ! class_exists( 'Magic_Appointments_Utils' ) ) {
+if ( ! class_exists( 'Magic_Plugin_Activation_Utils' ) ) {
 
 	/**
 	 * Generic utilities for TGMPA.
 	 *
 	 * All methods are static, poor-dev name-spacing class wrapper.
 	 *
-	 * Class was called TGM_Utils in 2.5.0 but renamed Magic_Appointments_Utils in 2.5.1 as this was conflicting with Soliloquy.
+	 * Class was called TGM_Utils in 2.5.0 but renamed Magic_Plugin_Activation_Utils in 2.5.1 as this was conflicting with Soliloquy.
 	 *
-	 * @since 2.5.0
+	 * @since 0.0.1
 	 *
-	 * @package TGM-Plugin-Activation
+	 * @package Magic-Plugin-Activation
 	 * @author  Juliette Reinders Folmer
 	 */
-	class Magic_Appointments_Utils {
+	class Magic_Plugin_Activation_Utils {
 		/**
 		 * Whether the PHP filter extension is enabled.
 		 *
 		 * @see http://php.net/book.filter
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @static
 		 *
@@ -3755,7 +3675,7 @@ if ( ! class_exists( 'Magic_Appointments_Utils' ) ) {
 		/**
 		 * Wrap an arbitrary string in <em> tags. Meant to be used in combination with array_map().
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @static
 		 *
@@ -3769,7 +3689,7 @@ if ( ! class_exists( 'Magic_Appointments_Utils' ) ) {
 		/**
 		 * Wrap an arbitrary string in <strong> tags. Meant to be used in combination with array_map().
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @static
 		 *
@@ -3783,7 +3703,7 @@ if ( ! class_exists( 'Magic_Appointments_Utils' ) ) {
 		/**
 		 * Helper function: Validate a value as boolean
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @static
 		 *
@@ -3805,7 +3725,7 @@ if ( ! class_exists( 'Magic_Appointments_Utils' ) ) {
 		/**
 		 * Helper function: Cast a value to bool
 		 *
-		 * @since 2.5.0
+		 * @since 0.0.1
 		 *
 		 * @static
 		 *
@@ -3849,5 +3769,5 @@ if ( ! class_exists( 'Magic_Appointments_Utils' ) ) {
 
 			return false;
 		}
-	} // End of class Magic_Appointments_Utils
+	} // End of class Magic_Plugin_Activation_Utils
 } // End of class_exists wrapper
