@@ -21,6 +21,8 @@ $context['post'] = new TimberPost();
 
 $context['user'] = $user;
 
+$context['user']->avatar = get_avatar_url( $user->user_email );
+
 $context['form'] = array(
   'url' => esc_url( admin_url('admin-post.php') ),
   'action' => 'magic_user_admin_profile',

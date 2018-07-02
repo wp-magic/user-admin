@@ -21,6 +21,11 @@
         <div class="label">{{ post.login_text }}</div>
         <div>{{ user.user_login }}</div>
       </li>
+      {% if user.avatar %}
+      <li>
+        <img src="{{ user.avatar }}" role="presentation" />
+      </li>
+      {% endif %}
       <li>
         <div class="label">{{ post.display_name_text }}</div>
         <input type="text" value="{{ user.display_name }}" name="display_name" />
