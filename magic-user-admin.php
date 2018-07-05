@@ -23,6 +23,8 @@ if ( ! defined( 'WPINC' ) ) {
   die;
 }
 
+define( 'MAGIC_USER_ADMIN_SLUG', 'magic_user_admin' );
+
 // Required files for registering the post type and taxonomies.
 require_once plugin_dir_path( __FILE__ ) . 'includes/plugin.php';
 
