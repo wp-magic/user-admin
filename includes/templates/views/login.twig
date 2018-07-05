@@ -1,7 +1,12 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  {{ post }}
+  <h3>{{ post.title }}</h3>
+
+  {% if post.above_form %}
+  <div class="content above">{{ post.above_form }}</div>
+  {% endif %}
+
   <form action="{{ form.url }}" method="post">
     <input type="hidden" name="nonce" value="{{ form.nonce }}" />
     <input type="hidden" name="action" value="{{ form.action }}" />
@@ -21,4 +26,8 @@
         <input type="submit" value="{{ post.submit_text }}" />
     </ul>
   </form>
+
+  {% if post.below_form %}
+  <div class="content below">{{ post.below_form }}</div>
+  {% endif %}
 {% endblock %}
