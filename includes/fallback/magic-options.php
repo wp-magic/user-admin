@@ -25,3 +25,9 @@ if ( !function_exists( 'magic_get_option') ) {
     return $val;
   }
 }
+
+if ( !function_exists( 'magic_slugify' ) ) {
+  function magic_slugify( string $value ) {
+    return str_replace( ' ', '_', strtolower( trim( $value ) ) );
+  }
+}
