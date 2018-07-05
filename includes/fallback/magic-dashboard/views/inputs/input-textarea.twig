@@ -1,0 +1,8 @@
+{% if setting.label %}
+<p>
+  <label for="{{ setting.name }}">{{ setting.label }}</label>
+</p>
+{% endif %}
+<p>
+  <textarea cols="60" rows="5" id="{{ setting.name }}" name="{{ setting.name }}">{{ setting.value }}</textarea>
+</p>

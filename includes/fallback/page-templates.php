@@ -57,7 +57,7 @@ if ( ! function_exists( 'magic_page_templates') ) {
 				return $template;
 			}
 
-			$file = $root . 'includes/' . get_post_meta(
+			$file = $root . get_post_meta(
 				$post->ID, '_wp_page_template', true
 			);
 

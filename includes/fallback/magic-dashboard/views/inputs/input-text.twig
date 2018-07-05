@@ -1,0 +1,13 @@
+{% if setting.label %}
+<p>
+  <label for="{{ setting.name }}">{{ setting.label }}</label>
+</p>
+{% endif %}
+<p>
+  <input
+    type="{{ setting.type }}"
+    value="{{ setting.value }}"
+    id="{{ setting.name }}"
+    name="{{ setting.name }}"
+  />
+</p>
