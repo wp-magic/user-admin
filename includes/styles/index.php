@@ -1,4 +1,4 @@
 <?php
-function magic_user_admin_enqueue_styles() {
-  wp_enqueue_style( 'magic_user_admin', plugin_dir_url(__FILE__ ) . 'magic-user-admin.less', -1 );
-}
+add_action( 'wp_enqueue_scripts', function () {
+  magic_register_style( 'magic-user-admin', dirname( plugin_basename(__FILE__ ) ) );
+} );
