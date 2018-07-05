@@ -7,7 +7,6 @@
  * @since   0.0.1
  */
 
-
 $user = wp_get_current_user();
 
 if ( $user->ID == 0 ) {
