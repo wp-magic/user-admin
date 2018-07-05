@@ -1,5 +1,5 @@
 <?php
-add_action( 'pre_user_query', 'hide_user_by_role' );
+// add_action( 'pre_user_query', 'hide_user_by_role' );
 
 function hide_user_by_role( $user_query ) {
   // if ( current_user_can( 'activate_plugin' ) ) {
