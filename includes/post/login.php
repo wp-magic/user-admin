@@ -1,5 +1,8 @@
 <?php
 
+add_action( 'admin_post_nopriv_magic_user_admin_login', 'magic_user_admin_login_form' );
+add_action( 'admin_post_magic_user_admin_login', 'magic_user_admin_login_form' );
+
 function magic_user_admin_login_form() {
   $ref = $_SERVER['HTTP_REFERER'];
 

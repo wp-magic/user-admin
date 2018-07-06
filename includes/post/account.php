@@ -1,4 +1,6 @@
 <?php
+add_action( 'admin_post_nopriv_magic_user_admin_profile', 'magic_user_admin_profile_form' );
+add_action( 'admin_post_magic_user_admin_profile', 'magic_user_admin_profile_form' );
 
 function magic_user_admin_profile_form() {
   $ref = $_SERVER['HTTP_REFERER'];
@@ -8,7 +10,7 @@ function magic_user_admin_profile_form() {
     exit;
   }
 
-  if( !wp_verify_nonce( $_POST['nonce'], MAGIC_USER_ADMIN_PROFILE_ACTION ) ) {
+  if( !wp_verify_nonce( $_POST['nonce'], MAGIC_USER_ADMIN_ACCOUNT_ACTION ) ) {
     wp_redirect( add_query_arg( 'error', 'nonce', $ref ) );
     exit;
   }
