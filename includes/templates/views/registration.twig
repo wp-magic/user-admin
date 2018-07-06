@@ -26,7 +26,7 @@
         <input type="password" name="password2" placeholder="{{ post.password2_placeholder }}" />
       </li>
       <li>
-        <input type="text" name="username" placeholder="{{ post.username_placeholder }}" />
+        <input type="text" name="username" placeholder="{{ post.username_placeholder }}" value="{{ _REQUEST.username }}"/>
       <li>
         <input type="submit" value="{{ post.submit_text }}" />
       </li>

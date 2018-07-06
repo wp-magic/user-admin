@@ -7,7 +7,7 @@
     <div class="above">{{ post.above_text }}</div>
   {% endif %}
 
-  <form class="profile" action="{{ form.url }}" method="post">
+  <form class="account" action="{{ form.url }}" method="post">
     <input type="hidden" name="nonce" value="{{ form.nonce }}" />
     <input type="hidden" name="action" value="{{ form.action }}" />
     <input type="hidden" name="ID" value="{{ user.ID }}" />

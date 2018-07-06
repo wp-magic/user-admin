@@ -23,7 +23,9 @@ function magic_user_admin_registration_form() {
       exit;
     }
 
-    $user_id = wp_create_user( $_POST['email'], $_POST['password'], $_POST['email'] );
+    $username = !empty($_POST['username']) ? $_POST['username'] : $_POST['email'];
+
+    $user_id = wp_create_user( $username, $_POST['password'], $_POST['email'] );
     if ( is_wp_error( $user_id ) ) {
       wp_redirect( add_query_arg('error', 'create', $ref ) );
       exit;
