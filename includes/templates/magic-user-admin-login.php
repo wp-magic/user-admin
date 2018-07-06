@@ -8,7 +8,7 @@
  */
 
 if ( wp_get_current_user()->ID > 0 ) {
-  wp_redirect( magic_get_option( 'magic_user_admin_profile_page', '/' ) );
+  wp_redirect( magic_get_option( 'magic_user_admin_account_page', '/' ) );
   exit;
 }
 
@@ -23,6 +23,16 @@ $context['form'] = array(
 );
 
 $context['_REQUEST'] = $_REQUEST;
+
+if ( defined( 'MAGIC_GDPR_COOKIE_SLUG' ) ) {
+  // magic gdpr exists
+  $context['gdpr_exists'] = true;
+  $cookie = $_COOKIE[MAGIC_GDPR_COOKIE_SLUG];
+  $enabled_cookies = wp_parse_args( $cookie );
+  $context['cookies'] = $enabled_cookies;
+  $context['post']->before_allow_cookies_text = magic_get_option( MAGIC_USER_ADMIN_SLUG . '_before_allow_cookies_text', '' );
+  $context['post']->after_allow_cookies_text = magic_get_option( MAGIC_USER_ADMIN_SLUG . '_after_allow_cookies_text', 'Allow Login Cookies' );
+}
 
 if ( isset( $_REQUEST['error'] ) ) {
   $context['form']['error'] = $_REQUEST['error'];
