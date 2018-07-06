@@ -4,6 +4,10 @@ if ( !defined( 'MAGIC_DASHBOARD_SLUG' ) ) {
   define( 'MAGIC_DASHBOARD_SLUG', 'magic_dashboard' );
 }
 
+if ( !defined( 'MAGIC_DASHBOARD_COOKIE_SEP' ) ) {
+  define( 'MAGIC_DASHBOARD_COOKIE_SEP', '|||');
+}
+
 if ( !function_exists( 'magic_dashboard' ) ) {
   function magic_dashboard() {
     add_menu_page(
@@ -130,6 +134,13 @@ if ( !function_exists( 'magic_dashboard_render_settings_fields' ) ) {
       }
 
       $setting['template'] = 'inputs/input-' . $setting['type'] . '.twig';
+
+      if ($setting['type'] === 'dropdown-pages' ) {
+        $settings['dropdown_args'] = array(
+          'echo' => 0,
+          'name' => $setting['name'],
+        );
+      }
 
       $settings[$key] = $setting;
     }
