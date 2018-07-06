@@ -56,6 +56,11 @@ if ( function_exists( 'register_field_group') ) {
   				'field_type' => 'select',
   				'allow_null' => 1,
         ),
+        'true_false' => array(
+  				'type' => 'true_false',
+  				'message' => 'Load user images using gravatar',
+  				'default_value' => 0,
+        ),
   		);
 
   		$fields = [];
