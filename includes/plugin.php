@@ -14,10 +14,10 @@ require_once 'custom-fields/index.php';
 require_once 'fallback/page-templates.php';
 
 $templates = array(
-	'magic_user_admin_login.php' => 'Login Page',
-	'magic_user_admin_logout.php' => 'Logout Page',
-	'magic_user_admin_registration.php' => 'Registration Page',
-	'magic_user_admin_profile.php' => 'User Profile Page',
+	MAGIC_USER_ADMIN_LOGIN_TEMPLATE => 'Login Page',
+	MAGIC_USER_ADMIN_LOGOUT_TEMPLATE  => 'Logout Page',
+	MAGIC_USER_ADMIN_REGISTRATION_TEMPLATE => 'Registration Page',
+	MAGIC_USER_ADMIN_ACCOUNT_TEMPLATE => 'User Account Page',
 );
 
 magic_page_templates($templates, plugin_dir_path( __FILE__ ) . 'templates/' );

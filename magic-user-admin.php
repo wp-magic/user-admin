@@ -24,6 +24,14 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 define( 'MAGIC_USER_ADMIN_SLUG', 'magic_user_admin' );
+define( 'MAGIC_USER_ADMIN_REGISTRATION_ACTION', 'magic_user_admin_registration' );
+define( 'MAGIC_USER_ADMIN_LOGIN_ACTION', 'magic_user_admin_login' );
+define( 'MAGIC_USER_ADMIN_PROFILE_ACTION', 'magic_user_admin_profile' );
+
+define( 'MAGIC_USER_ADMIN_LOGIN_TEMPLATE', 'magic-user-admin-login.php' );
+define( 'MAGIC_USER_ADMIN_LOGOUT_TEMPLATE', 'magic-user-admin-logout.php' );
+define( 'MAGIC_USER_ADMIN_REGISTRATION_TEMPLATE', 'magic-user-admin-registration.php' );
+define( 'MAGIC_USER_ADMIN_ACCOUNT_TEMPLATE', 'magic-user-admin-account.php' );
 
 // Required files for registering the post type and taxonomies.
 require_once plugin_dir_path( __FILE__ ) . 'includes/plugin.php';
