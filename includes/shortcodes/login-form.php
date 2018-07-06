@@ -1,9 +1,6 @@
 <?php
-function magic_user_admin_login_form_shortcode( $atts ) {
-  // $atts = shortcode_atts( array(
-	// 	'open' => '11:00',
-	// ), $atts, 'magic_user_admin' );
 
+add_shortcode( 'magic-login-form', function( $atts ) {
   $context = Timber::get_context();
 
   $context['form'] = array(
