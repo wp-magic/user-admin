@@ -16,6 +16,7 @@ if ( !function_exists( 'magic_dashboard' ) ) {
         25
     );
   }
+
   add_action( 'admin_menu', 'magic_dashboard' );
 }
 
@@ -86,12 +87,16 @@ if ( !function_exists( 'magic_dashboard_get_options') ) {
 
 if ( !function_exists( 'magic_dashboard_set_options') ) {
   function magic_dashboard_set_options( array $settings = [] ) {
-    foreach ( $settings as $setting ) {
-      $name = $setting['name'];
-      if ( isset( $_POST[$name] ) ) {
-        $value = $_POST[$name];
+    if ( is_array( $_POST[MAGIC_DASHBOARD_SLUG] ) ) {
+      magic_set_option( MAGIC_DASHBOARD_SLUG, $_POST[MAGIC_DASHBOARD_SLUG] );
+    } else {
+      foreach ( $settings as $setting ) {
+        $name = $setting['name'];
+        if ( isset( $_POST[$name] ) ) {
+          $value = $_POST[$name];
 
-        magic_set_option( $name, $value );
+          magic_set_option( $name, $value );
+        }
       }
     }
 
