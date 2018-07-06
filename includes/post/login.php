@@ -12,6 +12,14 @@ function magic_user_admin_login_form() {
     $error = 'invalid';
   }
 
+  if ( defined( 'MAGIC_GDPR_COOKIE_SLUG' ) ) {
+    $cookies = wp_parse_args( $_COOKIE[MAGIC_GDPR_COOKIE_SLUG], MAGIC_GDPR_DEFAULT_COOKIES );
+
+    if ( empty( $_POST['allow_cookies'] ) && empty( $cookies['auth'] ) ) {
+      $error = 'cookie';
+    }
+  }
+
   if ( !empty( $error ) ) {
     wp_redirect( add_query_arg( 'error', $error, $ref ) );
     exit;
@@ -46,6 +54,10 @@ function magic_user_admin_login_form() {
 
     wp_redirect( $ref );
     exit;
+  }
+
+  if ( function_exists( 'magic_gdpr_set_cookies' ) && isset( $_POST['allow_cookies'] ) ) {
+    magic_gdpr_set_cookies( array('settings', 'auth') );
   }
 
   wp_redirect( magic_get_option( 'magic_user_admin_login_redirect', '/' ) );

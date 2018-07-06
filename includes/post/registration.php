@@ -11,13 +11,15 @@ function magic_user_admin_registration_form() {
   }
 
   if( !wp_verify_nonce( $_POST['nonce'], MAGIC_USER_ADMIN_REGISTRATION_ACTION ) ) {
-    wp_redirect( add_query_arg( 'error', 'nonce', $ref ) );
-    exit;
-  }
+    $error = 'nonce';
+  } else if ( defined( 'MAGIC_GDPR_COOKIE_SLUG' ) ) {
+    $cookies = wp_parse_args( $_COOKIE[MAGIC_GDPR_COOKIE_SLUG], MAGIC_GDPR_DEFAULT_COOKIES );
 
-  if ( !wp_get_current_user() && !isset( $_POST['password'] ) || !isset( $_POST['password2']) || !isset( $_POST['email'] ) ) {
-    wp_redirect( add_query_arg( 'error', 'invalid', $ref ) );
-    exit;
+    if ( empty( $_POST['allow_cookies'] ) && empty( $cookies['auth'] ) ) {
+      $error = 'cookie';
+    }
+  } else if ( !wp_get_current_user() && !isset( $_POST['password'] ) || !isset( $_POST['password2']) || !isset( $_POST['email'] ) ) {
+    $error = 'invalid';
   }
 
   if ( !username_exists( $_POST['email'] ) && !email_exists($_POST['email']) ) {
@@ -30,17 +32,21 @@ function magic_user_admin_registration_form() {
 
     $user_id = wp_create_user( $username, $_POST['password'], $_POST['email'] );
     if ( is_wp_error( $user_id ) ) {
-      wp_redirect( add_query_arg('error', 'create', $ref ) );
-      exit;
+      $error = 'create';
     }
   } else {
     $user = get_user_by( 'email', $_POST['email'] );
 
     $checked = wp_check_password( $_POST['password'], $user->data->user_pass, $user->ID );
     if (!$checked) {
-      wp_redirect( add_query_arg( 'error', 'invalid_password', $ref ) );
-      exit;
+      $error = 'invalid_password';
     }
+  }
+
+  if ( $error ) {
+    $ref = add_query_arg( 'error', $error, $ref );
+    wp_redirect( $ref );
+    exit;
   }
 
   $credentials = array(
