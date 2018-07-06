@@ -24,8 +24,8 @@ $context['user']->avatar = get_avatar_url( $user->user_email );
 
 $context['form'] = array(
   'url' => esc_url( admin_url('admin-post.php') ),
-  'action' => MAGIC_USER_ADMIN_PROFILE_ACTION,
-  'nonce' => wp_create_nonce( MAGIC_USER_ADMIN_PROFILE_ACTION ),
+  'action' => MAGIC_USER_ADMIN_ACCOUNT_ACTION,
+  'nonce' => wp_create_nonce( MAGIC_USER_ADMIN_ACCOUNT_ACTION ),
 );
 
 if ( isset( $_REQUEST['error'] ) ) {
