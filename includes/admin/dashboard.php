@@ -19,6 +19,7 @@ add_action( 'admin_menu', function () {
     array(
       'name' => MAGIC_USER_ADMIN_SLUG . '_registration_page',
       'type' => 'text',
+      // 'type' => 'dropdown-pages',
       'default' => '/register',
       'label' => 'Registration Page',
     ),
@@ -29,9 +30,9 @@ add_action( 'admin_menu', function () {
       'label' => 'Logout Page',
     ),
     array(
-      'name' => MAGIC_USER_ADMIN_SLUG . '_profile_page',
+      'name' => MAGIC_USER_ADMIN_SLUG . '_account_page',
       'type' => 'text',
-      'default' => '/profile',
+      'default' => '/account',
       'label' => 'Profile Page',
     ),
 
