@@ -21,7 +21,6 @@ $templates = array(
 magic_page_templates($templates, plugin_dir_path( __FILE__ ) . 'templates/' );
 
 require_once 'post/index.php';
-// require_once 'shortcodes/login-form.php';
 
 require_once 'admin/dashboard.php';
 
