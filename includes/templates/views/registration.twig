@@ -3,8 +3,8 @@
 {% block content %}
   <h3>{{ post.title }}</h3>
 
-  {% if post.above_form %}
-  <div class="content above">{{ post.above_form }}</div>
+  {% if post.above_text %}
+  <div class="content above">{{ post.above_text }}</div>
   {% endif %}
 
   <form action="{{ form.url }}" method="post">
@@ -26,12 +26,14 @@
         <input type="password" name="password2" placeholder="{{ post.password2_placeholder }}" />
       </li>
       <li>
+        <input type="text" name="username" placeholder="{{ post.username_placeholder }}" />
+      <li>
         <input type="submit" value="{{ post.submit_text }}" />
       </li>
     </ul>
   </form>
-  
-  {% if post.below_form %}
-  <div class="content below">{{ post.below_form }}</div>
+
+  {% if post.below_text %}
+  <div class="content below">{{ post.below_text }}</div>
   {% endif %}
 {% endblock %}

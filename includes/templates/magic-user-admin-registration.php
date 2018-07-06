@@ -18,8 +18,8 @@ $context['post'] = new TimberPost();
 
 $context['form'] = array(
   'url' => esc_url( admin_url('admin-post.php') ),
-  'action' => 'magic_user_admin_registration',
-  'nonce' => wp_create_nonce('magic_user_admin_registration'),
+  'action' => MAGIC_USER_ADMIN_REGISTRATION_ACTION,
+  'nonce' => wp_create_nonce( MAGIC_USER_ADMIN_REGISTRATION_ACTION ),
 );
 
 if ( isset( $_REQUEST['error'] ) ) {
