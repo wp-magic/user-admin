@@ -1,9 +1,10 @@
 <?php
 if(function_exists("magic_register_field_group")) {
+	$slug = MAGIC_USER_ADMIN_SLUG . '_login_page';
 	magic_register_field_group(array (
-		'id' => 'acf_magic_user_admin_login_page',
+		'id' => 'acf_' . $slug,
 		'title' => 'Magic Login Page',
-		'slug' => 'magic_user_admin',
+		'slug' => $slug,
 		'fields' => array (
 			'above_form' => array (
 				'label' => 'Content above Form',
@@ -36,7 +37,7 @@ if(function_exists("magic_register_field_group")) {
 				array (
 					'param' => 'page_template',
 					'operator' => '==',
-					'value' => 'magic_user_admin_login.php',
+					'value' => MAGIC_USER_ADMIN_LOGIN_TEMPLATE,
 					'order_no' => 0,
 					'group_no' => 0,
 				),
@@ -44,7 +45,7 @@ if(function_exists("magic_register_field_group")) {
 		),
 		'options' => array (
 			'position' => 'normal',
-			'layout' => 'no_box',
+			'layout' => 'display',
 			'hide_on_screen' => array (
 				0 => 'the_content',
 				1 => 'excerpt',

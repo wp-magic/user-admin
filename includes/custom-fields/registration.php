@@ -1,74 +1,43 @@
 <?php
-if(function_exists("register_field_group")) {
-	register_field_group(array (
-		'id' => 'acf_magic_user_admin_registration_page',
+if ( function_exists( "magic_register_field_group" ) ) {
+	$slug = MAGIC_USER_ADMIN_SLUG . '_registration_page';
+	magic_register_field_group(array (
+		'id' => 'acf_' . $slug,
 		'title' => 'Magic Registration Page',
+		'slug' => $slug,
 		'fields' => array (
-			array (
-				'key' => 'field_5b3644536c379',
+			'above_text' => array (
 				'label' => 'Content above Form',
-				'name' => 'above_form',
 				'type' => 'wysiwyg',
-				'default_value' => '',
-				'toolbar' => 'full',
-				'media_upload' => 'yes',
 			),
-			array (
-				'key' => 'field_5b36437571e86',
+			'email_placeholder' => array (
 				'label' => 'Email Placeholder Text',
-				'name' => 'email_placeholder',
 				'type' => 'text',
 				'default_value' => 'Your email',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'html',
-				'maxlength' => '',
 			),
-			array (
-				'key' => 'field_5b36439e71e87',
+			'password_placeholder' => array (
 				'label' => 'Password Placeholder Text',
-				'name' => 'password_placeholder',
 				'type' => 'text',
 				'default_value' => 'Password',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'html',
-				'maxlength' => '',
 			),
-			array (
-				'key' => 'field_5b3643b171e88',
+			'password2_placeholder' => array (
 				'label' => 'Password2 Placeholder Text',
-				'name' => 'password2_placeholder',
 				'type' => 'text',
 				'default_value' => 'Password (again...)',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'html',
-				'maxlength' => '',
 			),
-			array (
-				'key' => 'field_5b364413cf3a5',
+			'username_placeholder' => array (
+				'label' => 'Username Placeholder Text',
+				'type' => 'text',
+				'default_value' => 'Username (can not be changed later)',
+			),
+			'submit_text' => array (
 				'label' => 'Submit Button Text',
-				'name' => 'submit_text',
 				'type' => 'text',
 				'default_value' => 'Submit',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'html',
-				'maxlength' => '',
 			),
-			array (
-				'key' => 'field_5b3644656c37a',
+			'below_text' => array (
 				'label' => 'Content Below Form',
-				'name' => 'below_form',
 				'type' => 'wysiwyg',
-				'default_value' => '',
-				'toolbar' => 'full',
-				'media_upload' => 'yes',
 			),
 		),
 		'location' => array (
@@ -76,7 +45,7 @@ if(function_exists("register_field_group")) {
 				array (
 					'param' => 'page_template',
 					'operator' => '==',
-					'value' => 'magic_user_admin_registration.php',
+					'value' => MAGIC_USER_ADMIN_REGISTRATION_TEMPLATE,
 					'order_no' => 0,
 					'group_no' => 0,
 				),
@@ -84,7 +53,7 @@ if(function_exists("register_field_group")) {
 		),
 		'options' => array (
 			'position' => 'normal',
-			'layout' => 'no_box',
+			'layout' => 'display',
 			'hide_on_screen' => array (
 				0 => 'the_content',
 				1 => 'excerpt',

@@ -1,8 +1,11 @@
 <?php
-if(function_exists("register_field_group")) {
-	register_field_group(array (
-		'id' => 'acf_magic_user_admin_logout_page',
+if( function_exists( "magic_register_field_group" ) ) {
+	$slug = MAGIC_USER_ADMIN_SLUG . '_logout_page';
+
+	magic_register_field_group(array (
+		'id' => 'acf_' . $slug,
 		'title' => 'Magic Logout Page',
+		'slug' => $slug,
 		'fields' => array (
 		),
 		'location' => array (
@@ -10,7 +13,7 @@ if(function_exists("register_field_group")) {
 				array (
 					'param' => 'page_template',
 					'operator' => '==',
-					'value' => 'magic_user_admin_logout.php',
+					'value' => MAGIC_USER_ADMIN_LOGOUT_TEMPLATE,
 					'order_no' => 0,
 					'group_no' => 0,
 				),

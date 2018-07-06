@@ -1,118 +1,60 @@
 <?php
-if ( function_exists("register_field_group" ) ) {
-	register_field_group(array (
-		'id' => 'acf_magic_user_admin_profile_page',
+if ( function_exists("magic_register_field_group" ) ) {
+	$slug = MAGIC_USER_ADMIN_SLUG . '_account_page';
+
+	magic_register_field_group(array (
+		'id' => 'acf_' . $slug,
 		'title' => 'Magic User Profile Page',
+		'slug' => $slug,
 		'fields' => array (
-			array (
-				'key' => 'field_5b376fc5d3ede',
+			'above_text' => array (
 				'label' => 'Text above Form',
-				'name' => 'above_text',
 				'type' => 'wysiwyg',
-				'default_value' => '',
-				'toolbar' => 'full',
-				'media_upload' => 'yes',
 			),
-			array(
-				'key' => 'magic_user_admin_profile_page_use_gravatar',
+			'use_gravatar' => array(
 				'label' => 'Use Gravatar images',
-				'name' => 'use_gravatar',
 				'type' => 'true_false',
 				'message' => 'Load user images using gravatar',
 				'default_value' => 0,
 			),
-			array (
-				'key' => 'field_5b376fe0d3edf',
+			'login_text' => array (
 				'label' => 'Login text',
-				'name' => 'login_text',
 				'type' => 'text',
 				'default_value' => 'Login',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'html',
-				'maxlength' => '',
 			),
-			array (
-				'key' => 'field_5b376fed72275',
+			'display_name_text' => array (
 				'label' => 'Display name text',
-				'name' => 'display_name_text',
 				'type' => 'text',
 				'default_value' => 'Display name',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'html',
-				'maxlength' => '',
 			),
-			array (
-				'key' => 'field_5b376ffc3758d',
+			'nicename_text' => array (
 				'label' => 'Nicename text',
-				'name' => 'nicename_text',
 				'type' => 'text',
 				'default_value' => 'Full name',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'html',
-				'maxlength' => '',
 			),
-			array (
-				'key' => 'field_5b377028ee3af',
+			'email_text' => array (
 				'label' => 'Email text',
-				'name' => 'email_text',
 				'type' => 'text',
 				'default_value' => 'Email',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'html',
-				'maxlength' => '',
 			),
-			array (
-				'key' => 'field_5b377049cfa80',
+			'url_text' => array (
 				'label' => 'Url text',
-				'name' => 'url_text',
 				'type' => 'text',
 				'default_value' => 'Your Homepage',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'html',
-				'maxlength' => '',
 			),
-			array (
-				'key' => 'field_5b377086aeece',
+			'registered_text' => array (
 				'label' => 'Registered at text',
-				'name' => 'registered_text',
 				'type' => 'text',
 				'default_value' => 'Registered at',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'html',
-				'maxlength' => '',
 			),
-			array (
-				'key' => 'field_5b37704dcfa80',
+			'submit_text' => array (
 				'label' => 'Submit button text',
-				'name' => 'submit_text',
 				'type' => 'text',
 				'default_value' => 'Submit',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'html',
-				'maxlength' => '',
 			),
-			array (
-				'key' => 'field_5b37709e6ed98',
+			'below_text' => array (
 				'label' => 'Text below Form',
-				'name' => 'below_text',
 				'type' => 'wysiwyg',
-				'default_value' => '',
-				'toolbar' => 'full',
-				'media_upload' => 'yes',
 			),
 		),
 		'location' => array (
@@ -120,7 +62,7 @@ if ( function_exists("register_field_group" ) ) {
 				array (
 					'param' => 'page_template',
 					'operator' => '==',
-					'value' => 'magic_user_admin_profile.php',
+					'value' => MAGIC_USER_ADMIN_ACCOUNT_TEMPLATE,
 					'order_no' => 0,
 					'group_no' => 0,
 				),
@@ -128,7 +70,7 @@ if ( function_exists("register_field_group" ) ) {
 		),
 		'options' => array (
 			'position' => 'normal',
-			'layout' => 'no_box',
+			'layout' => 'display',
 			'hide_on_screen' => array (
 				0 => 'the_content',
 				1 => 'excerpt',
