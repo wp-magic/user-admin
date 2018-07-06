@@ -7,7 +7,7 @@ function magic_user_admin_registration_form() {
     $ref = add_query_arg( 'email', $_POST['email'], $ref );
   }
 
-  if( !wp_verify_nonce( $_POST['nonce'], 'magic_user_admin_registration' ) ) {
+  if( !wp_verify_nonce( $_POST['nonce'], MAGIC_USER_ADMIN_REGISTRATION_ACTION ) ) {
     wp_redirect( add_query_arg( 'error', 'nonce', $ref ) );
     exit;
   }

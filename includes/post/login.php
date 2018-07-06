@@ -1,19 +1,9 @@
 <?php
 
-function magic_user_admin_login_form_check() {
-  if( !wp_verify_nonce( $_POST['nonce'], 'magic_user_admin_login' ) ) {
-    return 'nonce';
-  }
-
-  if ( !wp_get_current_user() && !isset( $_POST['password'] ) || !isset( $_POST['email'] ) ) {
-    return 'invalid';
-  }
-}
-
 function magic_user_admin_login_form() {
   $ref = $_SERVER['HTTP_REFERER'];
 
-  if( !wp_verify_nonce( $_POST['nonce'], 'magic_user_admin_login' ) ) {
+  if( !wp_verify_nonce( $_POST['nonce'], MAGIC_USER_ADMIN_LOGIN_ACTION ) ) {
     $error = 'nonce';
   } else if ( !wp_get_current_user() && !isset( $_POST['password'] ) || !isset( $_POST['email'] ) ) {
     $error = 'invalid';
@@ -44,18 +34,17 @@ function magic_user_admin_login_form() {
     if ( isset($signon->errors['incorrect_password'] ) ) {
       $error = 'incorrect_password';
     }
-    $refs = magic_get_option( 'magic_user_admin_login_page', '/login');
 
-    $refs = add_query_arg( 'error', $error, $refs );
+    $ref = add_query_arg( 'error', $error, $ref );
 
     if ( !empty( $_POST['email'] ) ) {
-      $refs = add_query_arg( 'email', $_POST['email'], $refs );
+      $ref = add_query_arg( 'email', $_POST['email'], $ref );
     }
 
-    wp_redirect( $refs );
+    wp_redirect( $ref );
     exit;
   }
 
-  wp_redirect( magic_get_option( 'magic_user_admin_login_redirect', '/') );
+  wp_redirect( magic_get_option( 'magic_user_admin_login_redirect', '/' ) );
   exit;
 }

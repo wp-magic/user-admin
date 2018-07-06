@@ -8,7 +8,7 @@ function magic_user_admin_profile_form() {
     exit;
   }
 
-  if( !wp_verify_nonce( $_POST['nonce'], 'magic_user_admin_profile' ) ) {
+  if( !wp_verify_nonce( $_POST['nonce'], MAGIC_USER_ADMIN_PROFILE_ACTION ) ) {
     wp_redirect( add_query_arg( 'error', 'nonce', $ref ) );
     exit;
   }
