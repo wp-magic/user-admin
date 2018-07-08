@@ -20,7 +20,8 @@ add_action( 'init', function () {
     }
 
     if ( is_admin() || $is_login ) {
-      magic_redirect( site_url() );
-    }
+      wp_redirect( site_url() );
+			exit;
+		}
   }
 } );
