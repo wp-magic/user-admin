@@ -5,6 +5,22 @@ add_action( 'admin_menu', function () {
 
   $settings = array(
     array(
+      'name' => MAGIC_USER_ADMIN_SLUG . '_hide_admin_header',
+      'type' => 'header',
+      'value' => 'Hide Admin interfaces',
+      'label' =>
+      'Hides /wp-admin and /wp-login.php from both subscribers and non logged in users.<br>' .
+      '/wp-admin/admin-post.php and /wp-admin/admin-ajax.php stay available to permit form submits from the front page.<br>' .
+      'To access the admin, login on the frontpage using a '.
+      'contributor, author, editor, admin or superadmin account',
+    ),
+    array(
+      'name' => MAGIC_USER_ADMIN_SLUG . '_hide_admin',
+      'type' => 'checkbox',
+      'label' => 'Hide wp-admin and wp-login.php',
+      'default' => 0,
+    ),
+    array(
       'name' => MAGIC_USER_ADMIN_SLUG . '_page_header',
       'type' => 'header',
       'value' => 'Page urls',
@@ -68,4 +84,4 @@ add_action( 'admin_menu', function () {
     'title' => $title,
     'settings' => $settings,
   ) );
-} );
+}, 2 );

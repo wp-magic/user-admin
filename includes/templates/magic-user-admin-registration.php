@@ -12,12 +12,17 @@ if ( wp_get_current_user()->ID > 0 ) {
  exit;
 }
 
+if ( !empty( $_POST ) ) {
+  require_once 'request/registration.php';
+  exit;
+}
+
 $context = Timber::get_context();
 
 $context['post'] = new TimberPost();
 
 $context['form'] = array(
-  'url' => esc_url( admin_url('admin-post.php') ),
+  'url' => '',
   'action' => MAGIC_USER_ADMIN_REGISTRATION_ACTION,
   'nonce' => wp_create_nonce( MAGIC_USER_ADMIN_REGISTRATION_ACTION ),
 );

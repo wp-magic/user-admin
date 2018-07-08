@@ -4,8 +4,6 @@
  * @version    0.0.1
  */
 
-require_once plugin_dir_path( __FILE__ ) . '../fallback/plugin-activation.php';
-
 add_action( 'magic_pa_register', 'magic_user_admin_register_required_plugins' );
 
 function magic_user_admin_register_required_plugins() {

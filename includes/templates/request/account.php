@@ -1,6 +1,6 @@
 <?php
-add_action( 'admin_post_nopriv_magic_user_admin_account', 'magic_user_admin_account_form' );
-add_action( 'admin_post_magic_user_admin_account', 'magic_user_admin_account_form' );
+// add_action( 'admin_post_nopriv_magic_user_admin_account', 'magic_user_admin_account_form' );
+// add_action( 'admin_post_magic_user_admin_account', 'magic_user_admin_account_form' );
 
 function magic_user_admin_account_form() {
   $ref = $_SERVER['HTTP_REFERER'];

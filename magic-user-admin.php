@@ -33,7 +33,6 @@ define( 'MAGIC_USER_ADMIN_LOGOUT_TEMPLATE', 'magic-user-admin-logout.php' );
 define( 'MAGIC_USER_ADMIN_REGISTRATION_TEMPLATE', 'magic-user-admin-registration.php' );
 define( 'MAGIC_USER_ADMIN_ACCOUNT_TEMPLATE', 'magic-user-admin-account.php' );
 
-// Required files for registering the post type and taxonomies.
 require_once plugin_dir_path( __FILE__ ) . 'includes/plugin.php';
 
 // Register callback that is fired when the plugin is activated.

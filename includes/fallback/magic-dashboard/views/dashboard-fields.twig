@@ -1,7 +1,0 @@
-<ul>
-  {% for setting in settings %}
-  <li>
-    {% include [ setting.template, 'inputs/input.twig' ] with { 'setting': setting } %}
-  </li>
-  {% endfor %}
-</ul>
