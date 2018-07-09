@@ -16,7 +16,7 @@ if ( is_admin() ) {
 	require_once 'admin/requirements.php';
 }
 
-add_action( 'plugins_loaded', function () {
+add_action( 'setup_theme', function () {
 	if ( function_exists( 'magic_page_templates' ) ) {
 		$templates = array(
 			MAGIC_USER_ADMIN_LOGIN_TEMPLATE => 'Login Page',
