@@ -15,8 +15,6 @@ if ( wp_get_current_user()->ID > 0 ) {
 
 if ( !empty( $_POST ) ) {
   require_once 'request/login.php';
-
-  magic_user_admin_login_form();
   exit;
 }
 
@@ -30,14 +28,10 @@ $context['form'] = array(
   'nonce' => wp_create_nonce( MAGIC_USER_ADMIN_LOGIN_ACTION ),
 );
 
-if ( isset( $_REQUEST['error'] ) ) {
-  $context['form']['error'] = $_REQUEST['error'];
-}
-
 $context['_REQUEST'] = $_REQUEST;
 
-if ( defined( 'MAGIC_GDPR_COOKIE_SLUG' ) ) {
-  // magic gdpr exists
+if ( defined( 'MAGIC_GDPR_SLUG' ) ) {
+  $context['cookie_template'] = MAGIC_GDPR_FORM_INPUT_TEMPLATE;
   $context['gdpr_exists'] = true;
   $cookie = $_COOKIE[MAGIC_GDPR_COOKIE_SLUG];
   $enabled_cookies = wp_parse_args( $cookie );

@@ -30,6 +30,7 @@ $context['form'] = array(
 if ( defined( 'MAGIC_GDPR_COOKIE_SLUG' ) ) {
   // magic gdpr exists
   $context['gdpr_exists'] = true;
+  $context['cookie_template'] = MAGIC_GDPR_FORM_INPUT_TEMPLATE;
   $enabled_cookies = wp_parse_args( $_COOKIE[MAGIC_GDPR_COOKIE_SLUG] );
   $context['cookies'] = $enabled_cookies;
   $context['post']->before_allow_cookies_text = magic_get_option( MAGIC_USER_ADMIN_SLUG . '_before_allow_cookies_text', '' );

@@ -18,7 +18,6 @@ if ( $user->ID == 0 ) {
 if ( !empty( $_POST ) ) {
   require_once 'request/account.php';
 
-  magic_user_admin_account_form();
   exit;
 }
 
@@ -33,13 +32,11 @@ if ( $context['post']->use_gravatar ) {
 }
 
 $context['form'] = array(
-  'url' => esc_url( admin_url('admin-post.php') ),
+  'url' => '',
   'action' => MAGIC_USER_ADMIN_ACCOUNT_ACTION,
   'nonce' => wp_create_nonce( MAGIC_USER_ADMIN_ACCOUNT_ACTION ),
 );
 
-if ( isset( $_REQUEST['error'] ) ) {
-  $context['form']['error'] = $_REQUEST['error'];
-}
+$context['_REQUEST'] = $_REQUEST;
 
 Timber::render( 'views/account.twig', $context );

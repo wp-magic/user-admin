@@ -11,29 +11,39 @@
     <input type="hidden" name="nonce" value="{{ form.nonce }}" />
     <input type="hidden" name="action" value="{{ form.action }}" />
 
-    {% if form.error %}
-      <div class="error">{{ form.error }}</div>
+    {% if 'nonce' in _REQUEST.error and post.error_nonce %}
+      <div class="error">{{ post.error_nonce }}</div>
+    {% elseif 'unknown' in _REQUEST.error and post.error_unknown %}
+      <div class="error">{{ post.error_unknown }}</div>
     {% endif %}
 
     <ul>
       <li>
+        {% if 'user_not_found' in _REQUEST.error and post.error_user_not_found %}
+          <div class="error">{{ post.error_user_not_found }}</div>
+        {% elseif 'missing_email' in _REQUEST.error and post.error_missing_email %}
+          <div class="error">{{ post.error_missing_email }}</div>
+        {% endif %}
         <input type="text" name="email" placeholder="{{ post.email_placeholder }}" value="{{ _REQUEST.email }}" />
       </li>
       <li>
+        {% if 'missing_password' in _REQUEST.error and post.error_missing_password %}
+          <div class="error">{{ post.error_missing_password }}</div>
+        {% endif %}
         <input type="password" name="password" placeholder="{{ post.password_placeholder }}" />
       </li>
       {% if gdpr_exists and not cookies.auth %}
       <li>
         <label for="cbx" class="check">
+          {% if 'cookie' in _REQUEST.error and post.error_cookie %}
+            <div class="error">{{ post.error_cookie }}</div>
+          {% endif %}
+
           {% if post.before_allow_cookies_text %}
           <span>{{ post.before_allow_cookies_text }}</span>
           {% endif %}
 
-          <input name="allow_cookies" type="checkbox" class="cbx">
-          <svg width="20px" height="20px" viewBox="0 0 18 18">
-            <path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
-            <polyline points="1 9 7 14 15 4"></polyline>
-          </svg>
+          {% include cookie_template %}
 
           {% if post.after_allow_cookies_text %}
           <span>{{ post.after_allow_cookies_text }}</span>

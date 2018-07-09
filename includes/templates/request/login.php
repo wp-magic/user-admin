@@ -1,40 +1,22 @@
 <?php
 
-if ( !empty( $_POST['email'] ) ) {
-  magic_add_query_arg( ['email' => $_POST['email']] );
-}
+magic_request();
 
-if ( !empty( $_POST['allow_cookies'] ) ) {
-  magic_add_query_arg( ['allow_cookies' => 1] );
-}
+magic_check_arguments( array(
+  'email' => 'missing_email',
+  'nonce' => 'nonce',
+  'password' => 'missing_password',
+) );
 
 magic_verify_nonce( $_POST['nonce'], MAGIC_USER_ADMIN_LOGIN_ACTION );
 
-if ( defined( 'MAGIC_GDPR_COOKIE_SLUG' ) ) {
-  $cookies = wp_parse_args( $_COOKIE[MAGIC_GDPR_COOKIE_SLUG], MAGIC_GDPR_DEFAULT_COOKIES );
-
-  if ( empty( $cookies['auth'] ) ) {
-    if ( !empty( $_POST['allow_cookies'] ) ) {
-      magic_gdpr_set_cookies( array('settings', 'auth') );
-    } else {
-      magic_add_query_arg( ['error' => 'cookie'] );
-    }
-  }
-}
-
-if ( !wp_get_current_user() ) {
-  if ( !isset( $_POST['password'] ) ) {
-    magic_add_query_arg( ['error' => 'missing_password'] );
-  }
-
-  if ( !isset( $_POST['email'] ) ) {
-    magic_add_query_arg( ['error' => 'missing_email'] );
-  }
-} else if ( !username_exists( $_POST['email'] ) && !email_exists( $_POST['email'] ) ) {
-  magic_add_query_arg( ['error' => 'noexist'] );
-}
-
 magic_redirect_if_error();
+
+magic_add_query_arg( ['email' => $_POST['email']] );
+
+if ( function_exists( 'magic_gdpr_check_cookies' ) ) {
+  magic_gdpr_check_cookies();
+}
 
 $credentials = array(
   'user_login' => $_POST['email'],
@@ -45,9 +27,7 @@ $credentials = array(
 $signon = wp_signon( $credentials );
 
 if ( is_wp_error($signon)) {
-  if ( isset($signon->errors['incorrect_password'] ) ) {
-    magic_add_query_arg( ['error' => 'password'] );
-  }
+  magic_add_query_error( 'user_not_found' );
 }
 
 magic_redirect_if_error();

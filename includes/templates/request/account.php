@@ -1,40 +1,47 @@
 <?php
-// add_action( 'admin_post_nopriv_magic_user_admin_account', 'magic_user_admin_account_form' );
-// add_action( 'admin_post_magic_user_admin_account', 'magic_user_admin_account_form' );
 
-function magic_user_admin_account_form() {
-  $ref = $_SERVER['HTTP_REFERER'];
+magic_require_login();
 
-  if ( !wp_get_current_user()->ID ) {
-    wp_redirect('/login');
-    exit;
-  }
+magic_check_arguments( array (
+  'nonce' => 'nonce',
+  'ID' => 'user_invalid',
+  'display_name' => 'missing_display_name',
+) );
 
-  if( !wp_verify_nonce( $_POST['nonce'], MAGIC_USER_ADMIN_ACCOUNT_ACTION ) ) {
-    wp_redirect( add_query_arg( 'error', 'nonce', $ref ) );
-    exit;
-  }
+magic_verify_nonce( $_POST['nonce'], MAGIC_USER_ADMIN_ACCOUNT_ACTION );
 
-  $user = get_user_by( 'id', $_POST['ID'] );
+magic_add_query_arg( ['display_name' => $_POST['display_name']] );
 
-  if ($user->ID != $_POST['ID'] ) {
-    wp_redirect( add_query_arg( 'error', 'invalid', $ref ) );
-    exit;
-  }
-
-  $new_user_data = array(
-    'ID' => $_POST['ID'],
-    'display_name' => $_POST['display_name'],
-    'user_nicename' => $_POST['user_nicename'],
-    'user_url' => $_POST['user_url'],
-  );
-
-  $update = wp_update_user($new_user_data);
-
-  if (is_wp_error( $update ) ) {
-    wp_redirect( add_query_arg( 'error', 'update', $ref ) );
-    exit;
-  }
-
-  wp_redirect( $ref );
+if ( !empty( $_POST['full_name'] ) ) {
+  magic_add_query_arg( ['full_name' => $_POST['full_name']] );
 }
+
+if ( !empty( $_POST['url'] ) ) {
+  magic_add_query_arg( ['user_url' => $_POST['user_url']] );
+}
+
+$id = $_POST['ID'];
+
+$user = get_user_by( 'id', $id );
+
+if ( (int) $user->ID !== (int) $id ) {
+  magic_add_query_error( 'user_invalid' );
+}
+
+magic_redirect_if_error();
+
+$new_user_data = array(
+  'ID' => $id,
+  'display_name' => $_POST['display_name'],
+  'user_nicename' => $_POST['user_nicename'],
+  'user_url' => $_POST['user_url'],
+);
+
+$update = wp_update_user($new_user_data);
+
+if (is_wp_error( $update ) ) {
+  magic_add_query_error( 'insert' );
+}
+
+magic_redirect();
+exit;
