@@ -7,25 +7,19 @@
  * @since   0.0.1
  */
 
-
-$user = wp_get_current_user();
-
-if ( $user->ID == 0 ) {
-  wp_redirect( magic_get_option( 'magic_user_admin_login_page', '/' ) );
-  exit;
-}
-
-if ( !empty( $_POST ) ) {
-  require_once 'request/account.php';
-
-  exit;
-}
+magic_require_login();
 
 $context = Timber::get_context();
 
+if ( !empty( $_POST ) ) {
+  require_once 'request/account.php';
+  $context = array_merge( $context, magic_user_admin_post_account() );
+}
+
 $context['post'] = new TimberPost();
 
-$context['user'] = $user;
+$user_id = get_current_user_id();
+$context['user'] = get_userdata( $user_id );
 
 if ( $context['post']->use_gravatar ) {
   $context['user']->avatar = get_avatar_url( $user->user_email );

@@ -1,47 +1,46 @@
 <?php
+function magic_user_admin_post_account() {
+  magic_require_login();
+  $arguments = array (
+    'nonce' => 'nonce',
+    'ID' => 'user_invalid',
+    'display_name' => 'missing_display_name',
+    'first_name' => false,
+    'last_name' => false,
+    'user_url' => false,
+  );
 
-magic_require_login();
+  $ctx = magic_parse_arguments( $arguments );
 
-magic_check_arguments( array (
-  'nonce' => 'nonce',
-  'ID' => 'user_invalid',
-  'display_name' => 'missing_display_name',
-) );
+  if ( !wp_verify_nonce( $_POST['nonce'], MAGIC_USER_ADMIN_ACCOUNT_ACTION ) ) {
+    $ctx['errors']['nonce'] = true;
+  }
 
-magic_verify_nonce( $_POST['nonce'], MAGIC_USER_ADMIN_ACCOUNT_ACTION );
+  $id = $_POST['ID'];
 
-magic_add_query_arg( ['display_name' => $_POST['display_name']] );
+  $user = get_user_by( 'id', $id );
 
-if ( !empty( $_POST['full_name'] ) ) {
-  magic_add_query_arg( ['full_name' => $_POST['full_name']] );
+  if ( (int) $user->ID !== (int) $id ) {
+    $ctx['errors']['user_invalid'] = true;
+  }
+
+  if ( !empty( $ctx['errors'] ) ) {
+    return $ctx;
+  }
+
+  $new_user_data = array(
+    'ID' => $id,
+    'display_name' => $_POST['display_name'],
+    'user_url' => $_POST['user_url'],
+    'first_name' => $_POST['first_name'],
+    'last_name' => $_POST['last_name'],
+  );
+
+  $update = wp_update_user($new_user_data);
+
+  if (is_wp_error( $update ) ) {
+    $ctx['errors']['insert_user'] = true;
+  }
+
+  return $ctx;
 }
-
-if ( !empty( $_POST['url'] ) ) {
-  magic_add_query_arg( ['user_url' => $_POST['user_url']] );
-}
-
-$id = $_POST['ID'];
-
-$user = get_user_by( 'id', $id );
-
-if ( (int) $user->ID !== (int) $id ) {
-  magic_add_query_error( 'user_invalid' );
-}
-
-magic_redirect_if_error();
-
-$new_user_data = array(
-  'ID' => $id,
-  'display_name' => $_POST['display_name'],
-  'user_nicename' => $_POST['user_nicename'],
-  'user_url' => $_POST['user_url'],
-);
-
-$update = wp_update_user($new_user_data);
-
-if (is_wp_error( $update ) ) {
-  magic_add_query_error( 'insert' );
-}
-
-magic_redirect();
-exit;

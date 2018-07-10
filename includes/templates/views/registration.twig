@@ -11,51 +11,57 @@
     <input type="hidden" name="nonce" value="{{ form.nonce }}" />
     <input type="hidden" name="action" value="{{ form.action }}" />
 
-    {% if form.error %}
-      <div class="error">{{ form.error }}</div>
+    {% if errors %}
+      {% for err in errors %}
+        <div>{{ err }}</div>
+      {% endfor %}
     {% endif %}
 
+    {% include 'magic-form-error.twig' with { err: 'nonce' } %}
+    {% include 'magic-form-error.twig' with { err: 'user_not_found' } %}
+    {% include 'magic-form-error.twig' with { err: 'unknown' } %}
+
     <ul>
+
       <li>
-        <input type="email" name="email" placeholder="{{ post.email_placeholder }}" value="{{ _REQUEST.email }}"/>
+        {% include 'magic-form-input.twig' with {
+          name: 'log',
+          error: 'missing_email',
+        } %}
       </li>
+
       <li>
-        <input type="password" name="password" placeholder="{{ post.password_placeholder }}" />
+        {% include 'magic-form-input.twig' with {
+          name: 'pwd',
+          error: 'missing_password',
+          type: 'password',
+        } %}
       </li>
+
+      {% include 'magic-form-error.twig' with { err: 'mismatch_password' } %}
+
       <li>
-        <input type="password" name="password2" placeholder="{{ post.password2_placeholder }}" />
+        {% include 'magic-form-input.twig' with {
+          name: 'pwd2',
+          error: 'missing_password2',
+          type: 'password',
+        } %}
       </li>
+
       <li>
-        <input type="text" name="username" placeholder="{{ post.username_placeholder }}" value="{{ _REQUEST.username }}"/>
+        {% include 'magic-form-input.twig' with {
+          name: 'username',
+        } %}
       </li>
 
       {% if gdpr_exists and not cookies.auth %}
       <li>
-        <label for="allow_cookies" class="check">
-          {% if post.before_allow_cookies_text %}
-          <span>{{ post.before_allow_cookies_text }}</span>
-          {% endif %}
-
-          {% include cookie_template %}
-
-          {% if post.after_allow_cookies_text %}
-          <span>{{ post.after_allow_cookies_text }}</span>
-          {% endif %}
-        </label>
-      </li>
-      {% endif %}
-
-      {% if tos %}
-      <li>
-        <label for="accept_tos">
-          <input type="checkbox" name="allow_cookies">
-          <a href="{{ tos.url }}">{{ tos.text }}</a>
-        </label>
+        {% include 'magic-gdpr-form-inputs.twig' %}
       </li>
       {% endif %}
 
       <li>
-        <input type="submit" value="{{ post.submit_text }}" />
+        {% include 'magic-form-submit-button.twig' %}
       </li>
     </ul>
   </form>

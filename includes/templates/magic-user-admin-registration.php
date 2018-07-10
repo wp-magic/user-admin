@@ -12,12 +12,12 @@ if ( wp_get_current_user()->ID > 0 ) {
  exit;
 }
 
+$context = Timber::get_context();
+
 if ( !empty( $_POST ) ) {
   require_once 'request/registration.php';
-  exit;
+  $context = array_merge( $context, magic_user_admin_post_registration() );
 }
-
-$context = Timber::get_context();
 
 $context['post'] = new TimberPost();
 

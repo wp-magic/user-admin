@@ -1,36 +1,27 @@
 <?php
+function magic_user_admin_post_login() {
+  $ctx = magic_parse_arguments( array(
+    'nonce' => MAGIC_USER_ADMIN_LOGIN_ACTION,
+    'log' => 'missing_email',
+    'pwd' => 'missing_password',
+    'allow_cookies' => false,
+    'rememberme' => false,
+  ) );
 
-magic_request();
+  if ( !empty( $ctx['errors'] ) ) {
+    return $ctx;
+  }
 
-magic_check_arguments( array(
-  'email' => 'missing_email',
-  'nonce' => 'nonce',
-  'password' => 'missing_password',
-) );
+  $signon = wp_signon();
 
-magic_verify_nonce( $_POST['nonce'], MAGIC_USER_ADMIN_LOGIN_ACTION );
+  if ( is_wp_error($signon)) {
+    $ctx['errors'][] = 'user_not_found';
+  }
 
-magic_redirect_if_error();
+  if ( !empty( $ctx['errors'] ) ) {
+    return $ctx;
+  }
 
-magic_add_query_arg( ['email' => $_POST['email']] );
-
-if ( function_exists( 'magic_gdpr_check_cookies' ) ) {
-  magic_gdpr_check_cookies();
+  wp_redirect( magic_get_option( 'magic_user_admin_login_redirect', '/' ) );
+  exit;
 }
-
-$credentials = array(
-  'user_login' => $_POST['email'],
-  'user_password' => $_POST['password'],
-  'remember' => isset($_POST['remember']) ? $_POST['remember'] : false,
-);
-
-$signon = wp_signon( $credentials );
-
-if ( is_wp_error($signon)) {
-  magic_add_query_error( 'user_not_found' );
-}
-
-magic_redirect_if_error();
-
-wp_redirect( magic_get_option( 'magic_user_admin_login_redirect', '/' ) );
-exit;

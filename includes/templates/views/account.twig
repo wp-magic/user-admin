@@ -34,8 +34,16 @@
         {% endif %}
       </li>
       <li>
-        <div class="label">{{ post.nicename_text }}</div>
-        <input type="text" value="{{ user.user_nicename }}" name="user_nicename" />
+        <div class="label">{{ post.email_text }}</div>
+        <div>{{ user.user_email }}</div>
+      </li>
+      <li>
+        <div class="label">{{ post.first_name_text }}</div>
+        <input type="text" value="{{ user.first_name }}" name="first_name" />
+      </li>
+      <li>
+        <div class="label">{{ post.last_name_text }}</div>
+        <input type="text" value="{{ user.last_name }}" name="last_name" />
       </li>
       <li>
         <div class="label">{{ post.email_text }}</div>
