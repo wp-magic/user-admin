@@ -1,9 +1,9 @@
 <?php
 if ( function_exists( "magic_register_field_group" ) ) {
 	$slug = MAGIC_USER_ADMIN_SLUG . '_registration_page';
-	$add_fields = array();
+	$gdpr_fields = array();
 	if ( defined( 'MAGIC_GDPR_SLUG' ) ) {
-		$add_fields = array (
+		$gdpr_fields = array (
 			'tab_cookies' => array(
 				'type' => 'tab',
 				'label' => 'GDPR settings',
@@ -21,6 +21,55 @@ if ( function_exists( "magic_register_field_group" ) ) {
 		);
 	}
 
+	$error_fields = array(
+		'error_tab' => array(
+			'type' => 'tab',
+			'label' => 'Page Errors',
+		),
+		'error_nonce' => array (
+			'label' => 'Nonce error',
+			'type' => 'text',
+			'default_value' => 'Nonce error. Please retry.',
+		),
+		'error_cookie' => array (
+			'label' => 'Cookie error',
+			'type' => 'text',
+			'default_value' => 'Cookies not allowed.',
+		),
+		'error_user_not_found' => array (
+			'label' => 'User not found / Invalid Password errors.',
+			'type' => 'text',
+			'default_value' => 'User not found.',
+			'instructions' => 'We combine all user errors into one. This way it is not possible to get a list of valid usernames by brute forcing the login form with email/password combinations.',
+		),
+		'error_missing_email' => array (
+			'label' => 'Email field empty.',
+			'type' => 'text',
+			'default_value' => 'Email must be entered',
+		),
+		'error_missing_password' => array (
+			'label' => 'Password field empty.',
+			'type' => 'text',
+			'default_value' => 'Password must be entered',
+		),
+		'error_missing_password2' => array (
+			'label' => 'Password confirmation field empty.',
+			'type' => 'text',
+			'default_value' => 'Password must be entered',
+		),
+		'error_mismatch_password' => array (
+			'label' => 'Passwords do not match.',
+			'type' => 'text',
+			'default_value' => 'Passwords did not match',
+		),
+		'error_unknown' => array (
+			'label' => 'Unknown error.',
+			'type' => 'text',
+			'default_value' => 'Unknown Error.',
+		),
+	);
+
+
 	magic_register_field_group(array (
 		'id' => 'acf_' . $slug,
 		'title' => 'Magic Registration Page',
@@ -35,17 +84,17 @@ if ( function_exists( "magic_register_field_group" ) ) {
 					'label' => 'Content above Form',
 					'type' => 'wysiwyg',
 				),
-				'email_placeholder' => array (
+				'log_placeholder' => array (
 					'label' => 'Email Placeholder Text',
 					'type' => 'text',
 					'default_value' => 'Your email',
 				),
-				'password_placeholder' => array (
+				'pwd_placeholder' => array (
 					'label' => 'Password Placeholder Text',
 					'type' => 'text',
 					'default_value' => 'Password',
 				),
-				'password2_placeholder' => array (
+				'pwd2_placeholder' => array (
 					'label' => 'Password2 Placeholder Text',
 					'type' => 'text',
 					'default_value' => 'Password (again...)',
@@ -58,14 +107,15 @@ if ( function_exists( "magic_register_field_group" ) ) {
 				'submit_text' => array (
 					'label' => 'Submit Button Text',
 					'type' => 'text',
-					'default_value' => 'Submit',
+					'default_value' => 'Sign up',
 				),
 				'below_text' => array (
 					'label' => 'Content Below Form',
 					'type' => 'wysiwyg',
 				),
 			),
-			$add_fields
+			$gdpr_fields,
+			$error_fields
 		),
 		'location' => array (
 			array (

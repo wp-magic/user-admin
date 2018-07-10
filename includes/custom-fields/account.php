@@ -27,10 +27,15 @@ if ( function_exists("magic_register_field_group" ) ) {
 				'type' => 'text',
 				'default_value' => 'Display name',
 			),
-			'nicename_text' => array (
-				'label' => 'Nicename text',
+			'first_name_text' => array (
+				'label' => 'Firstname text',
 				'type' => 'text',
-				'default_value' => 'Full name',
+				'default_value' => 'First name',
+			),
+			'last_name_text' => array (
+				'label' => 'Lastname text',
+				'type' => 'text',
+				'default_value' => 'Last name',
 			),
 			'email_text' => array (
 				'label' => 'Email text',

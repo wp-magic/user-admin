@@ -74,20 +74,17 @@ if(function_exists("magic_register_field_group")) {
 					'label' => 'Content above Form',
 					'type' => 'wysiwyg',
 				),
-				'email_placeholder' => array (
+				'log_placeholder' => array (
 					'label' => 'Login Form Email Placeholder',
 					'type' => 'text',
 					'default_value' => 'Email',
 				),
-				'password_placeholder' => array (
-					'key' => 'field_5b3525dbbda43',
+				'pwd_placeholder' => array (
 					'label' => 'Login Form Password Placeholder',
-					'name' => 'password_placeholder',
 					'type' => 'text',
 					'default_value' => 'Password',
 				),
 				'submit_text' => array (
-					'name' => 'submit_text',
 					'type' => 'text',
 					'default_value' => 'Send',
 				),
