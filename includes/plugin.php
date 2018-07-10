@@ -30,3 +30,9 @@ add_action( 'plugins_loaded', function () {
 		require_once 'custom-fields/index.php';
 	}
 } );
+
+add_action( 'wp_footer', function () {
+  if ( current_user_can( 'edit_posts' ) ) {
+		Timber::render( 'magic-user-admin-link.twig' );
+	}
+} );
