@@ -27,8 +27,8 @@
       {% endif %}
       <li>
         <div class="label">{{ post.display_name_text }}</div>
-        {% include 'magic-form-input.twig' with { error: 'missing_display_name'} %}
-      </li>
+        {% include 'magic-form-error.twig' with { err: 'missing_display_name' } %}
+        <input type="text" value="{{ user.display_name }}" name="display_name" />
       <li>
         <div class="label">{{ post.email_text }}</div>
         <input disabled value="{{ user.user_email }}" />
