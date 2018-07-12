@@ -23,7 +23,7 @@
     <ul>
       <li>
         <div class="label">{{ post.login_text }}</div>
-        <div>{{ user.user_login }}</div>
+        <input disabled value="{{ user.user_login }}" />
       </li>
       {% if user.avatar and post.use_gravatar %}
       <li>
@@ -39,7 +39,7 @@
       </li>
       <li>
         <div class="label">{{ post.email_text }}</div>
-        <div>{{ user.user_email }}</div>
+        <input disabled value="{{ user.user_email }}" />
       </li>
       <li>
         <div class="label">{{ post.first_name_text }}</div>
@@ -48,10 +48,6 @@
       <li>
         <div class="label">{{ post.last_name_text }}</div>
         <input type="text" value="{{ user.last_name }}" name="last_name" />
-      </li>
-      <li>
-        <div class="label">{{ post.email_text }}</div>
-        <div>{{ user.user_email }}</div>
       </li>
       <li>
         <div class="label">{{ post.url_text }}</div>
