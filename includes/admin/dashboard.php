@@ -5,7 +5,7 @@ add_action( 'admin_menu', function () {
 
   $settings = array(
     array(
-      'name' => MAGIC_USER_ADMIN_SLUG . '_hide_admin_header',
+      'name' => 'hide_admin_header',
       'type' => 'header',
       'value' => 'Hide Admin interfaces',
       'label' =>
@@ -15,63 +15,63 @@ add_action( 'admin_menu', function () {
       'contributor, author, editor, admin or superadmin account',
     ),
     array(
-      'name' => MAGIC_USER_ADMIN_SLUG . '_hide_admin',
+      'name' => 'hide_admin',
       'type' => 'checkbox',
       'label' => 'Hide wp-admin and wp-login.php',
       'default' => 0,
     ),
     array(
-      'name' => MAGIC_USER_ADMIN_SLUG . '_page_header',
+      'name' => 'page_header',
       'type' => 'header',
       'value' => 'Page urls',
       'label' => 'Where page templates are registered in your child theme',
     ),
     array(
-      'name' => MAGIC_USER_ADMIN_SLUG . '_login_page',
+      'name' => 'login_page',
       'type' => 'text',
       'default' => '/login',
       'label' => 'Login Page',
     ),
     array(
-      'name' => MAGIC_USER_ADMIN_SLUG . '_registration_page',
+      'name' => 'registration_page',
       'type' => 'text',
       // 'type' => 'dropdown-pages',
       'default' => '/register',
       'label' => 'Registration Page',
     ),
     array(
-      'name' => MAGIC_USER_ADMIN_SLUG . '_logout_page',
+      'name' => 'logout_page',
       'type' => 'text',
       'default' => '/logout',
       'label' => 'Logout Page',
     ),
     array(
-      'name' => MAGIC_USER_ADMIN_SLUG . '_account_page',
+      'name' => 'account_page',
       'type' => 'text',
       'default' => '/account',
       'label' => 'Profile Page',
     ),
 
     array(
-      'name' => MAGIC_USER_ADMIN_SLUG . '_redirect_header',
+      'name' => 'redirect_header',
       'type' => 'header',
       'value' => 'Redirect urls',
       'label' => 'Where the user gets redirected after certain actions',
     ),
     array(
-      'name' => MAGIC_USER_ADMIN_SLUG . '_login_redirect',
+      'name' => 'login_redirect',
       'type' => 'text',
       'default' => '/',
       'label' => 'Login Redirect',
     ),
     array(
-      'name' => MAGIC_USER_ADMIN_SLUG . '_registration_redirect',
+      'name' => 'registration_redirect',
       'type' => 'text',
       'default' => '/',
       'label' => 'Registration Redirect',
     ),
     array(
-      'name' => MAGIC_USER_ADMIN_SLUG . '_logout_redirect',
+      'name' => 'logout_redirect',
       'type' => 'text',
       'default' => '/',
       'label' => 'Logout Redirect',
