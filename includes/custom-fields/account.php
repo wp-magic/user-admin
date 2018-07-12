@@ -18,6 +18,11 @@ if ( function_exists("magic_register_field_group" ) ) {
 			'type' => 'text',
 			'default_value' => 'Display name can not be empty.',
 		),
+		'error_unknown' => array (
+			'label' => 'Unknown Error',
+			'type' => 'text',
+			'default_value' => 'Unknown Error.',
+		),
 	);
 
 
