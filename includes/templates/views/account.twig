@@ -7,6 +7,9 @@
     <div class="above">{{ post.above_text }}</div>
   {% endif %}
 
+  {% include 'magic-form-error.twig' with { err: 'nonce' } %}
+  {% include 'magic-form-error.twig' with { err: 'unknown' } %}
+
   <form class="account" action="{{ form.url }}" method="post">
     <input type="hidden" name="nonce" value="{{ form.nonce }}" />
     <input type="hidden" name="action" value="{{ form.action }}" />
