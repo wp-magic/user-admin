@@ -42,6 +42,11 @@ if ( function_exists( "magic_register_field_group" ) ) {
 			'default_value' => 'User not found.',
 			'instructions' => 'We combine all user errors into one. This way it is not possible to get a list of valid usernames by brute forcing the login form with email/password combinations.',
 		),
+		'error_create' => array (
+			'label' => 'User could not be created.',
+			'type' => 'text',
+			'default_value' => 'User could not be created.',
+		),
 		'error_missing_email' => array (
 			'label' => 'Email field empty.',
 			'type' => 'text',

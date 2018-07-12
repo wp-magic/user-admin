@@ -87,6 +87,7 @@ if(function_exists("magic_register_field_group")) {
 				'submit_text' => array (
 					'type' => 'text',
 					'default_value' => 'Send',
+					'label' => 'Submit button text',
 				),
 				'below_form' => array (
 					'label' => 'Content below Form',
