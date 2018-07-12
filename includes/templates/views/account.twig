@@ -7,18 +7,10 @@
     <div class="above">{{ post.above_text }}</div>
   {% endif %}
 
-  {% for error  in errors %}
-  {{error}}
-  {% endfor %}
-
   <form class="account" action="{{ form.url }}" method="post">
     <input type="hidden" name="nonce" value="{{ form.nonce }}" />
     <input type="hidden" name="action" value="{{ form.action }}" />
     <input type="hidden" name="ID" value="{{ user.ID }}" />
-
-    {% if form.error %}
-      <div class="error">{{ form.error }}</div>
-    {% endif %}
 
     <ul>
       <li>
@@ -32,10 +24,7 @@
       {% endif %}
       <li>
         <div class="label">{{ post.display_name_text }}</div>
-        <input type="text" value="{{ user.display_name }}" name="display_name" />
-        {% if 'missing_display_name' in _REQUEST.error and post.error_missing_display_name %}
-          <div class="error">{{ post.error_missing_display_name }}</div>
-        {% endif %}
+        {% include 'magic-form-input.twig' with { error: 'missing_display_name'} %}
       </li>
       <li>
         <div class="label">{{ post.email_text }}</div>
