@@ -9,6 +9,8 @@ function magic_user_admin_post_registration() {
     'username' => false,
     'allow_cookies' => false,
     'rememberme' => false,
+    'first_name' => false,
+    'last_name' => false,
   ) );
 
   if ( !empty( $ctx['errors'] ) ) {
@@ -27,22 +29,21 @@ function magic_user_admin_post_registration() {
     return $ctx;
   }
 
+  $email_without_host = explode('@', $ctx['query']['log'] )[0];
   if ( empty( $ctx['query']['username'] ) ) {
-    $ctx['query']['username'] = $ctx['query']['log'];
+    $ctx['query']['username'] = $email_without_host;
   }
 
-  if ( !username_exists( $ctx['query']['username'] ) && !email_exists( $ctx['query']['log'] ) ) {
+  if ( !email_exists( $ctx['query']['log'] ) ) {
+    if ( username_exists( $ctx['query']['username'] ) ) {
+      $ctx['errors'][] = 'username_exists';
+    }
     if ( $ctx['query']['pwd'] !== $ctx['query']['pwd2'] ) {
       $ctx['errors'][] = 'mismatch_password';
     }
 
-    if ( empty( $ctx['query']['username'] ) ) {
-      $ctx['query']['username'] = $ctx['query']['log'];
-    }
+    $user_id = wp_create_user( $ctx['query']['username'], $ctx['query']['pwd'], $ctx['query']['log'] );
 
-    $username = !empty($ctx['query']['username']) ? $ctx['query']['username'] : $ctx['query']['log'];
-
-    $user_id = wp_create_user( $username, $ctx['query']['pwd'], $ctx['query']['log'] );
     if ( is_wp_error( $user_id ) ) {
       $ctx['errors'][] = 'create';
     }

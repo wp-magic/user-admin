@@ -43,6 +43,7 @@
       </li>
 
       <li>
+        {% include 'magic-form-error.twig' with { err: 'username_exists' } %}
         {% include 'magic-form-input.twig' with {
           name: 'username',
         } %}
