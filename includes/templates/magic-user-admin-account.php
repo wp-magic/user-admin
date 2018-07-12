@@ -32,6 +32,4 @@ $context['form'] = array(
   'nonce' => wp_create_nonce( MAGIC_USER_ADMIN_ACCOUNT_ACTION ),
 );
 
-$context['_REQUEST'] = $_REQUEST;
-
 Timber::render( 'views/account.twig', $context );
