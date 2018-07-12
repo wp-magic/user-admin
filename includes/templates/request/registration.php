@@ -5,15 +5,11 @@ function magic_user_admin_post_registration() {
     'log' => 'missing_email',
     'pwd' => 'missing_password',
     'pwd2' => 'missing_password2',
-    'nonce' => 'nonce',
+    'nonce' => MAGIC_USER_ADMIN_REGISTRATION_ACTION,
     'username' => false,
     'allow_cookies' => false,
     'rememberme' => false,
   ) );
-
-  if ( !wp_verify_nonce( $ctx['query']['nonce'], MAGIC_USER_ADMIN_REGISTRATION_ACTION ) ) {
-    $ctx['errors'][] = 'nonce';
-  }
 
   if ( !empty( $ctx['errors'] ) ) {
     return $ctx;
