@@ -11,7 +11,9 @@ function magic_user_admin_post_registration() {
     'rememberme' => false,
   ) );
 
-  magic_verify_nonce( $ctx['query']['nonce'], MAGIC_USER_ADMIN_REGISTRATION_ACTION );
+  if ( !wp_verify_nonce( $ctx['query']['nonce'], MAGIC_USER_ADMIN_REGISTRATION_ACTION ) ) {
+    $ctx['errors'][] = 'nonce';
+  }
 
   if ( !empty( $ctx['errors'] ) ) {
     return $ctx;
@@ -57,7 +59,7 @@ function magic_user_admin_post_registration() {
   $signon = wp_signon();
 
   if ( is_wp_error($signon) ) {
-    $ctx['errors'][] = 'signon';
+    $ctx['errors'][] = 'create';
   }
 
   if( !empty( $ctx['errors'] ) ) {

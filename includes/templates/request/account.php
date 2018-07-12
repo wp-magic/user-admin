@@ -1,8 +1,9 @@
 <?php
 function magic_user_admin_post_account() {
-  magic_require_login();
+  // magic_require_login();
+
   $arguments = array (
-    'nonce' => 'nonce',
+    'nonce' => MAGIC_USER_ADMIN_ACCOUNT_ACTION,
     'ID' => 'user_invalid',
     'display_name' => 'missing_display_name',
     'first_name' => false,
@@ -12,16 +13,12 @@ function magic_user_admin_post_account() {
 
   $ctx = magic_parse_arguments( $arguments );
 
-  if ( !wp_verify_nonce( $_POST['nonce'], MAGIC_USER_ADMIN_ACCOUNT_ACTION ) ) {
-    $ctx['errors']['nonce'] = true;
-  }
-
   $id = $_POST['ID'];
 
   $user = get_user_by( 'id', $id );
 
   if ( (int) $user->ID !== (int) $id ) {
-    $ctx['errors']['user_invalid'] = true;
+    $ctx['errors'][] = 'user_invalid';
   }
 
   if ( !empty( $ctx['errors'] ) ) {
@@ -39,7 +36,7 @@ function magic_user_admin_post_account() {
   $update = wp_update_user($new_user_data);
 
   if (is_wp_error( $update ) ) {
-    $ctx['errors']['insert_user'] = true;
+    $ctx['errors'][] = 'insert_user';
   }
 
   return $ctx;

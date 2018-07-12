@@ -11,14 +11,9 @@
     <input type="hidden" name="nonce" value="{{ form.nonce }}" />
     <input type="hidden" name="action" value="{{ form.action }}" />
 
-    {% if errors %}
-      {% for err in errors %}
-        <div>{{ err }}</div>
-      {% endfor %}
-    {% endif %}
-
     {% include 'magic-form-error.twig' with { err: 'nonce' } %}
     {% include 'magic-form-error.twig' with { err: 'user_not_found' } %}
+    {% include 'magic-form-error.twig' with { err: 'create' } %}
     {% include 'magic-form-error.twig' with { err: 'unknown' } %}
 
     <ul>

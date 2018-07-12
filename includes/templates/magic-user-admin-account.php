@@ -7,7 +7,8 @@
  * @since   0.0.1
  */
 
-magic_require_login();
+$redirect_unauthorized = magic_get_option( 'magic_user_admin_login_page', '/login' );
+magic_require_login( $redirect_unauthorized );
 
 $context = Timber::get_context();
 
