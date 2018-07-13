@@ -28,6 +28,7 @@ $context['form'] = array(
   'nonce' => wp_create_nonce( MAGIC_USER_ADMIN_LOGIN_ACTION ),
 );
 
+
 if ( function_exists( 'magic_gdpr_create_context' ) ) {
   $context = magic_gdpr_create_context( $context );
 }
