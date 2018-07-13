@@ -1,25 +1,10 @@
 <?php
 if ( function_exists( "magic_register_field_group" ) ) {
 	$slug = MAGIC_USER_ADMIN_SLUG . '_registration_page';
-	$gdpr_fields = array();
-	if ( defined( 'MAGIC_GDPR_SLUG' ) ) {
-		$gdpr_fields = array (
-			'tab_cookies' => array(
-				'type' => 'tab',
-				'label' => 'GDPR settings',
-			),
-			'before_allow_cookies_text' => array (
-				'label' => 'Text before Allow Login Cookie Checkbox',
-				'type' => 'text',
-				'default_value' => '',
-			),
-			'after_allow_cookies_text' => array (
-				'label' => 'Text after Allow Login Cookie Checkbox',
-				'type' => 'text',
-				'default_value' => 'Accept Login Cookies',
-			),
-		);
-	}
+
+	$gdpr_fields = defined( 'MAGIC_GDPR_CUSTOM_FIELDS' )
+		? MAGIC_GDPR_CUSTOM_FIELDS
+		: [];
 
 	$error_fields = array(
 		'error_tab' => array(
