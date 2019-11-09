@@ -22,7 +22,7 @@ add_action(
 			}
 
 			if ( is_admin() || $is_login ) {
-				wp_redirect( site_url() );
+				magic_redirect( site_url() );
 				exit;
 			}
 		}

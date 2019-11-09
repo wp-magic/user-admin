@@ -36,6 +36,5 @@ function magic_user_admin_post_login() {
 		return $ctx;
 	}
 
-	wp_redirect( magic_get_option( 'magic_user_admin_login_redirect', '/' ) );
-	exit;
+	magic_edirect( magic_get_option( 'magic_user_admin_login_redirect', '/' ) );
 }

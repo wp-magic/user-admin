@@ -77,6 +77,5 @@ function magic_user_admin_post_registration() {
 		return $ctx;
 	}
 
-	wp_redirect( magic_get_option( 'magic_user_admin_registration_redirect', '/' ) );
-	exit;
+	magic_redirect( magic_get_option( 'magic_user_admin_registration_redirect', '/' ) );
 }

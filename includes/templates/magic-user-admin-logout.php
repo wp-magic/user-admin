@@ -8,5 +8,4 @@
  */
 
 wp_logout();
-wp_redirect( magic_get_option( 'magic_user_admin_logout_redirect', '/' ) );
-exit;
+magic_redirect( magic_get_option( 'magic_user_admin_logout_redirect', '/' ) );

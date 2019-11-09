@@ -8,8 +8,7 @@
  */
 
 if ( wp_get_current_user()->ID > 0 ) {
-	wp_redirect( magic_get_option( 'magic_user_admin_account_page', '/' ) );
-	exit;
+	magic_redirect( magic_get_option( 'magic_user_admin_account_page', '/' ) );
 }
 
 $context = Timber::get_context();
