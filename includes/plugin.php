@@ -6,11 +6,24 @@
  * @license   GPL-2.0+
  */
 
+/**
+ * Enqueue less css file
+ */
 require_once 'styles/index.php';
 
+/**
+ * Functionality that hides the admin bar from the top of the page.
+ */
 require_once 'admin/hide-admin-bar.php';
+
+/**
+ * Hides wp-admin and wp-login.php
+ */
 require_once 'admin/hide-admin.php';
 
+/**
+ * Include Dashboard if in admin.
+ */
 if ( is_admin() ) {
 	require_once 'admin/dashboard.php';
 	require_once 'admin/requirements.php';
