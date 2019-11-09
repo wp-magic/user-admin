@@ -1,5 +1,17 @@
 <?php
+/**
+ * Actual post request handler for login post request.
+ *
+ * @package MagicUserAdmin
+ * @since 0.0.1
+ */
 
+/**
+ * Register user, then login, then redirect user.
+ * Also checks magic-gdpr cookies.
+ *
+ * @since 0.0.1
+ */
 function magic_user_admin_post_registration() {
 	$ctx = magic_parse_arguments(
 		array(

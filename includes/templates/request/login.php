@@ -1,4 +1,16 @@
 <?php
+/**
+ * Actual post request handler for login post request.
+ *
+ * @package MagicUserAdmin
+ * @since 0.0.1
+ */
+
+/**
+ * Check if user can login, then redirect user.
+ *
+ * @since 0.0.1
+ */
 function magic_user_admin_post_login() {
 	$ctx = magic_parse_arguments(
 		array(
