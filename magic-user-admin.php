@@ -20,7 +20,7 @@
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
-  die;
+	die;
 }
 
 define( 'MAGIC_USER_ADMIN_SLUG', 'magic_user_admin' );
@@ -36,9 +36,15 @@ define( 'MAGIC_USER_ADMIN_ACCOUNT_TEMPLATE', 'magic-user-admin-account.php' );
 require_once plugin_dir_path( __FILE__ ) . 'includes/plugin.php';
 
 // Register callback that is fired when the plugin is activated.
-register_activation_hook( __FILE__, function () {
-  flush_rewrite_rules();
-} );
-register_deactivation_hook( __FILE__, function () {
-  flush_rewrite_rules();
-} );
+register_activation_hook(
+	__FILE__,
+	function () {
+		flush_rewrite_rules();
+	}
+);
+register_deactivation_hook(
+	__FILE__,
+	function () {
+		flush_rewrite_rules();
+	}
+);

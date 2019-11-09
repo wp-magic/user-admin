@@ -12,24 +12,24 @@ magic_require_login( $redirect_unauthorized );
 
 $context = Timber::get_context();
 
-if ( !empty( $_POST ) ) {
-  require_once 'request/account.php';
-  $context = array_merge( $context, magic_user_admin_post_account() );
+if ( ! empty( $_POST ) ) {
+	require_once 'request/account.php';
+	$context = array_merge( $context, magic_user_admin_post_account() );
 }
 
 $context['post'] = new TimberPost();
 
-$user_id = get_current_user_id();
+$user_id         = get_current_user_id();
 $context['user'] = get_userdata( $user_id );
 
 if ( $context['post']->use_gravatar ) {
-  $context['user']->avatar = get_avatar_url( $user->user_email );
+	$context['user']->avatar = get_avatar_url( $user->user_email );
 }
 
 $context['form'] = array(
-  'url' => '',
-  'action' => MAGIC_USER_ADMIN_ACCOUNT_ACTION,
-  'nonce' => wp_create_nonce( MAGIC_USER_ADMIN_ACCOUNT_ACTION ),
+	'url'    => '',
+	'action' => MAGIC_USER_ADMIN_ACCOUNT_ACTION,
+	'nonce'  => wp_create_nonce( MAGIC_USER_ADMIN_ACCOUNT_ACTION ),
 );
 
 Timber::render( 'views/account.twig', $context );

@@ -8,30 +8,30 @@ add_action( 'magic_pa_register', 'magic_user_admin_register_required_plugins' );
 
 function magic_user_admin_register_required_plugins() {
 
- 	$plugins = array(
-	 	array(
-	 		'name'      => 'Timber',
-	 		'slug'      => 'timber-library',
-	 		'required'  => true,
-	 	),
+	$plugins = array(
+		array(
+			'name'     => 'Timber',
+			'slug'     => 'timber-library',
+			'required' => true,
+		),
 
-	 	array(
-	 		'name'      => 'Advanced Custom Fields',
-	 		'slug'      => 'advanced-custom-fields',
-	 		'required'  => true,
-	 	),
+		array(
+			'name'     => 'Advanced Custom Fields',
+			'slug'     => 'advanced-custom-fields',
+			'required' => true,
+		),
 
-	 	array(
-	 		'name'      => 'Advanced Custom Fields: Date and Time Picker',
-	 		'slug'      => 'acf-field-date-time-picker',
-	 		'required'  => true,
-	 	),
+		array(
+			'name'     => 'Advanced Custom Fields: Date and Time Picker',
+			'slug'     => 'acf-field-date-time-picker',
+			'required' => true,
+		),
 
-	 	array(
-	 		'name'      => 'WP Less',
-	 		'slug'      => 'wp-less',
-	 		'required'  => true,
-	 	),
+		array(
+			'name'     => 'WP Less',
+			'slug'     => 'wp-less',
+			'required' => true,
+		),
 	);
 	$config = array(
 		'id'           => 'magic_user_admin',         // Unique ID for hashing notices for multiple instances of TGMPA.
