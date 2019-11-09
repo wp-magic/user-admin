@@ -26,7 +26,6 @@ require_once 'admin/hide-admin.php';
  */
 if ( is_admin() ) {
 	require_once 'admin/dashboard.php';
-	require_once 'admin/requirements.php';
 }
 
 add_action(
