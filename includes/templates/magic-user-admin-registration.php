@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Registration form context
  *
@@ -13,7 +12,9 @@ if ( wp_get_current_user()->ID > 0 ) {
 
 $context = Timber::get_context();
 
-if ( ! empty( $_POST ) ) {
+$request = magic_verify_nonce( MAGIC_USER_ADMIN_REGISTRATION_ACTION );
+
+if ( ! empty( $request ) ) {
 	require_once 'request/registration.php';
 	$context = array_merge( $context, magic_user_admin_post_registration() );
 }

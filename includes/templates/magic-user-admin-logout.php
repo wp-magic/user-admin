@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Logout and redirect user to login
+ * Logout and redirect user to page set in config.
  *
  * @package  Magic-User-Admin
  * @since   0.0.1
