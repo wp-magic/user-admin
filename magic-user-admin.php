@@ -28,6 +28,8 @@ define( 'MAGIC_USER_ADMIN_REGISTRATION_ACTION', 'magic_user_admin_registration' 
 define( 'MAGIC_USER_ADMIN_LOGIN_ACTION', 'magic_user_admin_login' );
 define( 'MAGIC_USER_ADMIN_ACCOUNT_ACTION', 'magic_user_admin_account' );
 
+define( 'MAGIC_USER_ADMIN_POST_SETTINGS_ACTION', 'magic_user_admin_post_settings' );
+
 define( 'MAGIC_USER_ADMIN_LOGIN_TEMPLATE', 'magic-user-admin-login.php' );
 define( 'MAGIC_USER_ADMIN_LOGOUT_TEMPLATE', 'magic-user-admin-logout.php' );
 define( 'MAGIC_USER_ADMIN_REGISTRATION_TEMPLATE', 'magic-user-admin-registration.php' );

@@ -86,6 +86,7 @@ add_action(
 				'slug'     => MAGIC_USER_ADMIN_SLUG,
 				'title'    => $title,
 				'settings' => $settings,
+				'action'   => MAGIC_USER_ADMIN_POST_SETTINGS_ACTION,
 			)
 		);
 	},
