@@ -1,9 +1,11 @@
 <?php
-
 /**
  * Disable /wp-admin/* and wp-login.php.
  *
  * Does NOT disable admin-ajax.php and admin-post.php
+ *
+ * @package MagicUserAdmin
+ * @since 0.0.1
  */
 
 add_action(
@@ -12,10 +14,12 @@ add_action(
 		$hide_admin = magic_get_option( MAGIC_USER_ADMIN_SLUG . '_hide_admin', false );
 
 		if ( $hide_admin && ! current_user_can( 'edit_posts' ) ) {
-			$is_login      = stristr( $_SERVER['REQUEST_URI'], 'wp-login' );
-			$is_admin_post = stristr( $_SERVER['REQUEST_URI'], 'admin-post.php' );
-			$is_admin_post = stristr( $_SERVER['REQUEST_URI'], 'admin-post.php' );
-			$is_ajax_post  = stristr( $_SERVER['REQUEST_URI'], 'admin-ajax.php' );
+			$request_uri = ! empty( $_SERVER['REQUEST_URI'] ) && sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+
+			$is_login      = stristr( $request_uri, 'wp-login' );
+			$is_admin_post = stristr( $request_uri, 'admin-post.php' );
+			$is_admin_post = stristr( $request_uri, 'admin-post.php' );
+			$is_ajax_post  = stristr( $request_uri, 'admin-ajax.php' );
 
 			if ( $is_admin_post || $is_ajax_post ) {
 				return;
@@ -23,7 +27,6 @@ add_action(
 
 			if ( is_admin() || $is_login ) {
 				magic_redirect( site_url() );
-				exit;
 			}
 		}
 	}

@@ -1,4 +1,12 @@
 <?php
+/**
+ * Custom fields for Advanced Custom Fields.
+ * Builds the Admin Settings on pages that have the this template activated
+ *
+ * @package MagicUserAdmin
+ * @since 0.0.1
+ */
+
 if ( function_exists( 'magic_register_field_group' ) ) {
 	$slug = MAGIC_USER_ADMIN_SLUG . '_login_page';
 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Magic User Admin Dashboard
+ *
+ * @package MagicUserAdmin
+ * @since 0.0.1
+ */
 
 add_action(
 	'admin_menu',

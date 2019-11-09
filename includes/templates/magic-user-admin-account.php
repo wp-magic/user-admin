@@ -11,7 +11,9 @@ magic_require_login( $redirect_unauthorized );
 
 $context = Timber::get_context();
 
-if ( ! empty( $_POST ) ) {
+$request = magic_verify_nonce( MAGIC_USER_ADMIN_ACCOUNT_ACTION );
+
+if ( ! empty( $request ) ) {
 	require_once 'request/account.php';
 	$context = array_merge( $context, magic_user_admin_post_account() );
 }

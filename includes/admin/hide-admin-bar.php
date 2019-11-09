@@ -1,4 +1,11 @@
 <?php
+/**
+ * Remove admin bar for all non staff users (subscribers).
+ *
+ * @package MagicUserAdmin
+ * @since 0.0.1
+ */
+
 add_action(
 	'after_setup_theme',
 	function () {
