@@ -18,7 +18,7 @@ require_once 'login.php';
  *
  * @since 0.0.1
  */
-require_once 'registration.php'
+require_once 'registration.php';
 
 /**
  * Handle user account data update
