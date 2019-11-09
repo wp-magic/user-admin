@@ -24,12 +24,22 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 define( 'MAGIC_USER_ADMIN_SLUG', 'magic_user_admin' );
+
+/**
+ * Nonce slugs for user facing actions
+ */
 define( 'MAGIC_USER_ADMIN_REGISTRATION_ACTION', 'magic_user_admin_registration' );
 define( 'MAGIC_USER_ADMIN_LOGIN_ACTION', 'magic_user_admin_login' );
 define( 'MAGIC_USER_ADMIN_ACCOUNT_ACTION', 'magic_user_admin_account' );
 
+/**
+ * Nonce slugs for admin facing actions
+ */
 define( 'MAGIC_USER_ADMIN_POST_SETTINGS_ACTION', 'magic_user_admin_post_settings' );
 
+/**
+ * Html template files
+ */
 define( 'MAGIC_USER_ADMIN_LOGIN_TEMPLATE', 'magic-user-admin-login.php' );
 define( 'MAGIC_USER_ADMIN_LOGOUT_TEMPLATE', 'magic-user-admin-logout.php' );
 define( 'MAGIC_USER_ADMIN_REGISTRATION_TEMPLATE', 'magic-user-admin-registration.php' );
